@@ -45,7 +45,7 @@
 								selector:@selector(initializeFacebook:)
 							 returnValue:nil
 							   arguments:[NSString className], NULL];
-	DLog(@"Registered initialize = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered initialize = %@", (result ? @"YES" : @"NO"));
 	
 
     //*- ObjC: + isLinkedWithUser:(PFUser*)
@@ -53,7 +53,7 @@
 									selector:@selector(isLinkedWithUser:)
 								 returnValue:[JavaClass boolPrimitive]
 								   arguments:[ParseUser className], NULL];
-	DLog(@"Registered isLinked = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered isLinked = %@", (result ? @"YES" : @"NO"));
 	
     //*- Java: public static void link(ParseUser user, Collection<String> permissions, Activity activity, SaveCallback callback)
     //*- ObjC: + linkUser:(PFUser*) permissions:(NSSArray*) block:(BOOL succeeded, NSError *error)
@@ -61,7 +61,7 @@
     //                                selector:@selector(linkUser:permissions:block:)
     //                             returnValue:nil
     //                               arguments:[ParseUser className], [JavaList className], [AndroidActivity className], [SaveCallback className],nil];
-	//DLog(@"Registered link = %@", (result ? @"YES" : @"NO"));
+	//NSLog(@"Registered link = %@", (result ? @"YES" : @"NO"));
 				
 	
 	//*- Java: public static void link(ParseUser user, String facebookId, String accessToken,Date expirationDate)
@@ -106,7 +106,7 @@
 									selector:@selector(logInWithPermissions:)
 								 returnValue:nil
 								   arguments:[AndroidActivity className],[MyLogInCallback className], NULL];
-	DLog(@"Registered login = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered login = %@", (result ? @"YES" : @"NO"));
 	
 //*- Java: public static com.facebook.Session getSession()
 //The active Facebook session associated with the logged in ParseUser, or null if there is none.
@@ -138,7 +138,7 @@
 									selector:@selector(saveLatestSessionDataWithCallback:callback:)
 								 returnValue:nil
 								   arguments:[ParseUser className],[SaveCallback className],nil];
-	DLog(@"Registered saveLatestSessionData1 = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered saveLatestSessionData1 = %@", (result ? @"YES" : @"NO"));
 
 
 //*- Java:  public static void saveLatestSessionData(ParseUser user)
@@ -147,7 +147,7 @@
 											 selector:@selector(saveLatestSessionData:)
 										  returnValue:nil
 											arguments:[ParseUser className],nil];
-	DLog(@"Registered saveLatestSessionData2 = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered saveLatestSessionData2 = %@", (result ? @"YES" : @"NO"));
 
 }
 

@@ -43,7 +43,7 @@
 				   selector:@selector(trackAppOpened:)
 				returnValue:nil
 				  arguments:[AndroidIntent className], nil];
-	 DLog(@"trackAppOpened registration = %i, %i", method1, method2);
+	 NSLog(@"trackAppOpened registration = %i, %i", method1, method2);
 	 
 }
 

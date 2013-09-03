@@ -37,7 +37,7 @@
 	BOOL results;
 	//*- Java: public SignUpCallback()
 	results = [StandardPushCallback registerConstructor];
-	DLog(@"Registered contructor = %@", (results ? @"YES" : @"NO"));
+	NSLog(@"Registered contructor = %@", (results ? @"YES" : @"NO"));
 	
 	//*- Java:  public abstract void done(ParseException e)
 	//*- iOS Bridge Method:  -(void)runStandardPushCallback;
@@ -46,7 +46,7 @@
 	//										  selector:@selector(runStandardPushCallback)
 	//									   returnValue:nil
 	//										 arguments:nil];
-	//DLog(@"Registered run = %@", (results ? @"YES" : @"NO"));
+	//NSLog(@"Registered run = %@", (results ? @"YES" : @"NO"));
 	
 	
 }

@@ -41,20 +41,20 @@
 	BOOL result;
 	result = [ParseUser registerConstructorWithSelector:@selector(initUser)
                                        arguments:nil];
-	DLog(@"Registered initUser = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered initUser = %@", (result ? @"YES" : @"NO"));
 	
 	//*- ObjC: + currentUser
     result = [ParseUser registerStaticMethod:@"getCurrentUser"
 						selector:@selector(currentUser)
 					 returnValue:[ParseUser className]
 					   arguments:nil];
-	DLog(@"Registered getCurrentUser = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered getCurrentUser = %@", (result ? @"YES" : @"NO"));
 
 	result = [ParseUser registerStaticMethod:@"logOut"
 								 selector:@selector(logOut)
 								 returnValue:nil
 					   arguments:nil];
-	DLog(@"Registered logOut = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered logOut = %@", (result ? @"YES" : @"NO"));
 					   
     //*- Java: public void put(String key, Object value)
     //*- ObjC: - setObject:(id) forKey:(NSString*)
@@ -62,7 +62,7 @@
                                selector:@selector(forKey:setObject:)
                             returnValue:nil
                               arguments:[NSString className],[JavaObject className],nil];
-	DLog(@"Registered put = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered put = %@", (result ? @"YES" : @"NO"));
 
     //*- Java: public boolean isAuthenticated()
     //*- ObjC: - (BOOL)isAuthenticated
@@ -70,14 +70,14 @@
                                selector:@selector(isAuthenticated)
                             returnValue:[JavaClass boolPrimitive]
                               arguments:nil];
-	DLog(@"Registered isAuthenticated = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered isAuthenticated = %@", (result ? @"YES" : @"NO"));
 
     //*- Java: public final void saveInBackground()
     //*- ObjC: - saveInBackground
     result = [ParseUser registerInstanceMethod:@"saveInBackground"
                                selector:@selector(saveInBackground)
                             returnValue:nil];
-	DLog(@"Registered saveInBackground = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered saveInBackground = %@", (result ? @"YES" : @"NO"));
 
     //*- Java: public static void enableAutomaticUser()
     //*- ObjC: + enableAutomaticUser
@@ -85,7 +85,7 @@
                            selector:@selector(enableAutomaticUser)
                         returnValue:nil
                           arguments:nil];
-	DLog(@"Registered enableAutomaticUser = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered enableAutomaticUser = %@", (result ? @"YES" : @"NO"));
 
  
 
@@ -96,7 +96,7 @@
 							 selector:@selector(remove:)
 						  returnValue:nil
 							arguments:[NSString className],nil];
-	DLog(@"Registered remove = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered remove = %@", (result ? @"YES" : @"NO"));
 
 
 	//*- Java: public void setUsername(String username)
@@ -106,7 +106,7 @@
 							 selector:@selector(setUsername:)
 						  returnValue:nil
 							arguments:[NSString className],nil];
-	DLog(@"Registered setUsername = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered setUsername = %@", (result ? @"YES" : @"NO"));
 
 
 	//*- Java: public String getUsername()
@@ -116,7 +116,7 @@
 							 selector:@selector(getUsername)
 						  returnValue:[NSString className]
 							arguments:nil];
-	DLog(@"Registered getUsername = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered getUsername = %@", (result ? @"YES" : @"NO"));
  
 
 	//*- Java: public void setPassword(String password)
@@ -126,7 +126,7 @@
 							 selector:@selector(setPassword:)
 						  returnValue:nil
 							arguments:[NSString className],nil];
-	DLog(@"Registered setPassword = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered setPassword = %@", (result ? @"YES" : @"NO"));
  
 	//*- Java: public void setEmail(String email)
 	//*- ObjC: -(void)setEmail:(NSString*)email;
@@ -135,7 +135,7 @@
 							 selector:@selector(setEmail:)
 						  returnValue:nil
 							arguments:[NSString className],nil];
-	DLog(@"Registered setEmail = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered setEmail = %@", (result ? @"YES" : @"NO"));
 
 	//*- Java: public String getEmail()
 	//*- ObjC: -(NSString*)getEmail;
@@ -144,7 +144,7 @@
 							 selector:@selector(getEmail)
 						  returnValue:[NSString className]
 							arguments:nil];
-	DLog(@"Registered getEmail = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered getEmail = %@", (result ? @"YES" : @"NO"));
  
  
 	//public String getSessionToken()
@@ -154,7 +154,7 @@
 							 selector:@selector(getSessionToken)
 						  returnValue:[NSString className]
 							arguments:nil];
-	DLog(@"Registered getSessionToken = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered getSessionToken = %@", (result ? @"YES" : @"NO"));
 
 	//*- Java: public ParseUser fetch()
 	//*- ObjC: -(ParseUser*)fetch;
@@ -163,7 +163,7 @@
 							 selector:@selector(fetch)
 						  returnValue:[ParseUser className]
 							arguments:nil];
-	DLog(@"Registered fetch = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered fetch = %@", (result ? @"YES" : @"NO"));
  
 
 	//*- Java: public void signUp()
@@ -172,7 +172,7 @@
 							 selector:@selector(signUp)
 						  returnValue:nil
 							arguments:nil];
-	DLog(@"Registered signUp = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered signUp = %@", (result ? @"YES" : @"NO"));
 	//Signs up a new user. You should call this instead of ParseObject.save() for new ParseUsers. This will create a new ParseUser on the server, and also persist the session on disk so that you can access the user using ParseUser.getCurrentUser(). A username and password must be set before calling signUp.Typically, you should use ParseUser.signUpInBackground(com.parse.SignUpCallback) instead of this, unless you are managing your own threading.
 
 
@@ -182,7 +182,7 @@
 							 selector:@selector(signUpInBackground:)
 						  returnValue:nil
 							arguments:[SignUpCallback className],nil];
-	DLog(@"Registered signUpInBackground = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered signUpInBackground = %@", (result ? @"YES" : @"NO"));
 	//Signs up a new user. You should call this instead of ParseObject.save() for new ParseUsers. This will create a new ParseUser on the server, and also persist the session on disk so that you can access the user using ParseUser.getCurrentUser(). This is preferable to using ParseUser.signUp(), unless your code is already running from a background thread.
 
 
@@ -192,7 +192,7 @@
                            selector:@selector(logIn:password:)
                         returnValue:[ParseUser className]
                           arguments:[NSString className],[NSString className],nil];
-	DLog(@"Registered logIn = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered logIn = %@", (result ? @"YES" : @"NO"));
 	//Logs in a user with a username and password. On success, this saves the session to disk, so you can retrieve the currently logged in user using ParseUser.getCurrentUser()  Typically, you should use ParseUser.logInInBackground(java.lang.String, java.lang.String, com.parse.LogInCallback) instead of this, unless you are managing your own threading.
 
 
@@ -202,7 +202,7 @@
                            selector:@selector(logInInBackground:password:callback:)
                         returnValue:nil
                           arguments:[NSString className],[NSString className],[LogInCallback className], nil];
-	DLog(@"Registered logInInBackground = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered logInInBackground = %@", (result ? @"YES" : @"NO"));
 	//Logs in a user with a username and password. On success, this saves the session to disk, so you can retrieve the currently logged in user using ParseUser.getCurrentUser() This is preferable to using ParseUser.logIn(java.lang.String, java.lang.String), unless your code is already running from a background thread.
 
 
@@ -213,7 +213,7 @@
                            selector:@selector(requestPasswordReset:)
                         returnValue:nil
                           arguments:[NSString className], nil];
-	DLog(@"Registered requestPasswordReset = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered requestPasswordReset = %@", (result ? @"YES" : @"NO"));
 
 	//*- Java:  public static void requestPasswordResetInBackground(String email,RequestPasswordResetCallback callback)
 	//*- ObjC: +(void)requestPasswordResetInBackground:(NSString*)email callback:(RequestPasswordResetCallback*)callback;
@@ -222,7 +222,7 @@
                            selector:@selector(requestPasswordResetInBackground:callback:)
                         returnValue:nil
                           arguments:[NSString className], [RequestPasswordResetCallback className], nil];
-	DLog(@"Registered requestPasswordResetInBackground = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered requestPasswordResetInBackground = %@", (result ? @"YES" : @"NO"));
 
 	//*- Java: public ParseUser fetchIfNeeded()
 	//*- ObjC: -(void)fetchIfNeeded;
@@ -230,7 +230,7 @@
 							 selector:@selector(fetchIfNeeded)
 						  returnValue:[ParseUser className]
 							arguments:nil];
-	DLog(@"Registered fetchIfNeeded = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered fetchIfNeeded = %@", (result ? @"YES" : @"NO"));
 
 	//*- Java: public boolean isNew()
 	//*- ObjC: -(void)isNew;
@@ -239,7 +239,7 @@
 							 selector:@selector(isNew)
 						  returnValue:[JavaClass boolPrimitive]
 							arguments:nil];
-	DLog(@"Registered isNew = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered isNew = %@", (result ? @"YES" : @"NO"));
 
 	//*- Java: public static ParseQuery<ParseUser> getQuery()
 	//*-  ObjC: -(ParseQuery*)getQuery;
@@ -248,7 +248,7 @@
 							 selector:@selector(getQuery)
 						  returnValue:[ParseQuery className]
 							arguments:nil];
-	DLog(@"Registered getQuery = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered getQuery = %@", (result ? @"YES" : @"NO"));
   
 }
 

@@ -21,7 +21,7 @@
 	//Constructs a new ParseRole with the given name. If no default ACL has been specified, you must provide an ACL for the role.
 	results = [ParseRole registerConstructorWithSelector:@selector(initWithName:)
 													arguments:[NSString className], nil];
-	DLog(@"ParseRole Registered constructor for initWithName =  %@", (results ? @"YES" : @"NO"));
+	NSLog(@"ParseRole Registered constructor for initWithName =  %@", (results ? @"YES" : @"NO"));
 	
 
  		
@@ -30,7 +30,7 @@
 	//Constructs a new ParseRole with the given name.
 	results = [ParseRole registerConstructorWithSelector:@selector(initWithNameandACL:acl:)
 									arguments:[NSString className],[ParseACL className], nil];
-	DLog(@"ParseRole Registered constructor for initWithNameandACL =  %@", (results ? @"YES" : @"NO"));
+	NSLog(@"ParseRole Registered constructor for initWithNameandACL =  %@", (results ? @"YES" : @"NO"));
 			
 	//public void setName(String name)
 	//Sets the name for a role. This value must be set before the role has been saved to the server, and cannot be set once the role has been saved.

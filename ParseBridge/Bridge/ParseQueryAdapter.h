@@ -7,8 +7,7 @@
 //
 
 #import <BridgeKit/JavaObject.h>
-
-@class ParseObject;
+#import "ParseObject.h"
 
 //public class ParseQueryAdapter<T extends ParseObject>
 //extends BaseAdapter

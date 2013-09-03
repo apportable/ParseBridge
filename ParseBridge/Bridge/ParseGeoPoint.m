@@ -36,7 +36,7 @@
 	BOOL results;
 	//*- Java: public SendCallback()
 	results = [ParseGeoPoint registerConstructor];
-	DLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
+	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
 	
 	//Constructors
 	//*- Java: ParseGeoPoint()

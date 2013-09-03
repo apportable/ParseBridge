@@ -81,7 +81,7 @@
                             returnValue:nil
 							  arguments:[SaveCallback className], nil];
 	
-	DLog(@"ParseInstallation Method Registration %i, %i, %i, %i, %i, %i", method1, method2, method3, method4, method5, method6);
+	NSLog(@"ParseInstallation Method Registration %i, %i, %i, %i, %i, %i", method1, method2, method3, method4, method5, method6);
 	
 
 
@@ -91,7 +91,7 @@
 
 -(NSString*)getInstallationId{
 	NSString* installationID = [NSString stringWithJavaString:[self _getInstallationId]];
-	DLog(@"InstallationID = %@",installationID);
+	NSLog(@"InstallationID = %@",installationID);
 	return  installationID; 
 }
 

@@ -36,16 +36,16 @@
 	BOOL results;
 	//*- Java:  RequestPasswordResetCallback()
 	results = [RequestPasswordResetCallback registerConstructor];
-	DLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
+	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
 	
 	//*- Java:  public abstract void done(ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseException*)error;
 	//Override this function with the code you want to run after the save is complete.
-	results = [RequestPasswordResetCallback registerCallback:@"done"
-							 selector:@selector(done:)
-						  returnValue:nil
-							arguments:[ParseException className], nil];
-	DLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
+	// results = [RequestPasswordResetCallback registerCallback:@"done"
+	// 						 selector:@selector(done:)
+	// 					  returnValue:nil
+	// 						arguments:[ParseException className], nil];
+	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 	
 	
 }
@@ -57,7 +57,7 @@
 		NSLog(@"Password reset request succesful");
 	}
 	else{
-		NSLog(@"Password reset request failed", [error getCode]);
+		// NSLog(@"Password reset request failed", [error getCode]);
 	}
 }
 

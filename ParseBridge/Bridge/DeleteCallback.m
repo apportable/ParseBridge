@@ -36,7 +36,7 @@
 	BOOL results;
 	//*- Java:  public SaveCallback()
     results = [DeleteCallback registerConstructor];
-	DLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
+	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
 	
 	//*- Java:  public abstract void done(ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseException*)error;
@@ -45,7 +45,7 @@
 						 selector:@selector(done:)
 					  returnValue:nil
 						arguments:[ParseException className], nil];
-	DLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
+	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 	
 }
 

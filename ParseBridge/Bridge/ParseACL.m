@@ -39,14 +39,14 @@
 	//*- Java:  ParseACL()
 	//Creates an ACL with no permissions granted.
 	BOOL result = [ParseACL registerConstructor];
-	DLog(@"Registered constructor =  %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered constructor =  %@", (result ? @"YES" : @"NO"));
 		
 	//*- Java:  ParseACL(ParseUser owner)
 	//*- ObjC:  -(id)initWithUser:(ParseUser*)owner;
 	//Creates an ACL where only the provided user has access.
 	result = [ParseACL registerConstructorWithSelector:@selector(initWithUser:)
 												arguments:[ParseUser className], nil];
-	DLog(@"Registered constructor2  =  %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered constructor2  =  %@", (result ? @"YES" : @"NO"));
 	
 	
 	//Methods
@@ -58,7 +58,7 @@
 										selector:@selector(setPublicReadAccess:)
 									 returnValue:nil
 									   arguments:[JavaClass boolPrimitive],nil];
-	DLog(@"Registered setPublicReadAccess = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered setPublicReadAccess = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public boolean getPublicReadAccess()
@@ -68,7 +68,7 @@
 										selector:@selector(getPublicReadAccess:)
 									 returnValue:[JavaClass boolPrimitive]
 									   arguments:nil];
-	DLog(@"Registered getPublicReadAccess = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered getPublicReadAccess = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public void setPublicWriteAccess(boolean allowed)
@@ -78,7 +78,7 @@
 										selector:@selector(setPublicWriteAcess:)
 									 returnValue:nil
 									   arguments:[JavaClass boolPrimitive],nil];
-	DLog(@"Registered setPublicWriteAcess = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered setPublicWriteAcess = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public boolean getPublicWriteAccess()
@@ -88,7 +88,7 @@
 									 selector:@selector(getPublicWriteAccess:)
 								  returnValue:[JavaClass boolPrimitive]
 									arguments:nil];
-	DLog(@"Registered getPublicWriteAccess = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered getPublicWriteAccess = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public void setReadAccess(String userId,boolean allowed)
@@ -98,7 +98,7 @@
 									 selector:@selector(setReadAccessForUserId:allowed:)
 								  returnValue:nil
 									arguments:[NSString className], [JavaClass boolPrimitive], nil];
-	DLog(@"Registered setReadAccess = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered setReadAccess = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public boolean getReadAccess(String userId)
@@ -108,7 +108,7 @@
 									 selector:@selector(getReadAccessWithUserId:)
 								  returnValue:[JavaClass boolPrimitive]
 									arguments:[NSString className], nil];
-	DLog(@"Registered getReadAccess = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered getReadAccess = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public void setWriteAccess(String userId,boolean allowed)
@@ -118,7 +118,7 @@
 									 selector:@selector(setWriteAccessForUserId:allowed:)
 								  returnValue:nil
 									arguments:[NSString className], [JavaClass boolPrimitive], nil];
-	DLog(@"Registered setWriteAccess for UserId = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered setWriteAccess for UserId = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public boolean getWriteAccess(String userId)
@@ -128,7 +128,7 @@
 									 selector:@selector(getWriteAccessForUserId:)
 								  returnValue:[JavaClass boolPrimitive]
 									arguments:[NSString className], nil];
-	DLog(@"Registered getWriteAccess = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered getWriteAccess = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public void setReadAccess(ParseUser user,boolean allowed)
@@ -138,7 +138,7 @@
 									 selector:@selector(setReadAccessWithUser:allowed:)
 								  returnValue:nil
 								    arguments:[ParseUser className], [JavaClass boolPrimitive], nil];
-	DLog(@"Registered setReadAccess = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered setReadAccess = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public boolean getReadAccess(ParseUser user)
@@ -148,7 +148,7 @@
 									 selector:@selector(getReadAccessWithUser:)
 								  returnValue:[JavaClass boolPrimitive]
 									arguments:[ParseUser className], nil];
-	DLog(@"Registered getReadAccess = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered getReadAccess = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public void setWriteAccess(ParseUser user,boolean allowed)
@@ -158,7 +158,7 @@
 									 selector:@selector(setWriteAccessForUser:allowed:)
 								  returnValue:nil
 								    arguments:[ParseUser className],[JavaClass boolPrimitive], nil];
-	DLog(@"Registered setWriteAccess for User = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered setWriteAccess for User = %@", (result ? @"YES" : @"NO"));
 	
 	//*- Java:  public boolean getWriteAccess(ParseUser user)
 	//*- ObjC: -(bool)getWriteAccessForUser:(ParseUser*)user;
@@ -167,7 +167,7 @@
 									 selector:@selector(getWriteAccessForUser:)
 								  returnValue:[JavaClass boolPrimitive]
 									arguments:[ParseUser className], nil];
-	DLog(@"Registered getReadAccess = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered getReadAccess = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public boolean getRoleReadAccess(String roleName)
@@ -177,7 +177,7 @@
 									 selector:@selector(getRoleReadAccess:)
 								  returnValue:[JavaClass boolPrimitive]
 									arguments:[NSString className], nil];
-	DLog(@"Registered getRoleReadAccess = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered getRoleReadAccess = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public void setRoleReadAccess(String roleName,boolean allowed)
@@ -187,7 +187,7 @@
 									 selector:@selector(setRoleReadAccessWithRoleName:allowed:)
 								  returnValue:nil
 									arguments:[NSString className], [JavaClass boolPrimitive], nil];
-	DLog(@"Registered setRoleReadAccess = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered setRoleReadAccess = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public boolean getRoleWriteAccess(String roleName)
@@ -197,7 +197,7 @@
 									 selector:@selector(getRoleWriteAccessWithRoleName:)
 								  returnValue:[JavaClass boolPrimitive]
 									arguments:[NSString className], nil];
-	DLog(@"Registered getRoleWriteAccess = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered getRoleWriteAccess = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public void setRoleWriteAccess(String roleName,boolean allowed)
@@ -207,7 +207,7 @@
 									 selector:@selector(setRoleWriteAccessWithRoleName:allowed:)
 							      returnValue:nil
 									arguments:[NSString className],[JavaClass boolPrimitive], nil];
-	DLog(@"Registered setRoleWriteAccess with rolename = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered setRoleWriteAccess with rolename = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public boolean getRoleReadAccess(ParseRole role)
@@ -217,7 +217,7 @@
 									 selector:@selector(getRoleReadAccessWithRole:)
 								  returnValue:[JavaClass boolPrimitive]
 									arguments:[ParseRole className], nil];
-	DLog(@"Registered getRoleReadAccess = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered getRoleReadAccess = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java: public void setRoleReadAccess(ParseRole role,boolean allowed)
@@ -227,7 +227,7 @@
 									 selector:@selector(setRoleReadAccessWithRole:allowed:)
 								  returnValue:nil
 									arguments:[ParseRole className],[JavaClass boolPrimitive], nil];
-	DLog(@"Registered setRoleReadAccess = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered setRoleReadAccess = %@", (result ? @"YES" : @"NO"));
 	
 	
 	
@@ -238,7 +238,7 @@
 									 selector:@selector(getRoleWriteAccessWithRole:)
 								  returnValue:[JavaClass boolPrimitive]
 									arguments:[ParseRole className], nil];
-	DLog(@"Registered getRoleWriteAccess = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered getRoleWriteAccess = %@", (result ? @"YES" : @"NO"));
 	
 	//*- Java:  public void setRoleWriteAccess(ParseRole role,boolean allowed)
 	//*- ObjC: -(void)setRoleWriteAccessWithRole:(ParseRole*)role allowed:(bool)allowed;
@@ -247,7 +247,7 @@
 									 selector:@selector(setRoleWriteAccessWithRole:)
 								  returnValue:nil
 									arguments:[ParseRole className],[JavaClass boolPrimitive], nil];
-	DLog(@"Registered setRoleWriteAccess with ParseRole = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered setRoleWriteAccess with ParseRole = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public static void setDefaultACL(ParseACL acl,boolean withAccessForCurrentUser)
@@ -257,7 +257,7 @@
 									  selector:@selector(setDefaultACL:currentUserAccess:)
 								   returnValue:nil
 									 arguments:[ParseACL className],[JavaClass boolPrimitive], nil];
-	DLog(@"Registered setDefaultACL = %@", (result ? @"YES" : @"NO"));
+	NSLog(@"Registered setDefaultACL = %@", (result ? @"YES" : @"NO"));
 }
 
  

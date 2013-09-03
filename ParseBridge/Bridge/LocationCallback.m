@@ -38,16 +38,16 @@
 	BOOL results;
 	//*- Java:  public SaveCallback()
 	results = [LocationCallback registerConstructor];
-	DLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
+	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
 	
 	//*- Java:  public abstract void done(ParseGeoPoint geoPoint,ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
 	//Override this function with the code you want to run after the save is complete.
-	results = [LocationCallback registerCallback:@"done"
-							 selector:@selector(done:error:)
-						  returnValue:nil
-							arguments:[ParseGeoPoint className],[ParseException className], nil];
-	DLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
+	// results = [LocationCallback registerCallback:@"done"
+	// 						 selector:@selector(done:error:)
+	// 					  returnValue:nil
+	// 						arguments:[ParseGeoPoint className],[ParseException className], nil];
+	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 	
 	
 }
@@ -59,7 +59,7 @@
 		NSLog(@"GeoPoint Retrieved Successfully");
 	}
 	else{
-		NSLog(@"Object retrieval failed", [error getCode]);
+		// NSLog(@"Object retrieval failed", [error getCode]);
 	}
 }
 

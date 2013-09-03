@@ -1,0 +1,35 @@
+sources = [
+    # 'src/com/parsebridge/parsebridge/MyCountCallback.java',
+    # 'src/com/parsebridge/parsebridge/MyFindCallback.java',
+    # 'src/com/parsebridge/parsebridge/MyFunctionCallback.java',
+    # 'src/com/parsebridge/parsebridge/MyGetCallback.java',
+    # 'src/com/parsebridge/parsebridge/MyGetDataCallback.java',
+    # 'src/com/parsebridge/parsebridge/MyLocationCallback.java',
+    # 'src/com/parsebridge/parsebridge/MyLogInCallback.java',
+    # 'src/com/parsebridge/parsebridge/MyProgressCallback.java',
+    # 'src/com/parsebridge/parsebridge/MyRefreshCallback.java',
+    # 'src/com/parsebridge/parsebridge/MyRequestPasswordResetCallback.java',
+    # 'src/com/parsebridge/parsebridge/MySaveCallback.java',
+    # 'src/com/parsebridge/parsebridge/MySendCallback.java',
+    # 'src/com/parsebridge/parsebridge/MySignUpCallback.java',
+    # 'src/com/parsebridge/parsebridge/ParseManager.java',
+]
+
+aidl_sources = [
+    
+]
+
+deps = [
+    
+]
+
+libs = [
+    'libs/Parse-1.3.3.jar'
+]
+
+paths = [
+    'src',
+]
+
+Import('env')
+env.BuildJava("Parse/ParseBridge/java", sources, paths, deps, libs=libs, output=True, aidl_sources=aidl_sources)

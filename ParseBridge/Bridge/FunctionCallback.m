@@ -37,15 +37,15 @@
 	BOOL results;
 	//*- Java:  public SaveCallback()
 	results = [FunctionCallback registerConstructor];
-	DLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
+	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
 	//*- Java:  public abstract void done(T object,ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
 	//Override this function with the code you want to run after the save is complete.
-	results = [FunctionCallback registerCallback:@"done"
-						  selector:@selector(done:error:)
-					   returnValue:nil
-						 arguments:[JavaObject className],[ParseException className], nil];
-	DLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
+	// results = [FunctionCallback registerCallback:@"done"
+	// 					  selector:@selector(done:error:)
+	// 				   returnValue:nil
+	// 					 arguments:[JavaObject className],[ParseException className], nil];
+	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 	
 }
 
@@ -57,7 +57,7 @@
 		NSLog(@"Cloud Function Successful");
 	}
 	else{
-		NSLog(@"Cloud Function failed", [error getCode]);
+		// NSLog(@"Cloud Function failed", [error getCode]);
 	}
 }
 

@@ -34,17 +34,17 @@
 	BOOL results;
 	//*- Java: public SignUpCallback()
 	results = [SignUpCallback registerConstructor];
-	DLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
+	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public abstract void done(ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseException*)error;
 	//Override this function with the code you want to run after the save is complete.
-	results = [SignUpCallback registerCallback:@"done"
-						  selector:@selector(done:)
-					   returnValue:nil
-						 arguments:[ParseException className], nil];
-	DLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
+	// results = [SignUpCallback registerCallback:@"done"
+	// 					  selector:@selector(done:)
+	// 				   returnValue:nil
+	// 					 arguments:[ParseException className], nil];
+	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 	
 	
 }
@@ -56,7 +56,7 @@
 		NSLog(@"Send success");
 	}
 	else{
-		NSLog(@"Send failed", [error getCode]);
+		// NSLog(@"Send failed", [error getCode]);
 	}
 }
 
