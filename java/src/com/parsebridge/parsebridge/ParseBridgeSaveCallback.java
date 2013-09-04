@@ -5,5 +5,5 @@ import com.parse.SaveCallback;
 
 public class ParseBridgeSaveCallback extends SaveCallback {
 	public native void done(ParseException ex);
-	public MySaveCallback() {}
+	public ParseBridgeSaveCallback() {}
 }

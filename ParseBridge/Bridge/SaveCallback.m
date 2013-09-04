@@ -49,7 +49,10 @@
 	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 }
 
-
++ (NSString *)className
+{
+    return @"com.parsebridge.ParseBridgeSaveCallback";
+}
 
 + (SaveCallback *)callbackWithHandler:(PFBooleanResultBlock)handler
 {

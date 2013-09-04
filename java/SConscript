@@ -1,19 +1,6 @@
 sources = [
-    'src/com/parsebridge/parsebridge/ParseBridgeDeleteCallback.java'
-    # 'src/com/parsebridge/parsebridge/MyCountCallback.java',
-    # 'src/com/parsebridge/parsebridge/MyFindCallback.java',
-    # 'src/com/parsebridge/parsebridge/MyFunctionCallback.java',
-    # 'src/com/parsebridge/parsebridge/MyGetCallback.java',
-    # 'src/com/parsebridge/parsebridge/MyGetDataCallback.java',
-    # 'src/com/parsebridge/parsebridge/MyLocationCallback.java',
-    # 'src/com/parsebridge/parsebridge/MyLogInCallback.java',
-    # 'src/com/parsebridge/parsebridge/MyProgressCallback.java',
-    # 'src/com/parsebridge/parsebridge/MyRefreshCallback.java',
-    # 'src/com/parsebridge/parsebridge/MyRequestPasswordResetCallback.java',
-    # 'src/com/parsebridge/parsebridge/MySaveCallback.java',
-    # 'src/com/parsebridge/parsebridge/MySendCallback.java',
-    # 'src/com/parsebridge/parsebridge/MySignUpCallback.java',
-    # 'src/com/parsebridge/parsebridge/ParseManager.java',
+    'src/com/parsebridge/parsebridge/ParseBridgeDeleteCallback.java',
+    'src/com/parsebridge/parsebridge/ParseBridgeSaveCallback.java',
 ]
 
 aidl_sources = [
