@@ -1,4 +1,5 @@
 sources = [
+    'src/com/parsebridge/parsebridge/ParseBridgeDeleteCallback.java'
     # 'src/com/parsebridge/parsebridge/MyCountCallback.java',
     # 'src/com/parsebridge/parsebridge/MyFindCallback.java',
     # 'src/com/parsebridge/parsebridge/MyFunctionCallback.java',

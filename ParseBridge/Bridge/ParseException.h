@@ -25,6 +25,7 @@
  */
 
 #import <BridgeKit/JavaObject.h>
+#import <BridgeKit/JavaThrowable.h>
 
 typedef enum parseErrorCode : int {
 	ACCOUNT_ALREADY_LINKED			=	208,
@@ -71,10 +72,7 @@ typedef enum parseErrorCode : int {
 
 } parseErrorCode;
 
-@class JavaThrowable;
-
-@interface ParseException : JavaObject{
-}
+@interface ParseException : JavaThrowable
 
 -(id)initParseExceptionWithCode:(int)errorcode message:(NSString*)message;
 -(id)initParseExceptionWithMessageandCause:(NSString*)message throwable:(JavaThrowable*)throwable;

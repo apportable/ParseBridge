@@ -29,15 +29,17 @@
 
 @implementation DeleteCallback
 
+@synthesize handler = _handler;
+
 + (void)initializeJava
 {
     [super initializeJava];
-	
+
 	BOOL results;
 	//*- Java:  public SaveCallback()
     results = [DeleteCallback registerConstructor];
 	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
-	
+
 	//*- Java:  public abstract void done(ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseException*)error;
 	//Override this function with the code you want to run after the save is complete.
@@ -46,23 +48,36 @@
 					  returnValue:nil
 						arguments:[ParseException className], nil];
 	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
-	
 }
 
 + (NSString *)className
 {
-    return @"com.parse.DeleteCallback";
+    return @"com.parsebridge.ParseBridgeDeleteCallback";
 }
 
--(void)done:(ParseException*)error{
-	//[self _done:error];
-	if(!error){
-	     //No error
-		 NSLog(@"Delete Successful");
++ (DeleteCallback *)callbackWithHandler:(PFBooleanResultBlock)handler
+{
+    DeleteCallback *callback = [DeleteCallback new];
+    callback.handler = handler;
+    return [callback autorelease];
+}
+
+- (void)done:(ParseException*)exception
+{
+    NSError *error = nil;
+	if (exception) {
+        error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
 	}
-	else{
-		 NSLog(@"Delete failed with error %i", [error getCode]);
-	}
+    if (_handler) {
+        _handler(YES, error);
+    }
+}
+
+- (void)dealloc
+{
+    Block_release(_handler);
+    _handler = nil;
+    [super dealloc];
 }
 
 

@@ -25,9 +25,15 @@
  */
 
 #import <BridgeKit/JavaObject.h>
+#import "PFConstants.h"
+
 @class ParseException;
 
 @interface DeleteCallback : JavaObject
+
+@property (nonatomic, copy) PFBooleanResultBlock handler;
+
++(DeleteCallback *)callbackWithHandler:(PFBooleanResultBlock)handler;
 
 -(id)init;
 -(void)done:(ParseException*)error;
