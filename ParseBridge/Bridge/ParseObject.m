@@ -212,7 +212,7 @@
 	result = [ParseObject registerInstanceMethod:@"saveInBackground"
 										selector:@selector(saveInBackgroundWithCallback:)
 									 returnValue:nil
-									   arguments:[SaveCallback className],nil];
+									   arguments:[SaveCallback className], nil];
 	NSLog(@"ParseObject Registered saveInBackground  =  %@", (result ? @"YES" : @"NO"));
 	
  

@@ -29,44 +29,51 @@
 
 @implementation SaveCallback
 
+@synthesize handler = _handler;
+
 + (void)initializeJava
 {
     [super initializeJava];
-	
 	BOOL results;
 	//*- Java:  public SaveCallback()
 	results = [SaveCallback registerConstructor];
 	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
-	
+
 	//*- Java:  public abstract void done(ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
 	//Override this function with the code you want to run after the save is complete.
-	// results = [SaveCallback registerCallback:@"done"
-	// 					   selector:@selector(done:)
-	// 					returnValue:nil
-	// 					  arguments:[ParseException className], nil];
+	results = [SaveCallback registerCallback:@"done"
+						   selector:@selector(done:)
+						returnValue:nil
+						  arguments:[ParseException className], nil];
 	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
-	
 }
 
 
 
--(void)done:(ParseException*)error{
-//[self _done:error];
-	if(!error){
-		//No error
-		NSLog(@"Save Successful");
-	}
-	else{
-		// NSLog(@"Save failed", [error getCode]);
-	}
-}
-
-
-+ (NSString *)className
++ (SaveCallback *)callbackWithHandler:(PFBooleanResultBlock)handler
 {
-    return @"com.parse.SaveCallback";
+    SaveCallback *callback = [SaveCallback new];
+    callback.handler = handler;
+    return [callback autorelease];
 }
 
+- (void)done:(ParseException*)exception
+{
+    NSError *error = nil;
+    if (exception) {
+        error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
+    }
+    if (_handler) {
+        _handler(YES, error);
+    }
+}
+
+- (void)dealloc
+{
+    Block_release(_handler);
+    _handler = nil;
+    [super dealloc];
+}
 
 @end
