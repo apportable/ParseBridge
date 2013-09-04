@@ -51,7 +51,7 @@
 				
 	//*- Java:  public ParseQuery(String theClassName)
 	//*- iOS Bridge Method:  -(ParseQuery*)initWithClassName:(NSString*)theClassName;
-    results = [ParseQuery registerConstructorWithSelector:@selector(initWithClassName)
+    results = [ParseQuery registerConstructorWithSelector:@selector(initWithClassName:)
                                       arguments:[NSString className], nil];
 	NSLog(@"Registered initWithClassName =  %@", (results ? @"YES" : @"NO"));
 	

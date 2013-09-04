@@ -464,15 +464,6 @@
 									   arguments:[NSString className],nil];
 	NSLog(@"ParseObject Registered has = %@", (result ? @"YES" : @"NO"));
 
-	//*- Java: public void put(String key,Object value)
-	//*- ObjC: -(void)put:(NSString*)key value:(JavaObject*)value;
-	//Add a key-value pair to this object. It is recommended to name keys in partialCamelCaseLikeThis.
-	result = [ParseObject registerInstanceMethod:@"put"
-										selector:@selector(put:)
-									 returnValue:nil
-									   arguments:[NSString className],[JavaObject className],nil];
-	NSLog(@"ParseObject Registered put = %@", (result ? @"YES" : @"NO"));
-
 
 	//*- Java: public void increment(String key)
 	//*- ObjC: -(void)increment:(NSString*)key;
