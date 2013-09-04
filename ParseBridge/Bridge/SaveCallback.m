@@ -65,7 +65,9 @@
         error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
     }
     if (_handler) {
-        _handler(YES, error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _handler(YES, error);
+        });
     }
 }
 
