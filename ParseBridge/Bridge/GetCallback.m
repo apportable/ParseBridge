@@ -26,48 +26,63 @@
 
 #import "GetCallback.h"
 #import "ParseException.h"
+#import "PFObject.h"
 #import "ParseObject.h"
 
 @implementation GetCallback
 
-
+@synthesize handler = _handler;
 
 + (void)initializeJava
 {
     [super initializeJava];
-	
+
 	BOOL results;
 	//*- Java:  public SaveCallback()
 	results = [GetCallback registerConstructor];
 	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
-	
+
 	//*- Java:  public abstract void done(T object,ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
 	//Override this function with the code you want to run after the save is complete.
-	// results = [GetCallback registerCallback:@"done"
-	// 						  selector:@selector(done:error:)
-	// 					   returnValue:nil
-	// 						 arguments:[ParseObject className],[ParseException className], nil];
+	results = [GetCallback registerCallback:@"done"
+							  selector:@selector(done:error:)
+						   returnValue:nil
+							 arguments:[ParseObject className],[ParseException className], nil];
 	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
-	
-	
 }
-
--(void)done:(JavaObject*)obj error:(ParseException*)error{
-	//[self _done:error];
-	if(!error && obj != nil){
-		//No error
-		NSLog(@"Object Retrieved Successfully");
-	}
-	else{
-		// NSLog(@"Object retrieval failed", [error getCode]);
-	}
-}
-
 
 + (NSString *)className
 {
-    return @"com.parse.GetCallback";
+    return @"com.parsebridge.ParseBridgeGetCallback";
+}
+
++ (GetCallback *)callbackWithHandler:(PFObjectResultBlock)handler
+{
+    GetCallback *callback = [GetCallback new];
+    callback.handler = handler;
+    return [callback autorelease];
+}
+
+- (void)done:(ParseObject *)parseObject error:(ParseException *)exception
+{
+    NSError *error = nil;
+    if (exception) {
+        error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
+    }
+    if (_handler) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            PFObject *pfObject = [[[PFObject alloc] initWithParseObject:parseObject] autorelease];
+            _handler(pfObject, error);
+        });
+    }
+}
+
+- (void)dealloc
+{
+    Block_release(_handler);
+    _handler = nil;
+    [super dealloc];
 }
 
 
