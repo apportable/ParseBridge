@@ -42,14 +42,12 @@
 	BOOL results = FALSE;
 	results = [ParseException registerConstructorWithSelector:@selector(initParseExceptionWithCode:message:)
 													arguments:[JavaClass intPrimitive], [NSString className], nil];
-	NSLog(@"ParseException Registered constructor for initParseExceptionWithCode =  %@", (results ? @"YES" : @"NO"));
 	
 	//*- Java:ParseException(String message, Throwable cause)
 	//*- Objective C:  -(id)initParseExceptionWithMessageandCause:(NSString*)message throwable:(JavaThrowable*)throwable;
 
 	results = [ParseException registerConstructorWithSelector:@selector(initParseExceptionWithMessageandCause:throwable:)
 													arguments:[NSString className], [JavaThrowable className], nil];
-	NSLog(@"ParseException Registered constructor for initParseExceptionWithMessageandCause =  %@", (results ? @"YES" : @"NO"));
 	//*- Objective C:
 
 	//Construct a new ParseException with an external cause.
@@ -58,7 +56,6 @@
 	//*- Objective C:  -(id)initParseExceptionWithCause:(JavaThrowable*)throwable;
 	results = [ParseException registerConstructorWithSelector:@selector(initParseExceptionWithCause:)
 													arguments:[JavaThrowable className], nil];
-	NSLog(@"ParseException Registered constructor for initParseExceptionWithCause =  %@", (results ? @"YES" : @"NO"));
 	//Construct a new ParseException with an external cause.
 	
 	//Methods
@@ -69,7 +66,6 @@
 							 selector:@selector(getCode)
 						  returnValue:[JavaClass intPrimitive]
 							arguments:nil];
-	NSLog(@"ParseException Registered for getCode =  %@", (results ? @"YES" : @"NO"));
 		
 	
 	

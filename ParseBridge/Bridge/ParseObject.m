@@ -50,27 +50,23 @@
     //*- ObjC: -(id)initParseObject:(NSString*)name;
 	BOOL result = NO;
 	result = [ParseObject registerConstructor];
-	NSLog(@"ParseObject Registered constructor  =  %@", (result ? @"YES" : @"NO"));
 	
 	//*- Java: ParseObject(String theClassName) - Constructor
 	//*- ObjC: -(id)initParseObject:(NSString*)name;
 	result = [ParseObject registerConstructorWithSelector:@selector(initParseObject:)
                                        arguments:[NSString className], nil];
-	NSLog(@"ParseObject Registered constructor2  =  %@", (result ? @"YES" : @"NO"));
     
 	//*- Java: public final void saveEventually()
 	//*- ObjC: -(void)saveEventually;
 	result = [ParseObject registerInstanceMethod:@"saveEventually"
                                selector:@selector(saveEventually)
                             returnValue:nil];
-	NSLog(@"ParseObject Registered saveEventually  =  %@", (result ? @"YES" : @"NO"));
                             
     //*- Java: public final void saveInBackground()
     //*- ObjC: -(void)saveInBackground;
     result = [ParseObject registerInstanceMethod:@"saveInBackground"
                                selector:@selector(saveInBackground)
 							   returnValue:nil];
-	NSLog(@"ParseObject Registered saveInBackground  =  %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java: public final void save()
@@ -78,7 +74,6 @@
 	result = [ParseObject registerInstanceMethod:@"save"
 											  selector:@selector(save)
 										   returnValue:nil];
-	NSLog(@"ParseObject Registered save  =  %@", (result ? @"YES" : @"NO"));
 	//Saves this object to the server. Typically, you should use ParseObject.saveInBackground(com.parse.SaveCallback) instead of this, unless you are managing your own threading.
  
  
@@ -88,7 +83,6 @@
 						selector:@selector(forKey:setObject:)
 					 returnValue:nil
 					   arguments:[NSString className],[JavaObject className],nil];
-	NSLog(@"ParseObject Registered put  =  %@", (result ? @"YES" : @"NO"));
     
     //*- Java: public static ParseObject create(String className)
     //*- ObjC: + (ParseObject*)objectWithClassName:(NSString*)className;
@@ -97,7 +91,6 @@
 					   selector:@selector(objectWithClassName:)
 					returnValue:[ParseObject className]
 					  arguments:[NSString className], nil];
-	NSLog(@"ParseObject Registered create  =  %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java: public static <T extends ParseObject> T create(Class<T> subclass)
@@ -107,7 +100,6 @@
 									  selector:@selector(objectWithClass:)
 								   returnValue:[ParseObject className]
 									 arguments:[JavaClass className], nil];
-	NSLog(@"ParseObject Registered create2  =  %@", (result ? @"YES" : @"NO"));
 
 	
     //*- Java: public static void saveAll(List<ParseObject> objects) throws ParseException
@@ -116,7 +108,6 @@
 					   selector:@selector(saveAll:)
 					returnValue:nil
 					  arguments:[JavaList className], nil];
-	NSLog(@"ParseObject Registered saveAll  =  %@", (result ? @"YES" : @"NO"));
 	
 
     //*- Java: public static ParseObject createWithoutData(String className, String objectId)
@@ -126,7 +117,6 @@
 					   selector:@selector(objectWithoutDataWithClassName:objectId:)
 					returnValue:[ParseObject className]
 					  arguments:[NSString className], [NSString className], nil];
-	NSLog(@"ParseObject Registered createWithoutData  =  %@", (result ? @"YES" : @"NO"));
 
 
 	//*- Java: public static <T extends ParseObject> T createWithoutData(Class<T> subclass,String objectId)
@@ -136,7 +126,6 @@
 									  selector:@selector(objectWithoutDataWithClass:objectId:)
 								   returnValue:[ParseObject className]
 									 arguments:[JavaClass className], [NSString className], nil];
-	NSLog(@"ParseObject Registered createWithoutData  =  %@", (result ? @"YES" : @"NO"));
 
 
 	//*- Java: public static void registerSubclass(Class<? extends ParseObject> subclass)
@@ -146,7 +135,6 @@
 									  selector:@selector(registerSubclass:)
 								   returnValue:nil
 									 arguments:[JavaClass className], nil];
-	NSLog(@"ParseObject Registered registerSubclass  =  %@", (result ? @"YES" : @"NO"));
 
 
 	//*- Java: public String getClassName()
@@ -156,7 +144,6 @@
 										selector:@selector(getClassName)
 									 returnValue:[NSString className]
 									   arguments:nil];
-	NSLog(@"ParseObject Registered getClassName  =  %@", (result ? @"YES" : @"NO"));
  
 
 	//*- Java: public Set<String> keySet()
@@ -166,7 +153,6 @@
 										selector:@selector(_keySet)
 									 returnValue:[JavaSet className]
 									   arguments:nil];
-	NSLog(@"ParseObject Registered keySet  =  %@", (result ? @"YES" : @"NO"));
 
 	//*- Java: public Date getUpdatedAt()
 	//*- ObjC: -(JavaObject*)getUpdatedAt;
@@ -175,7 +161,6 @@
 	//									selector:@selector(getUpdatedAt)
 	//								 returnValue:[JavaClass className]
 	//								   arguments:nil];
-	//NSLog(@"ParseObject Registered getUpdatedAt  =  %@", (result ? @"YES" : @"NO"));
 
 	//*- Java: public Date getCreatedAt()
 	//*- ObjC: -(JavaObject*)getCreatedAt;
@@ -184,7 +169,6 @@
 	//									selector:@selector(getCreatedAt)
 	//								 returnValue:[JavaClass className]
 	//								   arguments:nil];
-	//NSLog(@"ParseObject Registered getCreatedAt  =  %@", (result ? @"YES" : @"NO"));
  
 
 	//*- Java: public String getObjectId()
@@ -194,7 +178,6 @@
 										selector:@selector(getObjectId)
 									 returnValue:[NSString className]
 									   arguments:nil];
-	NSLog(@"ParseObject Registered getObjectId  =  %@", (result ? @"YES" : @"NO"));
  
 
 	//*- Java: public void setObjectId(String newObjectId)
@@ -204,7 +187,6 @@
 										selector:@selector(setObjectId:)
 									 returnValue:nil
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered setObjectId  =  %@", (result ? @"YES" : @"NO"));
 
 
 	//*- Java: public final void saveInBackground(SaveCallback callback)
@@ -214,7 +196,6 @@
 										selector:@selector(saveInBackgroundWithCallback:)
 									 returnValue:nil
 									   arguments:[SaveCallback className], nil];
-	NSLog(@"ParseObject Registered saveInBackground  =  %@", (result ? @"YES" : @"NO"));
 	
  
 	//*- Java: public final void saveInBackground()
@@ -224,7 +205,6 @@
 										selector:@selector(saveInBackground)
 									 returnValue:nil
 									   arguments:nil];
-	NSLog(@"ParseObject Registered saveInBackground2  =  %@", (result ? @"YES" : @"NO"));
 	
 
  
@@ -236,7 +216,6 @@
 										selector:@selector(saveEventually)
 									 returnValue:nil
 									   arguments:nil];
-	NSLog(@"ParseObject Registered saveEventually  =  %@", (result ? @"YES" : @"NO"));
 	
 
  
@@ -248,7 +227,6 @@
 										selector:@selector(saveEventuallyWithCallback:)
 									 returnValue:nil
 									   arguments:[SaveCallback className],nil];
-	NSLog(@"ParseObject Registered saveEventually2  =  %@", (result ? @"YES" : @"NO"));
  
 
 	//*- Java: public final void deleteEventually()
@@ -258,7 +236,6 @@
 										selector:@selector(deleteEventually)
 									 returnValue:nil
 									   arguments:nil];
-	NSLog(@"ParseObject Registered deleteEventually  =  %@", (result ? @"YES" : @"NO"));
  
 
 	//*- Java: public final void deleteEventually(DeleteCallback callback)
@@ -268,7 +245,6 @@
 										selector:@selector(deleteEventuallyWithCallback:)
 									 returnValue:nil
 									   arguments:[DeleteCallback className],nil];
-	NSLog(@"ParseObject Registered deleteEventually  =  %@", (result ? @"YES" : @"NO"));
 
 
 
@@ -278,7 +254,6 @@
 										selector:@selector(refresh)
 									 returnValue:nil
 									   arguments:nil];
-	NSLog(@"ParseObject Registered refresh  =  %@", (result ? @"YES" : @"NO"));
 
 
 	//*- Java: public final void refreshInBackground(RefreshCallback callback)
@@ -288,7 +263,6 @@
 										selector:@selector(refreshInBackground:)
 									 returnValue:nil
 									   arguments:[RefreshCallback className],nil];
-	NSLog(@"ParseObject Registered refreshInBackground  =  %@", (result ? @"YES" : @"NO"));
 
 
 	//*- Java: public <T extends ParseObject> T fetch()
@@ -298,7 +272,6 @@
 										selector:@selector(fetch)
 									 returnValue:[ParseObject className]
 									   arguments:nil];
-	NSLog(@"ParseObject Registered fetch = %@", (result ? @"YES" : @"NO"));
 
 	//*- Java: public final <T extends ParseObject> void fetchInBackground(GetCallback<T> callback)
 	//*- ObjC: -(void)fetchInBackground:(GetCallback*)callback;
@@ -307,7 +280,6 @@
 										selector:@selector(fetchInBackground:)
 									 returnValue:nil
 									   arguments:[GetCallback className],nil];
-	NSLog(@"ParseObject Registered fetchInBackground = %@", (result ? @"YES" : @"NO"));
 	
  
 
@@ -317,7 +289,6 @@
 										selector:@selector(fetchIfNeeded)
 									 returnValue:[ParseObject className]
 									   arguments:nil];
-	NSLog(@"ParseObject Registered fetchIfNeeded = %@", (result ? @"YES" : @"NO"));
 	
                     
 
@@ -328,7 +299,6 @@
 										selector:@selector(fetchIfNeededInBackground:)
 									 returnValue:nil
 									   arguments:[GetCallback className],nil];
-	NSLog(@"ParseObject Registered fetchIfNeededInBackground = %@", (result ? @"YES" : @"NO"));
  
 	//*- Java: public final void delete()
 	//*- ObjC: -(void)delete;
@@ -336,7 +306,6 @@
 										selector:@selector(delete)
 									 returnValue:nil
 									   arguments:nil];
-	NSLog(@"ParseObject Registered delete = %@", (result ? @"YES" : @"NO"));
          
 
 	//*- Java: public final void deleteInBackground(DeleteCallback callback)
@@ -346,7 +315,6 @@
 										selector:@selector(deleteInBackgroundWithCallback:)
 									 returnValue:nil
 									   arguments:[DeleteCallback className],nil];
-	NSLog(@"ParseObject Registered deleteInBackground = %@", (result ? @"YES" : @"NO"));
  
 	//*- Java: public final void deleteInBackground()
 	//*- ObjC: -(void)deleteInBackground;
@@ -355,7 +323,6 @@
 										selector:@selector(deleteInBackground)
 									 returnValue:nil
 									   arguments:nil];
-	NSLog(@"ParseObject Registered deleteInBackground = %@", (result ? @"YES" : @"NO"));
 
 
 	//*- Java: public static void deleteAll(List<ParseObject> objects)
@@ -365,7 +332,6 @@
 	//									selector:@selector(deleteAll:)
 	//								 returnValue:nil
 	//								   arguments:[JavaList className],nil];
-	//NSLog(@"ParseObject Registered deleteAll = %@", (result ? @"YES" : @"NO"));
  
 
 	//*- Java: public static void deleteAllInBackground(List<ParseObject> objects,DeleteCallback callback)
@@ -375,7 +341,6 @@
 	//								  selector:@selector(deleteAllInBackground:callback:)
 	//							   returnValue:nil
 	//								 arguments:[JavaList className],[DeleteCallback className],nil];
-	//NSLog(@"ParseObject Registered deleteAllInBackground = %@", (result ? @"YES" : @"NO"));
  
 
 
@@ -386,7 +351,6 @@
 									  selector:@selector(saveAll:)
 								   returnValue:nil
 									 arguments:[JavaList className],nil];
-	NSLog(@"ParseObject Registered saveAll = %@", (result ? @"YES" : @"NO"));
 
 
 	//*- Java:  public static <T extends ParseObject> List<T> fetchAllIfNeeded(List<T> objects)
@@ -395,7 +359,6 @@
 									  selector:@selector(fetchAllIfNeeded:)
 								   returnValue:[JavaList className]
 									 arguments:[JavaList className],nil];
-	//NSLog(@"ParseObject Registered fetchAllIfNeeded = %@", (result ? @"YES" : @"NO"));
   
 	
 	//*- Java: public static <T extends ParseObject> void fetchAllIfNeededInBackground(List<T> objects,FindCallback<T> callback)
@@ -405,7 +368,6 @@
 									  selector:@selector(fetchAllIfNeededInBackground:className:)
 								   returnValue:nil
 									 arguments:[JavaList className],[FindCallback className],nil];
-	NSLog(@"ParseObject Registered fetchAllIfNeededInBackground = %@", (result ? @"YES" : @"NO"));
 	
 	
 
@@ -415,7 +377,6 @@
 									  selector:@selector(fetchAll:)
 								   returnValue:[JavaList className]
 									 arguments:[JavaList className],nil];
-	//NSLog(@"ParseObject Registered fetchAll = %@", (result ? @"YES" : @"NO"));
  
 
 	//*- Java: public static <T extends ParseObject> void fetchAllInBackground(List<T> objects,FindCallback<T> callback)
@@ -425,7 +386,6 @@
 									  selector:@selector(fetchAllInBackground:callback:)
 								   returnValue:nil
 									 arguments:[JavaList className],[FindCallback className],nil];
-	NSLog(@"ParseObject Registered fetchAllInBackground = %@", (result ? @"YES" : @"NO"));
 
 	//*- Java: public static void saveAllInBackground(List<ParseObject> objects,SaveCallback callback)
 	//*- ObjC: -(void)saveAllInBackgroundWithCallback:(JavaList*)objects callback:(SaveCallback*)callback;
@@ -434,7 +394,6 @@
 									  selector:@selector(saveAllInBackgroundWithCallback:callback:)
 								   returnValue:nil
 									 arguments:[JavaList className],[SaveCallback className],nil];
-	NSLog(@"ParseObject Registered saveAllInBackground = %@", (result ? @"YES" : @"NO"));
 
 
 	//*- Java: public static void saveAllInBackground(List<ParseObject> objects)
@@ -444,7 +403,6 @@
 									  selector:@selector(saveAllInBackground:)
 								   returnValue:nil
 									 arguments:[JavaList className], nil];
-	NSLog(@"ParseObject Registered saveAllInBackground = %@", (result ? @"YES" : @"NO"));
 
 
 	//*- Java: public void remove(String key)
@@ -454,7 +412,6 @@
 										selector:@selector(remove:)
 									 returnValue:nil
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered remove = %@", (result ? @"YES" : @"NO"));
  
 	//*- Java: public boolean has(String key)
 	//*- ObjC: -(bool)has:(NSString*)key;
@@ -463,7 +420,6 @@
 										selector:@selector(has:)
 									 returnValue:[JavaClass boolPrimitive]
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered has = %@", (result ? @"YES" : @"NO"));
 
 
 	//*- Java: public void increment(String key)
@@ -473,7 +429,6 @@
 										selector:@selector(increment:)
 									 returnValue:nil
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered increment = %@", (result ? @"YES" : @"NO"));
  
 	//*- Java: public void increment(String key,Number amount)
 	//*- ObjC: -(void)incrementWithKeyandAmount:(NSString*)key amount:(NSNumber*)amount;
@@ -482,7 +437,6 @@
 										selector:@selector(increment:byAmount:)
 									 returnValue:nil
 									   arguments:[NSString className], [JavaNumber className], nil];
-	//NSLog(@"ParseObject Registered increment2 = %@", (result ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public void add(String key,Object value)
@@ -491,7 +445,6 @@
 										selector:@selector(add:value:)
 									 returnValue:nil
 									   arguments:[NSString className], [JavaObject className], nil];
-	NSLog(@"ParseObject Registered add = %@", (result ? @"YES" : @"NO"));
  
 	
 	//*- Java: public void addAll(String key,Collection<?> values)
@@ -500,7 +453,6 @@
 	//									selector:@selector(addAll:values:)
 	//								 returnValue:nil
 	//								   arguments:[NSString className],[JavaObject className], nil];
-	//NSLog(@"ParseObject Registered addAll = %@", (result ? @"YES" : @"NO"));
  
 	
 	//*- Java: public void addUnique(String key,Object value)
@@ -510,7 +462,6 @@
 										selector:@selector(addUnique:value:)
 									 returnValue:nil
 									   arguments:[NSString className],[JavaObject className], nil];
-	NSLog(@"ParseObject Registered addUnique = %@", (result ? @"YES" : @"NO"));
  
 
 	//*- Java: public void addAllUnique(String key,Collection<?> values)
@@ -520,7 +471,6 @@
 	//									selector:@selector(addAllUnique:values:)
 	//								 returnValue:nil
 	//								   arguments:[NSString className],[JavaObject className], nil];
-	//NSLog(@"ParseObject Registered addAllUnique = %@", (result ? @"YES" : @"NO"));
  
 
 	//*- Java: public void removeAll(String key,Collection<?> values)
@@ -530,7 +480,6 @@
 	//									selector:@selector(removeAll:values:)
 	//								 returnValue:nil
 	//								   arguments:[NSString className],[JavaClass className], nil];
-	//NSLog(@"ParseObject Registered removeAll = %@", (result ? @"YES" : @"NO"));
  
 	//*- Java: public boolean containsKey(String key)
 	//*- ObjC: -(bool)containsKey:(NSString*)key;
@@ -539,7 +488,6 @@
 										selector:@selector(containsKey:)
 									 returnValue:[JavaClass boolPrimitive]
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered containsKey = %@", (result ? @"YES" : @"NO"));
  
 
 	//*- Java:  public String getString(String key)
@@ -548,7 +496,6 @@
 										selector:@selector(getString:)
 									 returnValue:[NSString className]
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered getString = %@", (result ? @"YES" : @"NO"));
 
 	//*- Java: public byte[] getBytes(String key)
 	//*- ObjC: -(JavaByte*)getBytes:(NSString*)key;
@@ -567,7 +514,6 @@
 										selector:@selector(getString:)
 									 returnValue:[JavaList className]
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered getList = %@", (result ? @"YES" : @"NO"));
 	
 	//*- Java: public <V> Map<String,V> getMap(String key)
 	//*- ObjC: -(JavaObject*)getMap:(NSString*)key;
@@ -581,7 +527,6 @@
 										selector:@selector(getInt:)
 									 returnValue:[JavaClass intPrimitive]
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered getInt = %@", (result ? @"YES" : @"NO"));
 	
 	//*- Java: public double getDouble(String key)
 	//*- ObjC: -(double)getDouble:(NSString*)key;
@@ -589,7 +534,6 @@
 										selector:@selector(getDouble:)
 									 returnValue:[JavaClass doublePrimitive]
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered getDouble = %@", (result ? @"YES" : @"NO"));
 
 	//*- Java: public long getLong(String key)
 	//*- ObjC: -(long)getLong:(NSString*)key;
@@ -597,7 +541,6 @@
 										selector:@selector(getLong:)
 									 returnValue:[JavaClass longPrimitive]
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered getLong = %@", (result ? @"YES" : @"NO"));
 	
 	//*- Java: public boolean getBoolean(String key)
 	//*- ObjC: -(bool)getBoolean:(NSString*)key;
@@ -605,7 +548,6 @@
 										selector:@selector(getBoolean:)
 									 returnValue:[JavaClass boolPrimitive]
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered getBoolean = %@", (result ? @"YES" : @"NO"));
 	
 	//*- Java: public Date getDate(String key)
 	//*- ObjC: -(Date)getDate:(NSString*)key;
@@ -617,7 +559,6 @@
 										selector:@selector(getParseObject:)
 									 returnValue:[ParseObject className]
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered getParseObject = %@", (result ? @"YES" : @"NO"));
  
 
 	//*- Java: public ParseUser getParseUser(String key)
@@ -627,7 +568,6 @@
 										selector:@selector(getParseUser:)
 									 returnValue:[ParseUser className]
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered getParseUser = %@", (result ? @"YES" : @"NO"));
  
 
 	//*- Java: public ParseFile getParseFile(String key)
@@ -637,7 +577,6 @@
 										selector:@selector(getParseFile:)
 									 returnValue:[ParseFile className]
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered getParseFile = %@", (result ? @"YES" : @"NO"));
  
 	//*- Java: public ParseGeoPoint getParseGeoPoint(String key)
 	//*- ObjC: -(ParseGeoPoint*)getParseGeoPoint:(NSString*)key;
@@ -645,7 +584,6 @@
 										selector:@selector(getParseGeoPoint:)
 									 returnValue:[ParseGeoPoint className]
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered getParseGeoPoint = %@", (result ? @"YES" : @"NO"));
  
 
 	//*- Java: public ParseACL getACL()
@@ -654,7 +592,6 @@
 										selector:@selector(getACL:)
 									 returnValue:[ParseACL className]
 									   arguments:nil];
-	NSLog(@"ParseObject Registered getACL = %@", (result ? @"YES" : @"NO"));
  
 	//*- Java: public void setACL(ParseACL acl)
 	//*- ObjC: -(void)setACL:(ParseACL*)acl;
@@ -662,7 +599,6 @@
 										selector:@selector(setACL:)
 									 returnValue:nil
 									   arguments:[ParseACL className],nil];
-	NSLog(@"ParseObject Registered setACL = %@", (result ? @"YES" : @"NO"));
  
 	//*- Java: public boolean isDataAvailable()
 	//*- ObjC: -(bool)isDataAvailable;
@@ -671,7 +607,6 @@
 										selector:@selector(isDataAvailable:)
 									 returnValue:[JavaClass boolPrimitive]
 									   arguments:nil];
-	NSLog(@"ParseObject Registered isDataAvailable = %@", (result ? @"YES" : @"NO"));
  
 	//*- Java: public <T extends ParseObject> ParseRelation<T> getRelation(String key)
 	//*- ObjC: -(ParseRelation*)getRelation:(NSString*)key;
@@ -679,7 +614,6 @@
 										selector:@selector(getRelation:)
 									 returnValue:[ParseRelation className]
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered getRelation = %@", (result ? @"YES" : @"NO"));
 
 	//*- Java: public Object get(String key)
 	//*- ObjC: -(JavaObject*)get:(NSString*)key;
@@ -687,7 +621,6 @@
 										selector:@selector(get:)
 									 returnValue:[JavaObject className]
 									   arguments:[NSString className],nil];
-	NSLog(@"ParseObject Registered get = %@", (result ? @"YES" : @"NO"));
  
 
 	//*- Java: public boolean hasSameId(ParseObject other)
@@ -696,7 +629,6 @@
 										selector:@selector(hasSameId:)
 									 returnValue:[JavaClass boolPrimitive]
 									   arguments:[ParseObject className],nil];
-	NSLog(@"ParseObject Registered hasSameId = %@", (result ? @"YES" : @"NO"));
 	
 }
 
