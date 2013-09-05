@@ -3,6 +3,7 @@ sources = [
     'src/com/parsebridge/parsebridge/ParseBridgeSaveCallback.java',
     'src/com/parsebridge/parsebridge/ParseBridgeGetCallback.java',
     'src/com/parsebridge/parsebridge/ParseBridgeFindCallback.java',
+    'src/com/parsebridge/parsebridge/ParseBridgRefreshCallback.java',
 ]
 
 aidl_sources = [

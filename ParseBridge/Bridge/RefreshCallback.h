@@ -25,10 +25,19 @@
  */
 
 #import <BridgeKit/JavaObject.h>
+#import "PFConstants.h"
+
 @class ParseException;
 @class ParseObject;
 
 @interface RefreshCallback : JavaObject
+@end
+
+@interface ParseBridgeRefreshCallback : RefreshCallback
+
+@property (nonatomic, copy) PFObjectResultBlock handler;
+
++(ParseBridgeRefreshCallback *)callbackWithHandler:(PFObjectResultBlock)handler;
 
 -(id)init;
 -(void)done:(ParseObject*)object error:(ParseException*)error;

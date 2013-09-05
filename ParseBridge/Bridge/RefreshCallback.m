@@ -27,47 +27,78 @@
 #import "RefreshCallback.h"
 #import "ParseException.h"
 #import "ParseObject.h"
+#import "PFObject.h"
 
 @implementation RefreshCallback
 
++ (void)initializeJava
+{
+    [super initializeJava];
+}
 
-//public RefreshCallback()
++ (NSString *)className
+{
+    return @"com.parse.RefreshCallback";
+}
 
+@end
+
+@implementation ParseBridgeRefreshCallback
+
+@synthesize handler = _handler;
 
 + (void)initializeJava
 {
     [super initializeJava];
 	BOOL results;
 	//*- Java:  public SaveCallback()
-	results = [RefreshCallback registerConstructor];
-	
-	
+	results = [ParseBridgeRefreshCallback registerConstructor];
 	//*- Java:  public abstract void done(ParseObject object, ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseObject*)object error:(ParseException*)error;
 	//Override this function with the code you want to run after the save is complete.
-	// results = [RefreshCallback registerCallback:@"done"
-	// 					 selector:@selector(done:error:)
-	// 				  returnValue:nil
-	// 					arguments:[ParseObject className],[ParseException className], nil];
-	
-	
+	results = [ParseBridgeRefreshCallback registerCallback:@"done"
+						 selector:@selector(done:error:)
+					  returnValue:nil
+						arguments:[ParseObject className],[ParseException className], nil];
 }
-
--(void)done:(ParseObject*)obj error:(ParseException*)error{
-	//[self _done:error];
-	if(!error && obj != nil){
-		//No error
-		NSLog(@"Object refreshed Successfully");
-	}
-	else{
-		// NSLog(@"Object failed to refresh", [error getCode]);
-	}
-}
-
 
 + (NSString *)className
 {
-    return @"com.parse.RefreshCallback";
+    return @"com.parsebridge.ParseBridgRefreshCallback";
+}
+
++ (ParseBridgeRefreshCallback *)callbackWithHandler:(PFObjectResultBlock)handler
+{
+    ParseBridgeRefreshCallback *callback = [ParseBridgeRefreshCallback new];
+    if (handler == nil)
+    {
+        callback.handler = ^(PFObject *pObj, NSError *error){};
+    }
+    else
+    {
+        callback.handler = handler;
+    }
+    return callback; // NOTE: this is not autorelease but acts as if it is (because it is retained per the duration until the actual callback happens)
+}
+
+- (void)done:(ParseObject *)pObj error:(ParseException*)exception
+{
+    NSError *error = nil;
+    if (exception) {
+        error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        PFObject *pfObject = [[[PFObject alloc] initWithParseObject:pObj] autorelease];
+        _handler(pfObject, error);
+        [self autorelease]; // To balance the retain cycle created from the callbackWithHandler: method
+    });
+}
+
+- (void)dealloc
+{
+    Block_release(_handler);
+    _handler = nil;
+    [super dealloc];
 }
 
 @end
