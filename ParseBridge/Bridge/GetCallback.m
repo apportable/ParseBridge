@@ -31,6 +31,20 @@
 
 @implementation GetCallback
 
++ (void)initializeJava
+{
+    [super initializeJava];
+}
+
++ (NSString *)className
+{
+    return @"com.parse.GetCallback";
+}
+
+@end
+
+@implementation ParseBridgeGetCallback
+
 @synthesize handler = _handler;
 
 + (void)initializeJava
@@ -39,13 +53,13 @@
 
 	BOOL results;
 	//*- Java:  public SaveCallback()
-	results = [GetCallback registerConstructor];
+	results = [ParseBridgeGetCallback registerConstructor];
 	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
 
 	//*- Java:  public abstract void done(T object,ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
 	//Override this function with the code you want to run after the save is complete.
-	results = [GetCallback registerCallback:@"done"
+	results = [ParseBridgeGetCallback registerCallback:@"done"
 							  selector:@selector(done:error:)
 						   returnValue:nil
 							 arguments:[ParseObject className],[ParseException className], nil];
@@ -57,11 +71,18 @@
     return @"com.parsebridge.ParseBridgeGetCallback";
 }
 
-+ (GetCallback *)callbackWithHandler:(PFObjectResultBlock)handler
++ (ParseBridgeGetCallback *)callbackWithHandler:(PFObjectResultBlock)handler
 {
-    GetCallback *callback = [GetCallback new];
-    callback.handler = handler;
-    return [callback autorelease];
+    ParseBridgeGetCallback *callback = [ParseBridgeGetCallback new];
+    if (handler == nil)
+    {
+        callback.handler = ^(PFObject *obj, NSError *error){};
+    }
+    else
+    {
+        callback.handler = handler;
+    }
+    return callback; // NOTE: this is not autorelease but acts as if it is (because it is retained per the duration until the actual callback happens)
 }
 
 - (void)done:(ParseObject *)parseObject error:(ParseException *)exception
@@ -70,12 +91,11 @@
     if (exception) {
         error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
     }
-    if (_handler) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            PFObject *pfObject = [[[PFObject alloc] initWithParseObject:parseObject] autorelease];
-            _handler(pfObject, error);
-        });
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        PFObject *pfObject = [[[PFObject alloc] initWithParseObject:parseObject] autorelease];
+        _handler(pfObject, error);
+        [self autorelease]; // To balance the retain cycle created from the callbackWithHandler: method
+    });
 }
 
 - (void)dealloc

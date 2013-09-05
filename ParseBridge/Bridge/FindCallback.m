@@ -30,43 +30,75 @@
 
 @implementation FindCallback
 
++ (void)initializeJava
+{
+    [super initializeJava];
+}
+
++ (NSString *)className
+{
+    return @"com.parse.FindCallback";
+}
+
+@end
+
+@implementation ParseBridgeFindCallback
+
+@synthesize handler = _handler;
 
 + (void)initializeJava
 {
     [super initializeJava];
 	BOOL results;
 	//*- Java:  public SaveCallback()
-	results = [FindCallback registerConstructor];
+	results = [ParseBridgeFindCallback registerConstructor];
 	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
-	
 	//*- Java:  public abstract void done(List<T> objects,ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
 	//Override this function with the code you want to run after the save is complete.
-	// results = [FindCallback registerCallback:@"done"
-	// 					  selector:@selector(done:error:)
-	// 				   returnValue:nil
-	// 					 arguments:[JavaList className],[ParseException className], nil];
+	results = [ParseBridgeFindCallback registerCallback:@"done"
+						  selector:@selector(done:error:)
+					   returnValue:nil
+						 arguments:[JavaList className], [ParseException className], nil];
 	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
-	
 }
-
-
-
--(void)done:(JavaList*)list error:(ParseException*)error{
-	//[self _done:error];
-	if(!error && list != nil){
-		//No error
-		NSLog(@"Find Successful");
-	}
-	else{
-		// NSLog(@"Find failed", [error getCode]);
-	}
-}
-
 
 + (NSString *)className
 {
-    return @"com.parse.FindCallback";
+    return @"com.parsebridge.ParseBridgeFindCallback";
+}
+
++ (ParseBridgeFindCallback *)callbackWithHandler:(PFArrayResultBlock)handler
+{
+    ParseBridgeFindCallback *callback = [ParseBridgeFindCallback new];
+    if (handler == nil)
+    {
+        callback.handler = ^(NSArray *objects, NSError *error){};
+    }
+    else
+    {
+        callback.handler = handler;
+    }
+    return callback; // NOTE: this is not autorelease but acts as if it is (because it is retained per the duration until the actual callback happens)
+}
+
+- (void)done:(JavaList *)list error:(ParseException*)exception
+{
+    NSError *error = nil;
+    if (exception) {
+        error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _handler([list toArray], error);
+        [self autorelease]; // To balance the retain cycle created from the callbackWithHandler: method
+    });
+}
+
+- (void)dealloc
+{
+    Block_release(_handler);
+    _handler = nil;
+    [super dealloc];
 }
 
 @end

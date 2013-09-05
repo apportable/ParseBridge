@@ -25,10 +25,19 @@
  */
 
 #import <BridgeKit/JavaObject.h>
+#import "PFConstants.h"
+
 @class ParseException;
 @class JavaList;
 
 @interface FindCallback : JavaObject
+@end
+
+@interface ParseBridgeFindCallback : FindCallback
+
+@property (nonatomic, copy) PFArrayResultBlock handler;
+
++(FindCallback *)callbackWithHandler:(PFArrayResultBlock)handler;
 
 -(id)init;
 -(void)done:(JavaList*)list error:(ParseException*)error;

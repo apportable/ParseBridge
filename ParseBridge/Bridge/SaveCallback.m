@@ -29,6 +29,20 @@
 
 @implementation SaveCallback
 
++ (void)initializeJava
+{
+    [super initializeJava];
+}
+
++ (NSString *)className
+{
+    return @"com.parse.SaveCallback";
+}
+
+@end
+
+@implementation ParseBridgeSaveCallback
+
 @synthesize handler = _handler;
 
 + (void)initializeJava
@@ -36,13 +50,13 @@
     [super initializeJava];
 	BOOL results;
 	//*- Java:  public SaveCallback()
-	results = [SaveCallback registerConstructor];
+	results = [ParseBridgeSaveCallback registerConstructor];
 	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
 
 	//*- Java:  public abstract void done(ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
 	//Override this function with the code you want to run after the save is complete.
-	results = [SaveCallback registerCallback:@"done"
+	results = [ParseBridgeSaveCallback registerCallback:@"done"
 						   selector:@selector(done:)
 						returnValue:nil
 						  arguments:[ParseException className], nil];
@@ -54,11 +68,18 @@
     return @"com.parsebridge.ParseBridgeSaveCallback";
 }
 
-+ (SaveCallback *)callbackWithHandler:(PFBooleanResultBlock)handler
++ (ParseBridgeSaveCallback *)callbackWithHandler:(PFBooleanResultBlock)handler
 {
-    SaveCallback *callback = [SaveCallback new];
-    callback.handler = handler;
-    return [callback autorelease];
+    ParseBridgeSaveCallback *callback = [ParseBridgeSaveCallback new];
+    if (handler == nil)
+    {
+        callback.handler = ^(BOOL succeeded, NSError *error){};
+    }
+    else
+    {
+        callback.handler = handler;
+    }
+    return callback; // NOTE: this is not autorelease but acts as if it is (because it is retained per the duration until the actual callback happens)
 }
 
 - (void)done:(ParseException*)exception
@@ -67,11 +88,10 @@
     if (exception) {
         error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
     }
-    if (_handler) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            _handler(YES, error);
-        });
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _handler(YES, error);
+        [self autorelease]; // To balance the retain cycle created from the callbackWithHandler: method
+    });
 }
 
 - (void)dealloc

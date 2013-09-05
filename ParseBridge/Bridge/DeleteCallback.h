@@ -30,10 +30,13 @@
 @class ParseException;
 
 @interface DeleteCallback : JavaObject
+@end
+
+@interface ParseBridgeDeleteCallback : DeleteCallback
 
 @property (nonatomic, copy) PFBooleanResultBlock handler;
 
-+(DeleteCallback *)callbackWithHandler:(PFBooleanResultBlock)handler;
++(ParseBridgeDeleteCallback *)callbackWithHandler:(PFBooleanResultBlock)handler;
 
 -(id)init;
 -(void)done:(ParseException*)error;

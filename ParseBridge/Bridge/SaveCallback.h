@@ -27,13 +27,16 @@
 #import <BridgeKit/JavaObject.h>
 #import "PFConstants.h"
 
+@interface SaveCallback : JavaObject
+@end
+
 @class ParseException;
 
-@interface SaveCallback : JavaObject
+@interface ParseBridgeSaveCallback : SaveCallback
 
 @property (nonatomic, copy) PFBooleanResultBlock handler;
 
-+(SaveCallback *)callbackWithHandler:(PFBooleanResultBlock)handler;
++(ParseBridgeSaveCallback *)callbackWithHandler:(PFBooleanResultBlock)handler;
 
 -(id)init;
 -(void)done:(ParseException*)error;
