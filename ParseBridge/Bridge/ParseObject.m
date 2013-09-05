@@ -38,6 +38,7 @@
 #import <BridgeKit/JavaList.h>
 #import <BridgeKit/JavaClass.h>
 #import <BridgeKit/JavaSet.h>
+#import <BridgeKit/JavaNumbers.h>
 
 @implementation ParseObject
 
@@ -390,10 +391,10 @@
 
 	//*- Java:  public static <T extends ParseObject> List<T> fetchAllIfNeeded(List<T> objects)
 	//*- ObjC: +(JavaList*)fetchAllIfNeeded:(JavaList*)objects;
-	//result = [ParseObject registerStaticMethod:@"fetchAllIfNeeded"
-	//								  selector:@selector(fetchAllIfNeeded:)
-	//							   returnValue:nil
-	//								 arguments:[JavaList className],nil];
+	result = [ParseObject registerStaticMethod:@"fetchAllIfNeeded"
+									  selector:@selector(fetchAllIfNeeded:)
+								   returnValue:[JavaList className]
+									 arguments:[JavaList className],nil];
 	//NSLog(@"ParseObject Registered fetchAllIfNeeded = %@", (result ? @"YES" : @"NO"));
   
 	
@@ -410,10 +411,10 @@
 
 	//*- Java: public static List<ParseObject> fetchAll(List<ParseObject> objects)
 	//*- ObjC: +(JavaList*)fetchAll:(JavaList*)objects;
-	//result = [ParseObject registerStaticMethod:@"fetchAll"
-	//								  selector:@selector(fetchAll:)
-	//							   returnValue:nil
-	//								 arguments:[JavaList className],nil];
+	result = [ParseObject registerStaticMethod:@"fetchAll"
+									  selector:@selector(fetchAll:)
+								   returnValue:[JavaList className]
+									 arguments:[JavaList className],nil];
 	//NSLog(@"ParseObject Registered fetchAll = %@", (result ? @"YES" : @"NO"));
  
 
@@ -442,7 +443,7 @@
 	result = [ParseObject registerStaticMethod:@"saveAllInBackground"
 									  selector:@selector(saveAllInBackground:)
 								   returnValue:nil
-									 arguments:[JavaList className],nil];
+									 arguments:[JavaList className], nil];
 	NSLog(@"ParseObject Registered saveAllInBackground = %@", (result ? @"YES" : @"NO"));
 
 
@@ -477,10 +478,10 @@
 	//*- Java: public void increment(String key,Number amount)
 	//*- ObjC: -(void)incrementWithKeyandAmount:(NSString*)key amount:(NSNumber*)amount;
 	//Atomically increments the given key by the given number.
-	//result = [ParseObject registerInstanceMethod:@"increment"
-	//									selector:@selector(incrementWithKeyandAmount:amount:)
-	//								 returnValue:nil
-	//								   arguments:[NSString className],[JavaObject className], nil];
+	result = [ParseObject registerInstanceMethod:@"increment"
+										selector:@selector(increment:byAmount:)
+									 returnValue:nil
+									   arguments:[NSString className], [JavaNumber className], nil];
 	//NSLog(@"ParseObject Registered increment2 = %@", (result ? @"YES" : @"NO"));
 	
 	
@@ -489,7 +490,7 @@
 	result = [ParseObject registerInstanceMethod:@"add"
 										selector:@selector(add:value:)
 									 returnValue:nil
-									   arguments:[NSString className],[JavaObject className], nil];
+									   arguments:[NSString className], [JavaObject className], nil];
 	NSLog(@"ParseObject Registered add = %@", (result ? @"YES" : @"NO"));
  
 	
@@ -699,7 +700,8 @@
 	
 }
 
--(NSArray*)keySet{
+-(NSArray*) keySet
+{
 	return [[self _keySet] toArray];
 }
 

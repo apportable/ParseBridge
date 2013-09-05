@@ -29,7 +29,6 @@
 @class JavaClass;
 @class ParseObject;
 @class ParseGeoPoint;
-@class JavaArrayList;
 @class JavaSet;
 @class JavaList;
 
@@ -89,7 +88,7 @@
 
 -(ParseQuery*)whereGreaterThanOrEqualTo:(NSString*)key value:(JavaObject*)value;
 
--(ParseQuery*)whereContainedIn:(NSString*)key values:(JavaArrayList*)values;
+// -(ParseQuery*)whereContainedIn:(NSString*)key values:(JavaList*)values;
 
 -(ParseQuery*)whereContainsAll:(NSString*)key values:(JavaObject*)values;
 
@@ -101,7 +100,7 @@
 
 -(ParseQuery*)whereDoesNotMatchKeyInQuery:(NSString*)key keyInQuery:(NSString*)keyInQuery  query:(ParseQuery*)query;
 
--(ParseQuery*)whereNotContainedIn:(NSString*)key values:(JavaArrayList*)values;
+// -(ParseQuery*)whereNotContainedIn:(NSString*)key values:(JavaList*)values;
 
 -(ParseQuery*)whereWithinMiles:(NSString*)key point:(ParseGeoPoint*)point maxDistance:(double)maxDistance;
 
@@ -123,7 +122,7 @@
 
 -(void)include:(NSString*)key;
 
--(void)selectKeys:(JavaArrayList*)keys;
+// -(void)selectKeys:(JavaList*)keys;
 
 -(ParseQuery*)whereExists:(NSString*)key;
 

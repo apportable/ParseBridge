@@ -37,7 +37,7 @@
 
 @property (nonatomic, copy) PFArrayResultBlock handler;
 
-+(FindCallback *)callbackWithHandler:(PFArrayResultBlock)handler;
++(ParseBridgeFindCallback *)callbackWithHandler:(PFArrayResultBlock)handler;
 
 -(id)init;
 -(void)done:(JavaList*)list error:(ParseException*)error;

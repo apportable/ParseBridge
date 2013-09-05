@@ -40,6 +40,7 @@
 @class GetCallback;
 @class DeleteCallback;
 @class FindCallback;
+@class JavaNumber;
 
 
 @interface ParseObject : JavaObject
@@ -109,17 +110,17 @@
 
 +(void)saveAll:(JavaList*)objects;
 
-//+(JavaList*)fetchAllIfNeeded:(JavaList*)objects;
++(JavaList*)fetchAllIfNeeded:(JavaList*)objects;
 
 +(void)fetchAllIfNeededInBackground:(JavaList*)objects callback:(FindCallback*)callback;
 
-//+(JavaList*)fetchAll:(JavaList*)objects;
++(JavaList*)fetchAll:(JavaList*)objects;
 
 +(void)fetchAllInBackground:(JavaList*)objects callback:(FindCallback*)callback;
 
--(void)saveAllInBackgroundWithCallback:(JavaList*)objects callback:(SaveCallback*)callback;
++(void)saveAllInBackgroundWithCallback:(JavaList*)objects callback:(SaveCallback*)callback;
 
--(void)saveAllInBackground:(JavaList*)objects;
++(void)saveAllInBackground:(JavaList*)objects;
 
 -(void)remove:(NSString*)key;
 
@@ -129,7 +130,7 @@
 
 -(void)increment:(NSString*)key;
 
-//-(void)incrementWithKeyandAmount:(NSString*)key amount:(JavaObject*)amount;
+-(void)increment:(NSString*)key byAmount:(JavaNumber*)amount;
 
 -(void)add:(NSString*)key value:(JavaObject*)value;
 

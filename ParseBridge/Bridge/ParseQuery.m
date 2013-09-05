@@ -415,12 +415,12 @@
 									   arguments:[NSString className], nil];
 
 	//*- Java: public void selectKeys(Collection<String> keys)
-	//*- ObjC: -(void)selectKeys:(JavaArrayList*)keys;
+	//*- ObjC: -(void)selectKeys:(JavaList*)keys;
 	//Restrict the fields of returned ParseObjects to only include the provided keys. If this is called multiple times, then all of the keys specified in each of the calls will be included.
-	//results = [ParseQuery registerInstanceMethod:@"selectKeys"
-	//									selector:@selector(selectKeys:)
-	//								 returnValue:nil
-	//								   arguments:[JavaList className], nil];
+	// results = [ParseQuery registerInstanceMethod:@"selectKeys"
+	// 									selector:@selector(selectKeys:)
+	// 								 returnValue:nil
+	// 								   arguments:[JavaList className], nil];
 
 	//*- Java: public ParseQuery<T> whereExists(String key)
 	//*- ObjC: -(ParseQuery*)whereExists:(NSString*)key;
