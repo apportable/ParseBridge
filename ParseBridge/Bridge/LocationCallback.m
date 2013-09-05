@@ -38,7 +38,6 @@
 	BOOL results;
 	//*- Java:  public SaveCallback()
 	results = [LocationCallback registerConstructor];
-	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
 	
 	//*- Java:  public abstract void done(ParseGeoPoint geoPoint,ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
@@ -47,7 +46,6 @@
 	// 						 selector:@selector(done:error:)
 	// 					  returnValue:nil
 	// 						arguments:[ParseGeoPoint className],[ParseException className], nil];
-	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 	
 	
 }

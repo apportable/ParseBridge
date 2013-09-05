@@ -24,7 +24,6 @@
 													selector:@selector(add:)
 												 returnValue:nil
 												   arguments:[ParseObject className],nil];
-	NSLog(@"Registered isDataAvailable = %@", (result ? @"YES" : @"NO"));
 		
 	//*- Java:  public void remove(T object)
 	//*- ObjC:  -(void)remove:(ParseObject*)object;
@@ -32,7 +31,6 @@
 											   selector:@selector(remove:)
 											returnValue:nil
 											  arguments:[ParseObject className],nil];
-	NSLog(@"Registered isDataAvailable = %@", (result ? @"YES" : @"NO"));
 		
 	//*- Java:  public ParseQuery<T> getQuery()
 	//*- ObjC:  -(ParseQuery*)getQuery;
@@ -40,7 +38,6 @@
 										  selector:@selector(remove:)
 									   returnValue:[ParseQuery className]
 										 arguments:nil];
-	NSLog(@"Registered isDataAvailable = %@", (result ? @"YES" : @"NO"));
 
 	
 }

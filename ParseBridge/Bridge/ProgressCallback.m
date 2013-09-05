@@ -37,7 +37,6 @@
 	BOOL results;
 	//*- Java:  public ProgressCallback()
 	results = [ProgressCallback registerConstructor];
-	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 	
 	//*- Java:  public abstract void done(Integer percentDone)
 	//*- iOS Bridge Method:  public abstract void done(Integer percentDone)
@@ -46,7 +45,6 @@
 						   selector:@selector(done:)
 						returnValue:nil
 						  arguments:[JavaInteger className], nil];
-	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 	
 	
 }

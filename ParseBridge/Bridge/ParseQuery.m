@@ -47,13 +47,11 @@
 	//*- iOS Bridge Method:  -(ParseQuery*)initWithParseObject:(ParseObject*)object;
 	results = [ParseQuery registerConstructorWithSelector:@selector(initWithParseObject:)
                                       arguments:[JavaClass className], nil];
-	NSLog(@"Registered initWithParseObject =  %@", (results ? @"YES" : @"NO"));
 				
 	//*- Java:  public ParseQuery(String theClassName)
 	//*- iOS Bridge Method:  -(ParseQuery*)initWithClassName:(NSString*)theClassName;
     results = [ParseQuery registerConstructorWithSelector:@selector(initWithClassName:)
                                       arguments:[NSString className], nil];
-	NSLog(@"Registered initWithClassName =  %@", (results ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public static <T extends ParseObject> ParseQuery<T> getQuery(String className)
@@ -62,7 +60,6 @@
                             selector:@selector(queryWithClassName:)
                          returnValue:[ParseQuery className]
                            arguments:[NSString className], nil];
-	NSLog(@"Registered getQuery ->queryWithClassName =  %@", (results ? @"YES" : @"NO"));
 				
 	//*- Java:  public static <T extends ParseObject> ParseQuery<T> getQuery(Class<T> subclass)
 	//*- iOS Bridge Method: -(ParseQuery*)queryWithObject:(ParseObject*)object;
@@ -70,7 +67,6 @@
                             selector:@selector(queryWithObject:)
                          returnValue:[ParseQuery className]
                            arguments:[JavaClass className], nil];
-	NSLog(@"Registered getQuery ->queryWithObject =  %@", (results ? @"YES" : @"NO"));
 	
 	//*- Java:  public T get(String theObjectId)
 	//*- iOS Bridge Method: -(ParseObject*)get:(NSString*)objectID;
@@ -79,7 +75,6 @@
 							selector:@selector(get:)
 						 returnValue:[ParseObject className]
 						   arguments:[NSString className], nil];
-	NSLog(@"Registered get  =  %@", (results ? @"YES" : @"NO"));
 	
 	//Constructs a ParseObject whose id is already known by fetching data from the server. This mutates the ParseQuery.
 	
@@ -89,7 +84,6 @@
 										selector:@selector(getInBackground:callback:)
 									 returnValue:nil
 									   arguments:[NSString className], [GetCallback className], nil];
-	NSLog(@"Registered getInBackground  =  %@", (results ? @"YES" : @"NO"));
   
 
 	//*- Java:  public static <T extends ParseObject> ParseQuery<T> or(List<ParseQuery<T>> queries)
@@ -98,7 +92,6 @@
 									  selector:@selector(orQuery:)
 								   returnValue:[ParseQuery className]
 									 arguments:[JavaList className], nil];
-	NSLog(@"Registered or  =  %@", (results ? @"YES" : @"NO"));
 	
 	//*- Java: public void cancel()
 	//*- ObjC: -(void)cancel;
@@ -106,7 +99,6 @@
 										selector:@selector(cancel)
 									 returnValue:nil
 									   arguments:nil];
-	NSLog(@"Registered cancel  =  %@", (results ? @"YES" : @"NO"));
 	//Cancels the current network request (if one is running).
 
 	//*- Java: public List<T> find()
@@ -115,7 +107,6 @@
 										selector:@selector(find)
 									 returnValue:[JavaList className]
 									   arguments:nil];
-	NSLog(@"Registered find  =  %@", (results ? @"YES" : @"NO"));
 	//Retrieves a list of ParseObjects that satisfy this query. Uses the network and/or the cache, depending on the cache policy.
 
 	//*- Java: public T getFirst()
@@ -124,7 +115,6 @@
 										selector:@selector(getFirst)
 									 returnValue:[ParseObject className]
 									   arguments:nil];
-	NSLog(@"Registered getFirst  =  %@", (results ? @"YES" : @"NO"));
 	//Retrieves at most one ParseObject that satisfies this query. Uses the network and/or the cache, depending on the cache policy. This mutates the ParseQuery.
 
 
@@ -150,7 +140,6 @@
 										selector:@selector(findInBackground:)
 									 returnValue:nil  
 									   arguments:[FindCallback className], nil];
-	NSLog(@"Registered findInBackground  =  %@", (results ? @"YES" : @"NO"));
 	//Retrieves a list of ParseObjects that satisfy this query from the server in a background thread. This is preferable to using find(), unless your code is already running in a background thread.
 
 
@@ -160,7 +149,6 @@
 										selector:@selector(getFirstInBackground:)
 									 returnValue:nil
 									   arguments:[GetCallback className], nil];
-	NSLog(@"Registered getFirstInBackground  =  %@", (results ? @"YES" : @"NO"));
 	//Retrieves at most one ParseObject that satisfies this query from the server in a background thread. This is preferable to using getFirst(), unless your code is already running in a background thread. This mutates the ParseQuery.
 
 
@@ -171,7 +159,6 @@
 										selector:@selector(count)
 									 returnValue:[JavaClass intPrimitive]
 									   arguments:nil];
-	NSLog(@"Registered count  =  %@", (results ? @"YES" : @"NO"));
 
 	//*- Java: protected int count(boolean needsLock)throws ParseException
 	//*- ObjC: -(int)count:(bool)needsLock;
@@ -179,7 +166,6 @@
 										selector:@selector(count:)
 									 returnValue:[JavaClass intPrimitive]
 									   arguments:[JavaClass boolPrimitive],nil];
-	NSLog(@"Registered count  =  %@", (results ? @"YES" : @"NO"));
 
 	//*- Java: public void countInBackground(CountCallback callback)
 	//*- ObjC: -(void)countInBackground:(CountCallback*)callback;
@@ -188,7 +174,6 @@
 										selector:@selector(countInBackground:)
 									 returnValue:nil
 									   arguments:[CountCallback className],nil];
-	NSLog(@"Registered countInBackground  =  %@", (results ? @"YES" : @"NO"));
 
 
 
@@ -199,7 +184,6 @@
 										selector:@selector(hasCachedResult)
 									 returnValue:[JavaClass boolPrimitive]
 									   arguments:nil];
-	NSLog(@"Registered hasCachedResult  =  %@", (results ? @"YES" : @"NO"));
 	//Returns whether or not this query has a cached result.
 
 
@@ -209,7 +193,6 @@
 										selector:@selector(clearCachedResult)
 									 returnValue:nil
 									   arguments:nil];
-	NSLog(@"Registered clearCachedResult  =  %@", (results ? @"YES" : @"NO"));
 	//Removes the previously cached result for this query, forcing the next find() to hit the network. If there is no cached result for this query, then this is a no-op.
 
 
@@ -219,7 +202,6 @@
 										selector:@selector(clearAllCachedResults)
 									 returnValue:nil
 									   arguments:nil];
-	NSLog(@"Registered clearAllCachedResults  =  %@", (results ? @"YES" : @"NO"));
 	//Clears the cached result for all queries.
 	
 
@@ -230,7 +212,6 @@
 										selector:@selector(whereEqualTo:value:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[JavaObject className], nil];
-	NSLog(@"Registered whereEqualTo  =  %@", (results ? @"YES" : @"NO"));
 	
 
 
@@ -241,7 +222,6 @@
 										selector:@selector(whereLessThan:value:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[JavaObject className], nil];
-	NSLog(@"Registered whereLessThan  =  %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public ParseQuery<T> whereNotEqualTo(String key,Object value)
@@ -251,7 +231,6 @@
 										selector:@selector(whereNotEqualTo:value:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[JavaObject className], nil];
-	NSLog(@"Registered whereLessThan  =  %@", (results ? @"YES" : @"NO"));
 
 	//*- Java: public ParseQuery<T> whereGreaterThan(String key,Object value)
 	//*- ObjC: -(ParseQuery*)whereGreaterThan:(NSString*)key value:(JavaObject*)value;
@@ -260,7 +239,6 @@
 										selector:@selector(whereGreaterThan:value:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[JavaObject className], nil];
-	NSLog(@"Registered whereGreaterThan  =  %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public ParseQuery<T> whereLessThanOrEqualTo(String key,Object value)
@@ -270,7 +248,6 @@
 										selector:@selector(whereLessThanOrEqualTo:value:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[JavaObject className], nil];
-	NSLog(@"Registered whereLessThanOrEqualTo  =  %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public ParseQuery<T> whereGreaterThanOrEqualTo(String key,Object value)
@@ -280,7 +257,6 @@
 										selector:@selector(whereGreaterThanOrEqualTo:value:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[JavaObject className], nil];
-	NSLog(@"Registered whereGreaterThanOrEqualTo  =  %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public ParseQuery<T> whereContainedIn(String key,Collection<? extends Object> values)
@@ -290,7 +266,6 @@
 	//									selector:@selector(whereContainedIn:values:)
 	//								 returnValue:[ParseQuery className]
 	//								   arguments:[NSString className],[JavaArrayList className], nil];
-	//NSLog(@"Registered whereContainedIn  =  %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public ParseQuery<T> whereContainsAll(String key,Collection<?> values)
@@ -300,7 +275,6 @@
 	//									selector:@selector(whereContainsAll:values:)
 	//								 returnValue:[ParseQuery className]
 	//								   arguments:[NSString className],[JavaObject className], nil];
-	//NSLog(@"Registered whereContainsAll  =  %@", (results ? @"YES" : @"NO"));
 
 	//*- Java: public ParseQuery<T> whereMatchesQuery(String key,ParseQuery<?> query)
 	//*- ObjC: -(ParseQuery*)whereMatchesQuery:(NSString*)key query:(ParseQuery*)query;
@@ -309,7 +283,6 @@
 										selector:@selector(whereMatchesQuery:query:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[ParseQuery className], nil];
-	NSLog(@"Registered whereMatchesQuery  =  %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public ParseQuery<T> whereDoesNotMatchQuery(String key,ParseQuery<?> query)
@@ -319,7 +292,6 @@
 										selector:@selector(whereDoesNotMatchQuery:query:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[ParseQuery className], nil];
-	NSLog(@"Registered whereDoesNotMatchQuery  =  %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public ParseQuery<T> whereMatchesKeyInQuery(String key,String keyInQuery,ParseQuery<?> query)
@@ -329,7 +301,6 @@
 										selector:@selector(whereMatchesKeyInQuery:keyInQuery:query:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[NSString className],[ParseQuery className], nil];
-	NSLog(@"Registered whereMatchesKeyInQuery  =  %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public ParseQuery<T> whereDoesNotMatchKeyInQuery(String key,String keyInQuery,ParseQuery<?> query)
@@ -339,7 +310,6 @@
 										selector:@selector(whereDoesNotMatchKeyInQuery:query:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[NSString className],[ParseQuery className], nil];
-	NSLog(@"Registered whereDoesNotMatchKeyInQuery  =  %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public ParseQuery<T> whereNotContainedIn(String key,Collection<? extends Object> values)
@@ -349,7 +319,6 @@
 	//									selector:@selector(whereNotContainedIn:values:)
 	//								 returnValue:[ParseQuery className]
 	//								   arguments:[NSString className],[JavaArrayList className], nil];
-	//NSLog(@"Registered whereNotContainedIn  =  %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public ParseQuery<T> whereNear(String key,ParseGeoPoint point)
@@ -359,7 +328,6 @@
 										selector:@selector(whereNear:point:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[ParseGeoPoint className], nil];
-	NSLog(@"Registered whereNear = %@", (results ? @"YES" : @"NO"));
 
 	//*- Java: public ParseQuery<T> whereWithinMiles(String key,ParseGeoPoint point,double maxDistance)
 	//*- ObjC: -(ParseQuery*)whereWithinMiles:(NSString*)key point:(ParseGeoPoint*)point maxDistance:(double)maxDistance;
@@ -368,7 +336,6 @@
 										selector:@selector(whereWithinMiles:point:maxDistance:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[ParseGeoPoint className], [JavaClass doublePrimitive], nil];
-	NSLog(@"Registered whereWithinMiles = %@", (results ? @"YES" : @"NO"));
 
 	//*- Java: public ParseQuery<T> whereWithinKilometers(String key,ParseGeoPoint point,double maxDistance)
 	//*- ObjC: -(ParseQuery*)whereWithinKilometers:(NSString*)key point:(ParseGeoPoint*)point maxDistance:(double)maxDistance;
@@ -377,7 +344,6 @@
 										selector:@selector(whereWithinKilometers:point:maxDistance:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[ParseGeoPoint className], [JavaClass doublePrimitive], nil];
-	NSLog(@"Registered whereWithinKilometers = %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public ParseQuery<T> whereWithinRadians(String key,ParseGeoPoint point,double maxDistance)
@@ -387,7 +353,6 @@
 										selector:@selector(whereWithinRadians:point:maxDistance:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[ParseGeoPoint className], [JavaClass doublePrimitive], nil];
-	NSLog(@"Registered whereWithinRadians = %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public ParseQuery<T> whereWithinGeoBox(String key,ParseGeoPoint southwest,ParseGeoPoint northeast)
@@ -397,7 +362,6 @@
 										selector:@selector(whereWithinGeoBox:southwest:northeast:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[ParseGeoPoint className], [ParseGeoPoint className], nil];
-	NSLog(@"Registered whereWithinGeoBox = %@", (results ? @"YES" : @"NO"));
 
 	//*- Java: public ParseQuery<T> whereMatches(String key,String regex)
 	//*- ObjC: -(ParseQuery*)whereMatches:(NSString*)key regex:(NSString*)regex;
@@ -406,7 +370,6 @@
 										selector:@selector(whereMatches:regex:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[NSString className], nil];
-	NSLog(@"Registered whereMatches = %@", (results ? @"YES" : @"NO"));
 
 	//*- Java: public ParseQuery<T> whereMatches(String key,String regex,String modifiers)
 	//*- ObjC: -(ParseQuery*)whereMatches:(NSString*)key regex:(NSString*)regex modifiers:(NSString*)modifiers;
@@ -415,7 +378,6 @@
 										selector:@selector(whereMatches:regex:modifiers:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[NSString className],[NSString className], nil];
-	NSLog(@"Registered whereMatches = %@", (results ? @"YES" : @"NO"));
 
 	//*- Java: public ParseQuery<T> whereContains(String key,String substring)
 	//*- ObjC: -(ParseQuery*)whereContains:(NSString*)key substring:(NSString*)substring;
@@ -424,7 +386,6 @@
 										selector:@selector(whereContains:substring:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[NSString className], nil];
-	NSLog(@"Registered whereContains = %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public ParseQuery<T> whereStartsWith(String key,String prefix)
@@ -435,7 +396,6 @@
 										selector:@selector(whereStartsWith:prefix:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[NSString className], nil];
-	NSLog(@"Registered whereStartsWith = %@", (results ? @"YES" : @"NO"));
 
 	//*- Java: public ParseQuery<T> whereEndsWith(String key,String suffix)
 	//*- ObjC: -(ParseQuery*)whereEndsWith:(NSString*)key suffix:(NSString*)suffix;
@@ -444,7 +404,6 @@
 										selector:@selector(whereEndsWith:prefix:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[NSString className], nil];
-	NSLog(@"Registered whereEndsWith = %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public void include(String key)
@@ -454,7 +413,6 @@
 										selector:@selector(include:)
 									 returnValue:nil
 									   arguments:[NSString className], nil];
-	NSLog(@"Registered include = %@", (results ? @"YES" : @"NO"));
 
 	//*- Java: public void selectKeys(Collection<String> keys)
 	//*- ObjC: -(void)selectKeys:(JavaArrayList*)keys;
@@ -463,7 +421,6 @@
 	//									selector:@selector(selectKeys:)
 	//								 returnValue:nil
 	//								   arguments:[JavaList className], nil];
-	//NSLog(@"Registered selectKeys = %@", (results ? @"YES" : @"NO"));
 
 	//*- Java: public ParseQuery<T> whereExists(String key)
 	//*- ObjC: -(ParseQuery*)whereExists:(NSString*)key;
@@ -472,7 +429,6 @@
 										selector:@selector(whereExists:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className], nil];
-	NSLog(@"Registered whereExists = %@", (results ? @"YES" : @"NO"));
 
 	//*- Java: public ParseQuery<T> whereDoesNotExist(String key)
 	//*- ObjC: -(ParseQuery*)whereDoesNotExist:(NSString*)key
@@ -481,7 +437,6 @@
 										selector:@selector(whereDoesNotExist:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className], nil];
-	NSLog(@"Registered whereDoesNotExist = %@", (results ? @"YES" : @"NO"));
 
 	//*- Java: public ParseQuery<T> orderByAscending(String key)
 	//*- ObjC: -(ParseQuery*)orderByAscending:(NSString*)key
@@ -490,7 +445,6 @@
 										selector:@selector(orderByAscending:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className], nil];
-	NSLog(@"Registered orderByAscending = %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public ParseQuery<T> addAscendingOrder(String key)
@@ -500,7 +454,6 @@
 										selector:@selector(addAscendingOrder:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className], nil];
-	NSLog(@"Registered addAscendingOrder = %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public ParseQuery<T> orderByDescending(String key)
@@ -510,7 +463,6 @@
 										selector:@selector(orderByDescending:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className], nil];
-	NSLog(@"Registered orderByDescending = %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public ParseQuery<T> addDescendingOrder(String key)
@@ -520,7 +472,6 @@
 										selector:@selector(addDescendingOrder:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className], nil];
-	NSLog(@"Registered addDescendingOrder = %@", (results ? @"YES" : @"NO"));
 
 	//*- Java: public void setLimit(int newLimit)
 	//*- ObjC: -(void)setLimit:(int)newLimit;
@@ -529,7 +480,6 @@
 										selector:@selector(setLimit:)
 									 returnValue:nil
 									   arguments:[JavaClass intPrimitive], nil];
-	NSLog(@"Registered setLimit = %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public void setTrace(boolean shouldTrace)
@@ -539,7 +489,6 @@
 	//									selector:@selector(shouldTrace:)
 	//								 returnValue:nil
 	//								   arguments:[JavaClass boolPrimitive], nil];
-	//NSLog(@"Registered shouldTrace = %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public int getLimit()
@@ -549,7 +498,6 @@
 										selector:@selector(getLimit)
 									 returnValue:[JavaClass intPrimitive]
 									   arguments:nil];
-	NSLog(@"Registered getLimit = %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public void setSkip(int newSkip)
@@ -559,7 +507,6 @@
 										selector:@selector(setSkip:)
 									 returnValue:nil
 									   arguments:[JavaClass intPrimitive],nil];
-	NSLog(@"Registered setSkip = %@", (results ? @"YES" : @"NO"));
 
 
 	//*- Java: public int getSkip()
@@ -569,7 +516,6 @@
 										selector:@selector(getSkip)
 									 returnValue:[JavaClass intPrimitive]
 									   arguments:nil];
-	NSLog(@"Registered getSkip = %@", (results ? @"YES" : @"NO"));
  
 
 	//*- Java: public String getClassName()
@@ -579,7 +525,6 @@
 										selector:@selector(getClassName)
 									 returnValue:[NSString className]
 									   arguments:nil];
-	NSLog(@"Registered getClassName = %@", (results ? @"YES" : @"NO"));
 
 	
 }

@@ -36,12 +36,10 @@
 {
 	[super initializeJava];
 	BOOL results = [MyLogInCallback registerConstructor];
-	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
 	
 	//MyLoginCallback implements LoginCallback (abstract class)
 	//*- Java:  public abstract void done(ParseUser user,ParseException e)
 	results = [MyLogInCallback registerCallback:@"done" selector:@selector(done:error:) returnValue:nil arguments:[ParseUser className], [ParseException className], nil];
-	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 }
 
 + (NSString *)className { return @"com.parsebridge.MyLogInCallback"; }
@@ -75,7 +73,6 @@
     [super initializeJava];
 	BOOL results;
 	results = [LogInCallback registerConstructor];
-	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 	
 	//*- Java:  public abstract void done(ParseUser user,ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
@@ -84,7 +81,6 @@
 									 selector:@selector(done:error:)
 								  returnValue:nil
 									arguments:[ParseUser className],[ParseException className], nil];
-	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 	
 }
 

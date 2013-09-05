@@ -36,7 +36,6 @@
 	BOOL results;
 	//*- Java:  RequestPasswordResetCallback()
 	results = [RequestPasswordResetCallback registerConstructor];
-	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
 	
 	//*- Java:  public abstract void done(ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseException*)error;
@@ -45,7 +44,6 @@
 	// 						 selector:@selector(done:)
 	// 					  returnValue:nil
 	// 						arguments:[ParseException className], nil];
-	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 	
 	
 }

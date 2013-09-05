@@ -54,7 +54,6 @@
 	BOOL results;
 	//*- Java:  public SaveCallback()
 	results = [ParseBridgeGetCallback registerConstructor];
-	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
 
 	//*- Java:  public abstract void done(T object,ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
@@ -63,7 +62,6 @@
 							  selector:@selector(done:error:)
 						   returnValue:nil
 							 arguments:[ParseObject className],[ParseException className], nil];
-	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 }
 
 + (NSString *)className

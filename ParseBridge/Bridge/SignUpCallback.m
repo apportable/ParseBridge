@@ -34,7 +34,6 @@
 	BOOL results;
 	//*- Java: public SignUpCallback()
 	results = [SignUpCallback registerConstructor];
-	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public abstract void done(ParseException e)
@@ -44,7 +43,6 @@
 	// 					  selector:@selector(done:)
 	// 				   returnValue:nil
 	// 					 arguments:[ParseException className], nil];
-	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 	
 	
 }

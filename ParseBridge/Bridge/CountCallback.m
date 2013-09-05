@@ -18,7 +18,6 @@
 	BOOL results;
 	//*- Java:  public CountCallback()
 	results = [CountCallback registerConstructor];
-	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
 	
 	//*- Java:  public abstract void done(int count,ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(int)count error:(ParseException*)error;
@@ -27,7 +26,6 @@
 	// 								selector:@selector(done:error:)
 	// 							 returnValue:nil
 	// 							   arguments:[JavaClass intPrimitive],[ParseException className], nil];
-	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 	
 }
 

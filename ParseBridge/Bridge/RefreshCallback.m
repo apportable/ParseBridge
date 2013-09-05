@@ -40,7 +40,6 @@
 	BOOL results;
 	//*- Java:  public SaveCallback()
 	results = [RefreshCallback registerConstructor];
-	NSLog(@"Registered constructor = %@", (results ? @"YES" : @"NO"));
 	
 	
 	//*- Java:  public abstract void done(ParseObject object, ParseException e)
@@ -50,7 +49,6 @@
 	// 					 selector:@selector(done:error:)
 	// 				  returnValue:nil
 	// 					arguments:[ParseObject className],[ParseException className], nil];
-	NSLog(@"Registered done = %@", (results ? @"YES" : @"NO"));
 	
 	
 }
