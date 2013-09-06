@@ -36,10 +36,10 @@
 + (void)startServiceIfRequired:(AndroidContext*)context;
 
 //*- Java:   public static void subscribe(Context context,String channel,Class<? extends Activity> cls)
-+ (void)subscribe:(AndroidContext*)context channel:(NSString*)channel activitySubClass:(AndroidActivity*)activitySubClass;
++ (void)subscribe:(AndroidContext*)context channel:(NSString*)channel activitySubClass:(JavaClass*)activitySubClass;
 
 //*- Java:   public static void subscribe(Context context,String channel,Class<? extends Activity> cls,int icon)
-+ (void)subscribeWithIcon:(AndroidContext*)context channel:(NSString*)channel activitySubClass:(AndroidActivity*)activitySubClass icon:(int)icon;
++ (void)subscribeWithIcon:(AndroidContext*)context channel:(NSString*)channel activitySubClass:(JavaClass*)activitySubClass icon:(int)icon;
 
 //*- Java:   public static void unsubscribe(Context context,String channel)
 + (void)unsubscribe:(AndroidContext*)context channel:(NSString*)channel;
