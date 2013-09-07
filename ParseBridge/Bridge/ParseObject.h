@@ -104,9 +104,9 @@
 
 -(void)deleteInBackground;
 
-//-(void)deleteAll:(JavaList*)objects;
+-(void)deleteAll:(JavaList*)objects;
 
-//+(void)deleteAllInBackground:(JavaList*)objects callback:(DeleteCallback*)callback;
++(void)deleteAllInBackground:(JavaList*)objects callback:(DeleteCallback*)callback;
 
 +(void)saveAll:(JavaList*)objects;
 
@@ -134,13 +134,13 @@
 
 -(void)add:(NSString*)key value:(JavaObject*)value;
 
-//-(void)addAll:(NSString*)key values:(JavaObject*)values;
+-(void)addAll:(NSString*)key values:(JavaObject*)values;
 
 -(void)addUnique:(NSString*)key value:(JavaObject*)value;
 
-//-(void)addAllUnique:(NSString*)key values:(JavaObject*)values;
+-(void)addAllUnique:(NSString*)key values:(JavaObject*)values;
 
-//-(void)removeAll:(NSString*)key values:(JavaObject*)values;
+-(void)removeAll:(NSString*)key values:(JavaList*)values;
 
 -(bool)containsKey:(NSString*)key;
 
