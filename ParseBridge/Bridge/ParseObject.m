@@ -328,19 +328,19 @@
 	//*- Java: public static void deleteAll(List<ParseObject> objects)
 	//*- ObjC: -(void)deleteAll:(JavaList*)objects;
 	//Deletes each object in the provided list. This is faster than deleting each object individually because it batches the requests.
-	//result = [ParseObject registerStaticMethod:@"deleteAll"
-	//									selector:@selector(deleteAll:)
-	//								 returnValue:nil
-	//								   arguments:[JavaList className],nil];
+	result = [ParseObject registerStaticMethod:@"deleteAll"
+										selector:@selector(deleteAll:)
+									 returnValue:nil
+									   arguments:[JavaList className],nil];
  
 
 	//*- Java: public static void deleteAllInBackground(List<ParseObject> objects,DeleteCallback callback)
 	//*- ObjC: +(void)deleteAllInBackground:(JavaList*)objects callback:(DeleteCallback*)callback
 	//Deletes each object in the provided list. This is faster than deleting each object individually because it batches the requests.
-	//result = [ParseObject registerStaticMethod:@"deleteAllInBackground"
-	//								  selector:@selector(deleteAllInBackground:callback:)
-	//							   returnValue:nil
-	//								 arguments:[JavaList className],[DeleteCallback className],nil];
+	result = [ParseObject registerStaticMethod:@"deleteAllInBackground"
+									  selector:@selector(deleteAllInBackground:callback:)
+								   returnValue:nil
+									 arguments:[JavaList className],[DeleteCallback className],nil];
  
 
 
@@ -365,7 +365,7 @@
 	//*- ObjC: +(void)fetchAllIfNeededInBackground:(JavaList*)objects callback:(FindCallback*)callback
 	//Fetches all the objects that don't have data in the provided list in the background
 	result = [ParseObject registerStaticMethod:@"fetchAllIfNeededInBackground"
-									  selector:@selector(fetchAllIfNeededInBackground:className:)
+									  selector:@selector(fetchAllIfNeededInBackground:callback:)
 								   returnValue:nil
 									 arguments:[JavaList className],[FindCallback className],nil];
 	
@@ -449,10 +449,10 @@
 	
 	//*- Java: public void addAll(String key,Collection<?> values)
 	//*- ObjC: -(void)addAll:(NSString*)key values:(JavaObject*)values;
-	//result = [ParseObject registerInstanceMethod:@"addAll"
-	//									selector:@selector(addAll:values:)
-	//								 returnValue:nil
-	//								   arguments:[NSString className],[JavaObject className], nil];
+	result = [ParseObject registerInstanceMethod:@"addAll"
+										selector:@selector(addAll:values:)
+									 returnValue:nil
+									   arguments:[NSString className],[JavaCollection className], nil];
  
 	
 	//*- Java: public void addUnique(String key,Object value)
@@ -467,19 +467,19 @@
 	//*- Java: public void addAllUnique(String key,Collection<?> values)
 	//*- ObjC: -(void)addAllUnique:(NSString*)key values:(JavaObject*)values;
 	//Atomically adds the objects contained in a Collection to the array associated with a given key, only adding elements which are not already present in the array. The position of the insert is not guaranteed.
-	//result = [ParseObject registerInstanceMethod:@"addAllUnique"
-	//									selector:@selector(addAllUnique:values:)
-	//								 returnValue:nil
-	//								   arguments:[NSString className],[JavaObject className], nil];
+	result = [ParseObject registerInstanceMethod:@"addAllUnique"
+										selector:@selector(addAllUnique:values:)
+									 returnValue:nil
+									   arguments:[NSString className],[JavaCollection className], nil];
  
 
 	//*- Java: public void removeAll(String key,Collection<?> values)
 	//*- ObjC: -(void)removeAll:(NSString*)key values:(JavaObject*)values;
 	//Atomically removes all instances of the objects contained in a Collection from the array associated with a given key. To maintain consistency with the Java Collection API, there is no method removing all instances of a single object. Instead, you can call parseObject.removeAll(key, Arrays.asList(value)).
-	//result = [ParseObject registerInstanceMethod:@"removeAll"
-	//									selector:@selector(removeAll:values:)
-	//								 returnValue:nil
-	//								   arguments:[NSString className],[JavaClass className], nil];
+	result = [ParseObject registerInstanceMethod:@"removeAll"
+										selector:@selector(removeAll:values:)
+									 returnValue:nil
+									   arguments:[NSString className],[JavaCollection className], nil];
  
 	//*- Java: public boolean containsKey(String key)
 	//*- ObjC: -(bool)containsKey:(NSString*)key;

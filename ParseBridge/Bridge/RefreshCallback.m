@@ -88,8 +88,9 @@
         error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        PFObject *pfObject = [[[PFObject alloc] initWithParseObject:pObj] autorelease];
+        PFObject *pfObject = [[PFObject alloc] initWithParseObject:pObj];
         _handler(pfObject, error);
+        [pfObject release];
         [self autorelease]; // To balance the retain cycle created from the callbackWithHandler: method
     });
 }
