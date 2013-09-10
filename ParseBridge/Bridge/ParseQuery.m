@@ -307,7 +307,7 @@
 	//*- ObjC: -(ParseQuery*)whereDoesNotMatchKeyInQuery:(NSString*)key keyInQuery:(NSString*)keyInQuery  query:(ParseQuery*)query;
 	//Add a constraint to the query that requires a particular key's value does not match any value for a key in the results of another ParseQuery.
 	results = [ParseQuery registerInstanceMethod:@"whereDoesNotMatchKeyInQuery"
-										selector:@selector(whereDoesNotMatchKeyInQuery:query:)
+										selector:@selector(whereDoesNotMatchKeyInQuery:keyInQuery:query:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[NSString className],[ParseQuery className], nil];
 

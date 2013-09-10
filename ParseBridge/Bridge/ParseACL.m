@@ -62,7 +62,7 @@
 	//*- ObjC:  -(bool)getPublicReadAccess;
 	//Get whether the public is allowed to read this object.
 	result = [ParseACL registerInstanceMethod:@"getPublicReadAccess"
-										selector:@selector(getPublicReadAccess:)
+										selector:@selector(getPublicReadAccess)
 									 returnValue:[JavaClass boolPrimitive]
 									   arguments:nil];
 	
@@ -80,7 +80,7 @@
 	//*- ObjC: -(bool)getPublicWriteAccess;
 	//Set whether the public is allowed to write this object.
 	result = [ParseACL registerInstanceMethod:@"getPublicWriteAccess"
-									 selector:@selector(getPublicWriteAccess:)
+									 selector:@selector(getPublicWriteAccess)
 								  returnValue:[JavaClass boolPrimitive]
 									arguments:nil];
 	
@@ -223,7 +223,7 @@
 	//*- ObjC: -(void)setRoleWriteAccessWithRole:(ParseRole*)role allowed:(bool)allowed;
 	//Set whether users belonging to the given role are allowed to write this object. The role must already be saved on the server and its data must have been fetched in order to use this method.
 	result = [ParseACL registerInstanceMethod:@"setRoleWriteAccess"
-									 selector:@selector(setRoleWriteAccessWithRole:)
+									 selector:@selector(setRoleWriteAccessWithRole:allowed:)
 								  returnValue:nil
 									arguments:[ParseRole className],[JavaClass boolPrimitive], nil];
 	

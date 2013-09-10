@@ -35,7 +35,7 @@
 	//*- Java:  public ParseQuery<T> getQuery()
 	//*- ObjC:  -(ParseQuery*)getQuery;
 	result = [ParseRelation registerInstanceMethod:@"getQuery"
-										  selector:@selector(remove:)
+										  selector:@selector(getQuery)
 									   returnValue:[ParseQuery className]
 										 arguments:nil];
 

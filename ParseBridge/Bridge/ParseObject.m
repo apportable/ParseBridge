@@ -589,7 +589,7 @@
 	//*- Java: public ParseACL getACL()
 	//*- ObjC: -(ParseACL*)getACL;
 	result = [ParseObject registerInstanceMethod:@"getACL"
-										selector:@selector(getACL:)
+										selector:@selector(getACL)
 									 returnValue:[ParseACL className]
 									   arguments:nil];
  
@@ -604,7 +604,7 @@
 	//*- ObjC: -(bool)isDataAvailable;
 	//Gets whether the ParseObject has been fetched.
 	result = [ParseObject registerInstanceMethod:@"isDataAvailable"
-										selector:@selector(isDataAvailable:)
+										selector:@selector(isDataAvailable)
 									 returnValue:[JavaClass boolPrimitive]
 									   arguments:nil];
  
