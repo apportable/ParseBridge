@@ -1,4 +1,5 @@
 sources = [
+    'src/com/parsebridge/parsebridge/ParseReceiverIntent.java',
     'src/com/parsebridge/parsebridge/ParseBridgeDeleteCallback.java',
     'src/com/parsebridge/parsebridge/ParseBridgeSaveCallback.java',
     'src/com/parsebridge/parsebridge/ParseBridgeGetCallback.java',
