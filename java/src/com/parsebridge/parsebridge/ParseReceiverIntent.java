@@ -43,23 +43,10 @@ public class ParseReceiverIntent extends BroadcastReceiver {
             String payload = intent.getExtras().getString("com.parse.Data");
             JSONObject message = new JSONObject(payload);
 
-            Log.d(TAG, "got action " + action + " on channel " + channel);
-            Iterator itr = message.keys();
-            while (itr.hasNext()) {
-                String key = (String) itr.next();
-                Log.d(TAG, "..." + key + " -> " + message.getString(key));
-            }
-            logPushExtras(intent);
-
             // isBackground defaults to false before the application is created
             if (!Lifecycle.isNativeApplicationStarted() || Lifecycle.isInBackground()) {
-                // convert to local notification
-                Class notificationsClass = Class.forName("com.apportable.notifications.Notifications");
-                Method postNotification = notificationsClass.getDeclaredMethod("postNotification", Context.class, String.class, String.class, String.class);
-
-                String notificationBody = message.getString("alert");
-                String sound = null;
-                postNotification.invoke(notificationsClass, context, notificationBody, sound, payload);
+                // if app is backgrounded, Parse will automagically deliver notification to system
+                // tray list, so we don't need to do anything here
             } else {
                 // only receives notification if package exists and is in foreground
                 ParseReceiverIntent.forwardRemoteNotification(payload);
