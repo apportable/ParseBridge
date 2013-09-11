@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.os.Bundle;
+import android.app.NotificationManager;
 
 import org.json.JSONObject;
 import org.json.JSONException;
@@ -45,8 +46,17 @@ public class ParseReceiverIntent extends BroadcastReceiver {
 
             // isBackground defaults to false before the application is created
             if (!Lifecycle.isNativeApplicationStarted() || Lifecycle.isInBackground()) {
-                // if app is backgrounded, Parse will automagically deliver notification to system
-                // tray list, so we don't need to do anything here
+                // cancel any duplicate Parse notification
+                NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.cancelAll();
+
+                // convert to local notification
+                Class notificationsClass = Class.forName("com.apportable.notifications.Notifications");
+                Method postNotification = notificationsClass.getDeclaredMethod("postNotification", Context.class, String.class, String.class, String.class);
+
+                String notificationBody = message.getString("alert");
+                String sound = null;
+                postNotification.invoke(notificationsClass, context, notificationBody, sound, payload);
             } else {
                 // only receives notification if package exists and is in foreground
                 ParseReceiverIntent.forwardRemoteNotification(payload);
