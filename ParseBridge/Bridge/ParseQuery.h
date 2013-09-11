@@ -88,9 +88,9 @@
 
 -(ParseQuery*)whereGreaterThanOrEqualTo:(NSString*)key value:(JavaObject*)value;
 
-// -(ParseQuery*)whereContainedIn:(NSString*)key values:(JavaList*)values;
+-(ParseQuery*)whereContainedIn:(NSString*)key values:(JavaList*)values;
 
--(ParseQuery*)whereContainsAll:(NSString*)key values:(JavaObject*)values;
+-(ParseQuery*)whereContainsAll:(NSString*)key values:(JavaList*)values;
 
 -(ParseQuery*)whereMatchesQuery:(NSString*)key query:(ParseQuery*)query;
 
@@ -122,7 +122,7 @@
 
 -(void)include:(NSString*)key;
 
-// -(void)selectKeys:(JavaList*)keys;
+-(void)selectKeys:(JavaList*)keys;
 
 -(ParseQuery*)whereExists:(NSString*)key;
 

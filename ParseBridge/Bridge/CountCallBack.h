@@ -25,10 +25,19 @@
  */
 
 #import <BridgeKit/JavaObject.h>
+#import "PFConstants.h"
 @class ParseException;
 
 @interface CountCallback : JavaObject
+@end
 
+@interface ParseBridgeCountCallback : CountCallback
+
+@property (nonatomic, copy) PFIntegerResultBlock handler;
+
++(ParseBridgeCountCallback *)callbackWithHandler:(PFIntegerResultBlock)handler;
+
+-(id)init;
 -(void)done:(int)count error:(ParseException*)error;
 
 @end

@@ -262,19 +262,19 @@
 	//*- Java: public ParseQuery<T> whereContainedIn(String key,Collection<? extends Object> values)
 	//*- ObjC: -(ParseQuery*)whereContainedIn:(NSString*)key values:(JavaArrayList*)values;
 	//Add a constraint to the query that requires a particular key's value to be contained in the provided list of values.
-	//results = [ParseQuery registerInstanceMethod:@"whereContainedIn"
-	//									selector:@selector(whereContainedIn:values:)
-	//								 returnValue:[ParseQuery className]
-	//								   arguments:[NSString className],[JavaArrayList className], nil];
+	results = [ParseQuery registerInstanceMethod:@"whereContainedIn"
+										selector:@selector(whereContainedIn:values:)
+									 returnValue:[ParseQuery className]
+									   arguments:[NSString className],[JavaCollection className], nil];
 
 
 	//*- Java: public ParseQuery<T> whereContainsAll(String key,Collection<?> values)
 	//*- ObjC: -(ParseQuery*)whereContainsAll:(NSString*)key values:(JavaArrayList*)values;
 	//Add a constraint to the query that requires a particular key's value match another ParseQuery. This only works on keys whose values are ParseObjects or lists of ParseObjects. Add a constraint to the query that requires a particular key's value to contain every one of the provided list of values.
-	//results = [ParseQuery registerInstanceMethod:@"whereContainsAll"
-	//									selector:@selector(whereContainsAll:values:)
-	//								 returnValue:[ParseQuery className]
-	//								   arguments:[NSString className],[JavaObject className], nil];
+	results = [ParseQuery registerInstanceMethod:@"whereContainsAll"
+										selector:@selector(whereContainsAll:values:)
+									 returnValue:[ParseQuery className]
+									   arguments:[NSString className],[JavaCollection className], nil];
 
 	//*- Java: public ParseQuery<T> whereMatchesQuery(String key,ParseQuery<?> query)
 	//*- ObjC: -(ParseQuery*)whereMatchesQuery:(NSString*)key query:(ParseQuery*)query;
@@ -417,10 +417,10 @@
 	//*- Java: public void selectKeys(Collection<String> keys)
 	//*- ObjC: -(void)selectKeys:(JavaList*)keys;
 	//Restrict the fields of returned ParseObjects to only include the provided keys. If this is called multiple times, then all of the keys specified in each of the calls will be included.
-	// results = [ParseQuery registerInstanceMethod:@"selectKeys"
-	// 									selector:@selector(selectKeys:)
-	// 								 returnValue:nil
-	// 								   arguments:[JavaList className], nil];
+	results = [ParseQuery registerInstanceMethod:@"selectKeys"
+										selector:@selector(selectKeys:)
+									 returnValue:nil
+									   arguments:[JavaCollection className], nil];
 
 	//*- Java: public ParseQuery<T> whereExists(String key)
 	//*- ObjC: -(ParseQuery*)whereExists:(NSString*)key;
