@@ -28,7 +28,7 @@
 #import "ParseUser.h"
 #import "ParseQuery.h"
 #import <BridgeKit/JavaClass.h>
-#import "MyLogInCallback.h"
+#import "LogInCallback.h"
 #import "SignUpCallback.h"
 #import "RequestPasswordResetCallback.h"
 
@@ -104,7 +104,7 @@
 	//*- ObjC: -(NSString*)getUsername;
 	//Retrieves the username.
     result = [ParseUser registerInstanceMethod:@"getUsername"
-							 selector:@selector(getUsername)
+							 selector:@selector(username)
 						  returnValue:[NSString className]
 							arguments:nil];
  
@@ -129,7 +129,7 @@
 	//*- ObjC: -(NSString*)getEmail;
 	//Retrieves the email address.
     result = [ParseUser registerInstanceMethod:@"getEmail"
-							 selector:@selector(getEmail)
+							 selector:@selector(email)
 						  returnValue:[NSString className]
 							arguments:nil];
  
@@ -138,7 +138,7 @@
 	//*-  ObjC: -(NSString*)getSessionToken;
 	//Retrieves the session token for a user, if they are logged in.
     result = [ParseUser registerInstanceMethod:@"getSessionToken"
-							 selector:@selector(getSessionToken)
+							 selector:@selector(sessionToken)
 						  returnValue:[NSString className]
 							arguments:nil];
 

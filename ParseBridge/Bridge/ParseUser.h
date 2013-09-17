@@ -25,16 +25,23 @@
  */
 
 #import <BridgeKit/JavaObject.h>
+#import "ParseObject.h"
 
 @class ParseUser;
-@class MyLogInCallback;
+@class LogInCallback;
 @class SignUpCallback;
 @class RequestPasswordResetCallback;
 @class ParseQuery;
 
-@interface ParseUser : JavaObject
+@interface ParseUser : ParseObject
 
-+ (ParseUser*) currentUser; 
+@property (nonatomic, retain) NSString *username;
+@property (nonatomic, retain) NSString *password;
+@property (nonatomic, retain) NSString *email;
+@property (nonatomic, retain) NSString *sessionToken;
+@property (readonly, assign) BOOL isNew;
+
++ (ParseUser *) currentUser;
 + (void)logOut;
 - (id)initUser;
 - (BOOL)isAuthenticated;
@@ -44,21 +51,15 @@
 + (void)enableAutomaticUser;
 + (void)enableAutomaticUser;
 - (void)remove:(NSString*) key;
-- (void)setUsername:(NSString*)username;
-- (NSString*)getUsername;
-- (void)setPassword:(NSString*)password;
-- (void)setEmail:(NSString*)email;
-- (NSString*)getEmail;
-- (NSString*)getSessionToken;
-- (ParseUser*)fetch;
+- (ParseUser *)fetch;
 - (void)signUp;
 - (void)signUpInBackground:(SignUpCallback*)callback;
 + (ParseUser*)logIn:(NSString*)username password:(NSString*)password;
-+ (void)logInInBackground:(NSString*)username password:(NSString*)password callback:(MyLogInCallback*)callback;
++ (void)logInInBackground:(NSString*)username password:(NSString*)password callback:(LogInCallback*)callback;
 + (void)requestPasswordReset:(NSString*)email;
 + (void)requestPasswordResetInBackground:(NSString*)email callback:(RequestPasswordResetCallback*)callback;
-- (void)fetchIfNeeded;
-- (void)isNew;
-- (ParseQuery*)getQuery;
+- (ParseUser *)fetchIfNeeded;
+- (BOOL)isNew;
++ (ParseQuery *)getQuery;
 
 @end
