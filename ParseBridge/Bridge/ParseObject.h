@@ -104,7 +104,7 @@
 
 -(void)deleteInBackground;
 
--(void)deleteAll:(JavaList*)objects;
++(void)deleteAll:(JavaList*)objects;
 
 +(void)deleteAllInBackground:(JavaList*)objects callback:(DeleteCallback*)callback;
 
