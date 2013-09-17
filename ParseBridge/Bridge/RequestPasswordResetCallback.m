@@ -87,7 +87,8 @@
         error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        _handler(YES, error);
+        BOOL succeeded = error == nil;
+        _handler(succeeded, error);
         [self autorelease]; // To balance the retain cycle created from the callbackWithHandler: method
     });
 }
