@@ -25,10 +25,20 @@
  */
 
 #import <BridgeKit/JavaObject.h>
-@class ParseException;
+#import "PFConstants.h"
 
 @interface RequestPasswordResetCallback : JavaObject
+@end
 
--(void)done:(ParseException*)error;
+@class ParseException;
+
+@interface ParseBridgeRequestPasswordResetCallback : RequestPasswordResetCallback
+
+@property (nonatomic, copy) PFBooleanResultBlock handler;
+
++(ParseBridgeRequestPasswordResetCallback *)callbackWithHandler:(PFBooleanResultBlock)handler;
+
+-(id)init;
+-(void)done:(ParseException*)exception;
 
 @end

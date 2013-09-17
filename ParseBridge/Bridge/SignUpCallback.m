@@ -31,38 +31,71 @@
 + (void)initializeJava
 {
     [super initializeJava];
-	BOOL results;
-	//*- Java: public SignUpCallback()
-	results = [SignUpCallback registerConstructor];
-	
-	
-	//*- Java:  public abstract void done(ParseException e)
-	//*- iOS Bridge Method:  -(void)done:(ParseException*)error;
-	//Override this function with the code you want to run after the save is complete.
-	// results = [SignUpCallback registerCallback:@"done"
-	// 					  selector:@selector(done:)
-	// 				   returnValue:nil
-	// 					 arguments:[ParseException className], nil];
-	
-	
 }
-
--(void)done:(ParseException*)error{
-	//[self _done:error];
-	if(!error){
-		//No error
-		NSLog(@"Send success");
-	}
-	else{
-		// NSLog(@"Send failed", [error getCode]);
-	}
-}
-
 
 + (NSString *)className
 {
     return @"com.parse.SignUpCallback";
 }
 
+@end
+
+@implementation ParseBridgeSignUpCallback
+
+@synthesize handler = _handler;
+
++ (void)initializeJava
+{
+    [super initializeJava];
+    BOOL results;
+    //*- Java:  public SaveCallback()
+    results = [ParseBridgeSignUpCallback registerConstructor];
+
+    //*- Java:  public abstract void done(ParseException e)
+    //*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
+    //Override this function with the code you want to run after the save is complete.
+    results = [ParseBridgeSignUpCallback registerCallback:@"done"
+                           selector:@selector(done:)
+                        returnValue:nil
+                          arguments:[ParseException className], nil];
+}
+
++ (NSString *)className
+{
+    return @"com.parsebridge.ParseBridgeSignUpCallback";
+}
+
++ (ParseBridgeSignUpCallback *)callbackWithHandler:(PFBooleanResultBlock)handler
+{
+    ParseBridgeSignUpCallback *callback = [ParseBridgeSignUpCallback new];
+    if (handler == nil)
+    {
+        callback.handler = ^(BOOL succeeded, NSError *error){};
+    }
+    else
+    {
+        callback.handler = handler;
+    }
+    return callback; // NOTE: this is not autorelease but acts as if it is (because it is retained per the duration until the actual callback happens)
+}
+
+- (void)done:(ParseException*)exception
+{
+    NSError *error = nil;
+    if (exception) {
+        error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _handler(YES, error);
+        [self autorelease]; // To balance the retain cycle created from the callbackWithHandler: method
+    });
+}
+
+- (void)dealloc
+{
+    Block_release(_handler);
+    _handler = nil;
+    [super dealloc];
+}
 
 @end

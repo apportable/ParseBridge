@@ -23,11 +23,12 @@
  * THE SOFTWARE.
  *
  */
-
-#import "RequestPasswordResetCallback.h"
+#import "LogInCallback.h"
+#import "ParseUser.h"
 #import "ParseException.h"
+#import "PFUser.h"
 
-@implementation RequestPasswordResetCallback
+@implementation LogInCallback
 
 + (void)initializeJava
 {
@@ -36,42 +37,33 @@
 
 + (NSString *)className
 {
-    return @"com.parse.RequestPasswordResetCallback";
+    return @"com.parse.LogInCallback";
 }
 
 @end
 
-@implementation ParseBridgeRequestPasswordResetCallback
+
+@implementation ParseBridgeLogInCallback
 
 @synthesize handler = _handler;
 
 + (void)initializeJava
 {
     [super initializeJava];
-    BOOL results;
-    //*- Java:  public SaveCallback()
-    results = [ParseBridgeRequestPasswordResetCallback registerConstructor];
-
-    //*- Java:  public abstract void done(ParseException e)
-    //*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
-    //Override this function with the code you want to run after the save is complete.
-    results = [ParseBridgeRequestPasswordResetCallback registerCallback:@"done"
-                           selector:@selector(done:)
-                        returnValue:nil
-                          arguments:[ParseException className], nil];
+    [ParseBridgeLogInCallback registerCallback:@"done" selector:@selector(done:error:) returnValue:nil arguments:[ParseUser className], [ParseException className], nil];
 }
 
 + (NSString *)className
 {
-    return @"com.parsebridge.ParseBridgeRequestPasswordResetCallback";
+    return @"com.parsebridge.ParseBridgeLogInCallback";
 }
 
-+ (ParseBridgeRequestPasswordResetCallback *)callbackWithHandler:(PFBooleanResultBlock)handler
++ (ParseBridgeLogInCallback *)callbackWithHandler:(PFUserResultBlock)handler
 {
-    ParseBridgeRequestPasswordResetCallback *callback = [ParseBridgeRequestPasswordResetCallback new];
+    ParseBridgeLogInCallback *callback = [ParseBridgeLogInCallback new];
     if (handler == nil)
     {
-        callback.handler = ^(BOOL succeeded, NSError *error){};
+        callback.handler = ^(PFUser *obj, NSError *error){};
     }
     else
     {
@@ -80,14 +72,16 @@
     return callback; // NOTE: this is not autorelease but acts as if it is (because it is retained per the duration until the actual callback happens)
 }
 
-- (void)done:(ParseException*)exception
+- (void)done:(ParseUser *)parseUser error:(ParseException *)exception
 {
     NSError *error = nil;
     if (exception) {
         error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        _handler(YES, error);
+        PFUser *pfUser = [[PFUser alloc] initWithParseUser:parseUser];
+        _handler(pfUser, error);
+        [pfUser release];
         [self autorelease]; // To balance the retain cycle created from the callbackWithHandler: method
     });
 }

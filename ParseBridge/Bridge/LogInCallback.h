@@ -25,26 +25,20 @@
  */
 
 #import <BridgeKit/JavaObject.h>
+#import "PFConstants.h"
 
-@class ParseException;
 @class ParseUser;
-
-typedef void (^callbackBlock)(ParseUser*, ParseException*);
+@class ParseException;
 
 @interface LogInCallback : JavaObject
-
--(id)init;
--(void)done:(ParseUser*)user error:(ParseException*)error;
-
 @end
 
+@interface ParseBridgeLogInCallback : LogInCallback
 
-@interface MyLogInCallback : LogInCallback
+@property(readwrite, copy) PFUserResultBlock handler;
 
-@property(readwrite, copy) callbackBlock handler;
-
-+ (MyLogInCallback *)callbackWithHandler:(callbackBlock)myHandler;
-- (void)done:(JavaObject *)userObj error:(JavaObject *)errorObj;
++ (ParseBridgeLogInCallback *)callbackWithHandler:(PFUserResultBlock)myHandler;
+- (void)done:(ParseUser *)parseUser error:(ParseException *)error;
 
 @end
 

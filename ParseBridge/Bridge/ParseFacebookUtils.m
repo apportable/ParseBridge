@@ -30,7 +30,7 @@
 #import <BridgeKit/AndroidActivity.h>
 #import <BridgeKit/JavaList.h>
 #import <BridgeKit/JavaClass.h>
-#import "MyLogInCallback.h"
+#import "LogInCallback.h"
 #import <FacebookSDK/FacebookSDK.h>
 
 @implementation ParseFacebookUtils
@@ -102,7 +102,7 @@
 	result = [ParseFacebookUtils registerStaticMethod:@"login"
 									selector:@selector(logInWithPermissions:)
 								 returnValue:nil
-								   arguments:[AndroidActivity className],[MyLogInCallback className], NULL];
+								   arguments:[AndroidActivity className],[LogInCallback className], NULL];
 	
 //*- Java: public static com.facebook.Session getSession()
 //The active Facebook session associated with the logged in ParseUser, or null if there is none.

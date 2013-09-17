@@ -25,10 +25,20 @@
  */
 
 #import <BridgeKit/JavaObject.h>
-@class ParseException;
+#import "PFConstants.h"
 
 @interface SignUpCallback : JavaObject
+@end
 
--(void)done:(ParseException*)error;
+@class ParseException;
+
+@interface ParseBridgeSignUpCallback : SignUpCallback
+
+@property (nonatomic, copy) PFBooleanResultBlock handler;
+
++(ParseBridgeSignUpCallback *)callbackWithHandler:(PFBooleanResultBlock)handler;
+
+-(id)init;
+-(void)done:(ParseException*)exception;
 
 @end
