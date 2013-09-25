@@ -160,13 +160,6 @@
 									 returnValue:[JavaClass intPrimitive]
 									   arguments:nil];
 
-	//*- Java: protected int count(boolean needsLock)throws ParseException
-	//*- ObjC: -(int)count:(bool)needsLock;
-	results = [ParseQuery registerInstanceMethod:@"count"
-										selector:@selector(count:)
-									 returnValue:[JavaClass intPrimitive]
-									   arguments:[JavaClass boolPrimitive],nil];
-
 	//*- Java: public void countInBackground(CountCallback callback)
 	//*- ObjC: -(void)countInBackground:(CountCallback*)callback;
 	//Counts the number of objects that match this query in a background thread. This does not use caching.

@@ -33,17 +33,32 @@
 {
     [super initializeJava];
 
+	BOOL results = FALSE;
+
 	//Constructor
 	//*- Java:  public ParseAnalytics()
-	BOOL method1 = [ParseAnalytics registerConstructor];
+	results = [ParseAnalytics registerConstructor];
+
 	//*- Java:  public static void trackAppOpened(Intent intent)
 	//*- Objective C:  +(void)trackAppOpenedWithLaunchOptions:(NSDictionary *)launchOptions
 	/*-- Tracks this application being launched (and if this happened as the result of the user opening a push notification, this method sends along information to correlate this open with that push).  Parameters: intent - The Intent that started an Activity, if any. Can be null.*/
-	BOOL method2 = [ParseAnalytics registerStaticMethod:@"trackAppOpened"
+	results = [ParseAnalytics registerStaticMethod:@"trackAppOpened"
 				   selector:@selector(trackAppOpened:)
 				returnValue:nil
 				  arguments:[AndroidIntent className], nil];
-	 NSLog(@"trackAppOpened registration = %i, %i", method1, method2);
+	NSLog(@"trackAppOpened registration = %i", results);
+
+    results = [ParseAnalytics registerStaticMethod:@"trackEvent"
+                            selector:@selector(trackEvent:)
+                         returnValue:nil
+                           arguments:[NSString className], nil];
+	NSLog(@"trackEvent: registration = %i", results);
+
+    results = [ParseAnalytics registerStaticMethod:@"trackEvent"
+                            selector:@selector(trackEvent:dimensions:)
+                         returnValue:nil
+                           arguments:[NSString className], @"java.util.Map", nil];
+	NSLog(@"trackEvent:dimensions: registration = %i", results);
 	 
 }
 

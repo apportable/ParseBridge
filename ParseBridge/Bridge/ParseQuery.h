@@ -66,8 +66,6 @@
 
 -(int)count;
 
--(int)count:(bool)needsLock;
-
 -(void)countInBackground:(CountCallback*)callback;
 
 -(bool)hasCachedResult;
