@@ -46,20 +46,16 @@
 				   selector:@selector(trackAppOpened:)
 				returnValue:nil
 				  arguments:[AndroidIntent className], nil];
-	NSLog(@"trackAppOpened registration = %i", results);
 
     results = [ParseAnalytics registerStaticMethod:@"trackEvent"
                             selector:@selector(trackEvent:)
                          returnValue:nil
                            arguments:[NSString className], nil];
-	NSLog(@"trackEvent: registration = %i", results);
 
     results = [ParseAnalytics registerStaticMethod:@"trackEvent"
                             selector:@selector(trackEvent:dimensions:)
                          returnValue:nil
-                           arguments:[NSString className], @"java.util.Map", nil];
-	NSLog(@"trackEvent:dimensions: registration = %i", results);
-	 
+                           arguments:[NSString className], @"java.util.Map", nil]; 
 }
 
 + (NSString *)className
