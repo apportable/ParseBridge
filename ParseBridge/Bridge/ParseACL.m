@@ -68,10 +68,10 @@
 	
 	
 	//*- Java:  public void setPublicWriteAccess(boolean allowed)
-	//*- ObjC: -(void)setPublicWriteAcess:(bool)allowed;
+	//*- ObjC: -(void)setPublicWriteAccess:(bool)allowed;
 	//Set whether the public is allowed to write this object.
 	result = [ParseACL registerInstanceMethod:@"setPublicWriteAccess"
-										selector:@selector(setPublicWriteAcess:)
+										selector:@selector(setPublicWriteAccess:)
 									 returnValue:nil
 									   arguments:[JavaClass boolPrimitive],nil];
 	
@@ -95,10 +95,10 @@
 	
 	
 	//*- Java:  public boolean getReadAccess(String userId)
-	//*- ObjC: -(bool)getReadAccessWithUserId:(NSString*)userId;
+	//*- ObjC: -(bool)getReadAccessForUserId:(NSString*)userId;
 	//Get whether the given user id is *explicitly* allowed to read this object. Even if this returns false, the user may still be able to access it if getPublicReadAccess returns true or a role that the user belongs to has read access.
 	result = [ParseACL registerInstanceMethod:@"getReadAccess"
-									 selector:@selector(getReadAccessWithUserId:)
+									 selector:@selector(getReadAccessForUserId:)
 								  returnValue:[JavaClass boolPrimitive]
 									arguments:[NSString className], nil];
 	
@@ -122,19 +122,19 @@
 	
 	
 	//*- Java:  public void setReadAccess(ParseUser user,boolean allowed)
-	//*- ObjC: -(void)setReadAccessWithUser:(ParseUser*)user allowed:(bool)allowed;
+	//*- ObjC: -(void)setReadAccessForUser:(ParseUser*)user allowed:(bool)allowed;
 	//Set whether the given user is allowed to read this object.
 	result = [ParseACL registerInstanceMethod:@"setReadAccess"
-									 selector:@selector(setReadAccessWithUser:allowed:)
+									 selector:@selector(setReadAccessForUser:allowed:)
 								  returnValue:nil
 								    arguments:[ParseUser className], [JavaClass boolPrimitive], nil];
 	
 	
 	//*- Java:  public boolean getReadAccess(ParseUser user)
-	//*- ObjC: -(bool)getReadAccessWithUser:(ParseUser*)user;
+	//*- ObjC: -(bool)getReadAccessForUser:(ParseUser*)user;
 	//Get whether the given user id is *explicitly* allowed to read this object. Even if this returns false, the user may still be able to access it if getPublicReadAccess returns true or a role that the user belongs to has read access.
 	result = [ParseACL registerInstanceMethod:@"getReadAccess"
-									 selector:@selector(getReadAccessWithUser:)
+									 selector:@selector(getReadAccessForUser:)
 								  returnValue:[JavaClass boolPrimitive]
 									arguments:[ParseUser className], nil];
 	

@@ -42,7 +42,7 @@
 -(bool)getPublicReadAccess;
 
 //*- Java:  public void setPublicWriteAccess(boolean allowed)
--(void)setPublicWriteAcess:(bool)allowed;
+-(void)setPublicWriteAccess:(bool)allowed;
 
 //*- Java:  public boolean getPublicWriteAccess()
 -(bool)getPublicWriteAccess;
@@ -51,7 +51,7 @@
 -(void)setReadAccessForUserId:(NSString*)userId allowed:(bool)allowed;
 
 //*- Java:  public boolean getReadAccess(String userId)
--(bool)getReadAccessWithUserId:(NSString*)userId;
+-(bool)getReadAccessForUserId:(NSString*)userId;
 
 //*- Java:  public void setWriteAccess(String userId,boolean allowed)
 -(void)setWriteAccessForUserId:(NSString*)userId allowed:(bool)allowed;
@@ -60,10 +60,10 @@
 -(bool)getWriteAccessForUserId:(NSString*)userId;
 
 //*- Java:  public void setReadAccess(ParseUser user,boolean allowed)
--(void)setReadAccessWithUser:(ParseUser*)user allowed:(bool)allowed;
+-(void)setReadAccessForUser:(ParseUser*)user allowed:(bool)allowed;
 
 //*- Java:  public boolean getReadAccess(ParseUser user)
--(bool)getReadAccessWithUser:(ParseUser*)user;
+-(bool)getReadAccessForUser:(ParseUser*)user;
 
 //*- Java:  public void setWriteAccess(ParseUser user,boolean allowed)
 -(void)setWriteAccessForUser:(ParseUser*)user allowed:(bool)allowed;
