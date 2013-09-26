@@ -10,6 +10,12 @@
 #import <BridgeKit/JavaObject.h>
 #import "ParseObject.h"
 
+@class ParseQuery;
+
 @interface ParseRelation : ParseObject
+
+- (ParseQuery *)query;
+- (void)addObject:(ParseObject *)object;
+- (void)removeObject:(ParseObject *)object;
 
 @end

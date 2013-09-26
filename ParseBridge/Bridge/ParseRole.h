@@ -11,10 +11,19 @@
 #import "ParseObject.h"
 
 @class ParseACL;
+@class ParseQuery;
+@class ParseRelation;
 
 @interface ParseRole : ParseObject
 
 -(id)initWithName:(NSString*)name;
 -(id)initWithNameandACL:(NSString*)name acl:(ParseACL*)acl;
+
+- (NSString *)name;
+- (void)setName:(NSString *)name;
+- (ParseRelation *)users;
+- (ParseRelation *)roles;
+
++ (ParseQuery *)query;
 
 @end
