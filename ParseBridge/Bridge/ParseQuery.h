@@ -72,7 +72,7 @@
 
 -(void)clearCachedResult;
 
--(void)clearAllCachedResults;
++(void)clearAllCachedResults;
 
 -(ParseQuery*)whereEqualTo:(NSString*)key value:(JavaObject*)value;
 
