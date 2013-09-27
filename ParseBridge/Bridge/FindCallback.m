@@ -49,13 +49,13 @@
 + (void)initializeJava
 {
     [super initializeJava];
-	BOOL results;
+
 	//*- Java:  public SaveCallback()
-	results = [ParseBridgeFindCallback registerConstructor];
+	[ParseBridgeFindCallback registerConstructor];
 	//*- Java:  public abstract void done(List<T> objects,ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
 	//Override this function with the code you want to run after the save is complete.
-	results = [ParseBridgeFindCallback registerCallback:@"done"
+	[ParseBridgeFindCallback registerCallback:@"done"
 						  selector:@selector(done:error:)
 					   returnValue:nil
 						 arguments:[JavaList className], [ParseException className], nil];

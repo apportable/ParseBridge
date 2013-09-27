@@ -33,15 +33,15 @@
 + (void)initializeJava
 {
     [super initializeJava];
-	BOOL results;
+
 	//*- Java: public SendCallback()
-	results = [SendCallback registerConstructor];
+	[SendCallback registerConstructor];
 	
 	
 	//*- Java:  public abstract void done(ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseException*)error;
 	//Override this function with the code you want to run after the save is complete.
-	// results = [SendCallback registerCallback:@"done"
+	// [SendCallback registerCallback:@"done"
 	// 									  selector:@selector(done:)
 	// 								   returnValue:nil
 	// 									 arguments:[ParseException className], nil];

@@ -33,14 +33,13 @@
 + (void)initializeJava
 {
     [super initializeJava];
-	BOOL results;
 	//*- Java:  public SaveCallback()
-	results = [GetDataCallback registerConstructor];
+	[GetDataCallback registerConstructor];
 	
 	//*- Java:  public abstract void done(byte[] data,ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
 	//Override this function with the code you want to run after the save is complete.
-	// results = [GetDataCallback registerCallback:@"done"
+	// [GetDataCallback registerCallback:@"done"
 	// 					 selector:@selector(done:error:)
 	// 				  returnValue:nil
 	// 					arguments:[NSData className],[ParseException className], nil];

@@ -30,11 +30,9 @@
 + (void)initializeJava
 {
     [super initializeJava];
-    BOOL results;
+    [ParseBridgeCountCallback registerConstructor];
 
-    results = [ParseBridgeCountCallback registerConstructor];
-
-    results = [ParseBridgeCountCallback registerCallback:@"done"
+    [ParseBridgeCountCallback registerCallback:@"done"
                           selector:@selector(done:error:)
                        returnValue:nil
                          arguments:[JavaClass intPrimitive], [ParseException className], nil];

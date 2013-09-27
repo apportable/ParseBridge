@@ -34,14 +34,14 @@
 + (void)initializeJava
 {
     [super initializeJava];
-	BOOL results;
+
 	//*- Java: public SignUpCallback()
-	results = [StandardPushCallback registerConstructor];
+	[StandardPushCallback registerConstructor];
 	
 	//*- Java:  public abstract void done(ParseException e)
 	//*- iOS Bridge Method:  -(void)runStandardPushCallback;
 	//Override this function with the code you want to run after the save is complete.
-	//results = [ParseObject registerInstanceMethod:@"run"
+	//[ParseObject registerInstanceMethod:@"run"
 	//										  selector:@selector(runStandardPushCallback)
 	//									   returnValue:nil
 	//										 arguments:nil];

@@ -38,24 +38,24 @@
 + (void)initializeJava
 {
     [super initializeJava];
-	BOOL result;
+
     //*- Java; public static void initialize(String appId)
     //*- Objc: + initializeFacebook
-	result = [ParseFacebookUtils registerStaticMethod:@"initialize"
+	[ParseFacebookUtils registerStaticMethod:@"initialize"
 								selector:@selector(initializeFacebook:)
 							 returnValue:nil
 							   arguments:[NSString className], NULL];
 	
 
     //*- ObjC: + isLinkedWithUser:(PFUser*)
-	result = [ParseFacebookUtils registerStaticMethod:@"isLinked"
+	[ParseFacebookUtils registerStaticMethod:@"isLinked"
 									selector:@selector(isLinkedWithUser:)
 								 returnValue:[JavaClass boolPrimitive]
 								   arguments:[ParseUser className], NULL];
 	
     //*- Java: public static void link(ParseUser user, Collection<String> permissions, Activity activity, SaveCallback callback)
     //*- ObjC: + linkUser:(PFUser*) permissions:(NSSArray*) block:(BOOL succeeded, NSError *error)
-    //result = [ParseFacebookUtils registerStaticMethod:@"link"
+    //[ParseFacebookUtils registerStaticMethod:@"link"
     //                                selector:@selector(linkUser:permissions:block:)
     //                             returnValue:nil
     //                               arguments:[ParseUser className], [JavaList className], [AndroidActivity className], [SaveCallback className],nil];
@@ -99,7 +99,7 @@
 	
 	//*- Java:public static void logIn(Activity activity,LogInCallback callback)
 	//*- ObjC:+(void)logIn:(AndroidActivity*)activity callback:(LogInCallback*)callback;
-	result = [ParseFacebookUtils registerStaticMethod:@"login"
+	[ParseFacebookUtils registerStaticMethod:@"login"
 									selector:@selector(logInWithPermissions:)
 								 returnValue:nil
 								   arguments:[AndroidActivity className],[LogInCallback className], NULL];
@@ -130,7 +130,7 @@
 
 //*- Java: public static void saveLatestSessionData(ParseUser user,SaveCallback callback)
 //*- ObjC: + (void)saveLatestSessionDataWithCallback:(ParseUser*)user callback:(SaveCallback*)callback;
-	result = [ParseFacebookUtils registerStaticMethod:@"saveLatestSessionData"
+	[ParseFacebookUtils registerStaticMethod:@"saveLatestSessionData"
 									selector:@selector(saveLatestSessionDataWithCallback:callback:)
 								 returnValue:nil
 								   arguments:[ParseUser className],[SaveCallback className],nil];
@@ -138,7 +138,7 @@
 
 //*- Java:  public static void saveLatestSessionData(ParseUser user)
 //*- ObjC: + (void)saveLatestSessionData:(ParseUser*)user;
-	result = [ParseFacebookUtils registerStaticMethod:@"saveLatestSessionData"
+	[ParseFacebookUtils registerStaticMethod:@"saveLatestSessionData"
 											 selector:@selector(saveLatestSessionData:)
 										  returnValue:nil
 											arguments:[ParseUser className],nil];

@@ -49,30 +49,29 @@
 	
     //*- Java: ParseObject(String theClassName) - Constructor
     //*- ObjC: -(id)initParseObject:(NSString*)name;
-	BOOL result = NO;
-	result = [ParseObject registerConstructor];
+	[ParseObject registerConstructor];
 	
 	//*- Java: ParseObject(String theClassName) - Constructor
 	//*- ObjC: -(id)initParseObject:(NSString*)name;
-	result = [ParseObject registerConstructorWithSelector:@selector(initParseObject:)
+	[ParseObject registerConstructorWithSelector:@selector(initParseObject:)
                                        arguments:[NSString className], nil];
     
 	//*- Java: public final void saveEventually()
 	//*- ObjC: -(void)saveEventually;
-	result = [ParseObject registerInstanceMethod:@"saveEventually"
+	[ParseObject registerInstanceMethod:@"saveEventually"
                                selector:@selector(saveEventually)
                             returnValue:nil];
                             
     //*- Java: public final void saveInBackground()
     //*- ObjC: -(void)saveInBackground;
-    result = [ParseObject registerInstanceMethod:@"saveInBackground"
+    [ParseObject registerInstanceMethod:@"saveInBackground"
                                selector:@selector(saveInBackground)
 							   returnValue:nil];
 	
 	
 	//*- Java: public final void save()
 	//*- ObjC: -(void)save;
-	result = [ParseObject registerInstanceMethod:@"save"
+	[ParseObject registerInstanceMethod:@"save"
 											  selector:@selector(save)
 										   returnValue:nil];
 	//Saves this object to the server. Typically, you should use ParseObject.saveInBackground(com.parse.SaveCallback) instead of this, unless you are managing your own threading.
@@ -80,7 +79,7 @@
  
     //*- Java: public void put(String key, Object value)
     //*- ObjC: -(void)forKey:(NSString *)key setObject:(id)value;
-    result = [ParseObject registerInstanceMethod:@"put"
+    [ParseObject registerInstanceMethod:@"put"
 						selector:@selector(forKey:setObject:)
 					 returnValue:nil
 					   arguments:[NSString className],[JavaObject className],nil];
@@ -88,7 +87,7 @@
     //*- Java: public static ParseObject create(String className)
     //*- ObjC: + (ParseObject*)objectWithClassName:(NSString*)className;
 	//Creates a new ParseObject based upon a class name. If the class name is a special type (e.g. for ParseUser), then the appropriate type of ParseObject is returned.
-    result = [ParseObject registerStaticMethod:@"create"
+    [ParseObject registerStaticMethod:@"create"
 					   selector:@selector(objectWithClassName:)
 					returnValue:[ParseObject className]
 					  arguments:[NSString className], nil];
@@ -97,7 +96,7 @@
 	//*- Java: public static <T extends ParseObject> T create(Class<T> subclass)
 	//*- ObjC: + (ParseObject*)objectWithClass:(JavaClass*)subclass;
 	//Creates a new ParseObject based upon a subclass type. Note that the object will be created based upon the ParseClassName of the given subclass type. For example, calling create(ParseUser.class) may create an instance of a custom subclass of ParseUser.
-	result = [ParseObject registerStaticMethod:@"create"
+	[ParseObject registerStaticMethod:@"create"
 									  selector:@selector(objectWithClass:)
 								   returnValue:[ParseObject className]
 									 arguments:[JavaClass className], nil];
@@ -105,7 +104,7 @@
 	
     //*- Java: public static void saveAll(List<ParseObject> objects) throws ParseException
     //*- ObjC: + (void)saveAll:(NSArray*)objects;
-    result = [ParseObject registerStaticMethod:@"saveAll"
+    [ParseObject registerStaticMethod:@"saveAll"
 					   selector:@selector(saveAll:)
 					returnValue:nil
 					  arguments:[JavaList className], nil];
@@ -114,7 +113,7 @@
     //*- Java: public static ParseObject createWithoutData(String className, String objectId)
     //*- ObjC: + (ParseObject*)objectWithoutDataWithClassName:(NSString*)className objectId:(NSString*)objectId;
 	//Creates a reference to an existing ParseObject for use in creating associations between ParseObjects. Calling ParseObject.isDataAvailable() on this object will return false until ParseObject.fetchIfNeeded() or ParseObject.refresh() has been called. No network request will be made.
-    result = [ParseObject registerStaticMethod:@"createWithoutData"
+    [ParseObject registerStaticMethod:@"createWithoutData"
 					   selector:@selector(objectWithoutDataWithClassName:objectId:)
 					returnValue:[ParseObject className]
 					  arguments:[NSString className], [NSString className], nil];
@@ -123,7 +122,7 @@
 	//*- Java: public static <T extends ParseObject> T createWithoutData(Class<T> subclass,String objectId)
 	//*- ObjC: +(ParseObject*)objectWithoutDataWithClass:(JavaClass*)subclass objectId:(NSString*)objectId;
 	//Creates a reference to an existing ParseObject for use in creating associations between ParseObjects. Calling ParseObject.isDataAvailable() on this object will return false until ParseObject.fetchIfNeeded() or ParseObject.refresh() has been called. No network request will be made.
-	result = [ParseObject registerStaticMethod:@"createWithoutData"
+	[ParseObject registerStaticMethod:@"createWithoutData"
 									  selector:@selector(objectWithoutDataWithClass:objectId:)
 								   returnValue:[ParseObject className]
 									 arguments:[JavaClass className], [NSString className], nil];
@@ -132,7 +131,7 @@
 	//*- Java: public static void registerSubclass(Class<? extends ParseObject> subclass)
 	//*- ObjC: +(void)registerSubclass:(JavaClass*)subclass;
 	//Registers a custom subclass type with the Parse SDK, enabling strong-typing of those ParseObjects whenever they appear. Subclasses must specify the ParseClassName annotation and have a default constructor.
-	result = [ParseObject registerStaticMethod:@"registerSubclass"
+	[ParseObject registerStaticMethod:@"registerSubclass"
 									  selector:@selector(registerSubclass:)
 								   returnValue:nil
 									 arguments:[JavaClass className], nil];
@@ -141,7 +140,7 @@
 	//*- Java: public String getClassName()
 	//*- ObjC: -(NSString*)getClassName;
 	//Accessor to the class name.
-	result = [ParseObject registerInstanceMethod:@"getClassName"
+	[ParseObject registerInstanceMethod:@"getClassName"
 										selector:@selector(getClassName)
 									 returnValue:[NSString className]
 									   arguments:nil];
@@ -150,7 +149,7 @@
 	//*- Java: public Set<String> keySet()
 	//*- ObjC: -(NSArray*)keySet;
 	//Returns a set view of the keys contained in this object. This does not include createdAt, updatedAt, authData, or objectId. It does include things like username and ACL.
-	result = [ParseObject registerInstanceMethod:@"keySet"
+	[ParseObject registerInstanceMethod:@"keySet"
 										selector:@selector(_keySet)
 									 returnValue:[JavaSet className]
 									   arguments:nil];
@@ -158,7 +157,7 @@
 	//*- Java: public Date getUpdatedAt()
 	//*- ObjC: -(JavaObject*)getUpdatedAt;
 	//This reports time as the server sees it, so that if you make changes to a ParseObject, then wait a while, and then call save(), the updated time will be the time of the save() call rather than the time the object was changed locally.
-	result = [ParseObject registerInstanceMethod:@"getUpdatedAt"
+	[ParseObject registerInstanceMethod:@"getUpdatedAt"
 										selector:@selector(updatedAt)
 									 returnValue:[JavaDate className]
 									   arguments:nil];
@@ -166,7 +165,7 @@
 	//*- Java: public Date getCreatedAt()
 	//*- ObjC: -(JavaObject*)getCreatedAt;
 	//This reports time as the server sees it, so that if you create a ParseObject, then wait a while, and then call save(), the creation time will be the time of the first save() call rather than the time the object was created locally.
-	result = [ParseObject registerInstanceMethod:@"getCreatedAt"
+	[ParseObject registerInstanceMethod:@"getCreatedAt"
 										selector:@selector(createdAt)
 									 returnValue:[JavaDate className]
 									   arguments:nil];
@@ -175,7 +174,7 @@
 	//*- Java: public String getObjectId()
 	//*- ObjC: -(NSString*)getObjectId;
 	//Accessor to the object id. An object id is assigned as soon as an object is saved to the server. The combination of a className and an objectId uniquely identifies an object in your application.
-	result = [ParseObject registerInstanceMethod:@"getObjectId"
+	[ParseObject registerInstanceMethod:@"getObjectId"
 										selector:@selector(getObjectId)
 									 returnValue:[NSString className]
 									   arguments:nil];
@@ -184,7 +183,7 @@
 	//*- Java: public void setObjectId(String newObjectId)
 	//*- ObjC: -(void)setObjectId:(NSString*)newObjectId;
 	//Setter for the object id. In general you do not need to use this. However, in some cases this can be convenient. For example, if you are serializing a ParseObject yourself and wish to recreate it, you can use this to recreate the ParseObject exactly.
-	result = [ParseObject registerInstanceMethod:@"setObjectId"
+	[ParseObject registerInstanceMethod:@"setObjectId"
 										selector:@selector(setObjectId:)
 									 returnValue:nil
 									   arguments:[NSString className],nil];
@@ -193,7 +192,7 @@
 	//*- Java: public final void saveInBackground(SaveCallback callback)
 	//*- ObjC: -(void)saveInBackgroundWithCallback:(SaveCallback*)callback;
 	//Saves this object to the server in a background thread. This is preferable to using save(), unless your code is already running from a background thread.
-	result = [ParseObject registerInstanceMethod:@"saveInBackground"
+	[ParseObject registerInstanceMethod:@"saveInBackground"
 										selector:@selector(saveInBackgroundWithCallback:)
 									 returnValue:nil
 									   arguments:[SaveCallback className], nil];
@@ -202,7 +201,7 @@
 	//*- Java: public final void saveInBackground()
 	//*- ObjC: -(void)saveInBackground;
 	//Saves this object to the server in a background thread. Use this when you do not have code to run on completion of the push.
-	result = [ParseObject registerInstanceMethod:@"saveInBackground"
+	[ParseObject registerInstanceMethod:@"saveInBackground"
 										selector:@selector(saveInBackground)
 									 returnValue:nil
 									   arguments:nil];
@@ -213,7 +212,7 @@
 	//*- Java: public final void saveEventually()
 	//*- ObjC: -(void)saveEventually;
 	//Saves this object to the server at some unspecified time in the future, even if Parse is currently inaccessible. Use this when you may not have a solid network connection, and don't need to know when the save completes. If there is some problem with the object such that it can't be saved, it will be silently discarded. Objects saved with this method will be stored locally in an on-disk cache until they can be delivered to Parse. They will be sent immediately if possible. Otherwise, they will be sent the next time a network connection is available. Objects saved this way will persist even after the app is closed, in which case they will be sent the next time the app is opened. If more than 10MB of data is waiting to be sent, subsequent calls to saveEventually or deleteEventually will cause old saves to be silently discarded until the connection can be re-established, and the queued objects can be saved.
-	result = [ParseObject registerInstanceMethod:@"saveEventually"
+	[ParseObject registerInstanceMethod:@"saveEventually"
 										selector:@selector(saveEventually)
 									 returnValue:nil
 									   arguments:nil];
@@ -224,7 +223,7 @@
 	//*- Java: public void saveEventually(SaveCallback callback)
 	//*- ObjC: -(void)saveEventuallyWithCallback:(SaveCallback*)callback;
 	//Saves this object to the server at some unspecified time in the future, even if Parse is currently inaccessible. Use this when you may not have a solid network connection, and don't need to know when the save completes. If there is some problem with the object such that it can't be saved, it will be silently discarded. Objects saved with this method will be stored locally in an on-disk cache until they can be delivered to Parse. They will be sent immediately if possible. Otherwise, they will be sent the next time a network connection is available. Objects saved this way will persist even after the app is closed, in which case they will be sent the next time the app is opened. If more than 10MB of data is waiting to be sent, subsequent calls to saveEventually or deleteEventually will cause old saves to be silently discarded until the connection can be re-established, and the queued objects can be saved.
-	result = [ParseObject registerInstanceMethod:@"saveEventually"
+	[ParseObject registerInstanceMethod:@"saveEventually"
 										selector:@selector(saveEventuallyWithCallback:)
 									 returnValue:nil
 									   arguments:[SaveCallback className],nil];
@@ -233,7 +232,7 @@
 	//*- Java: public final void deleteEventually()
 	//*- ObjC: -(void)deleteEventually;
 	//Deletes this object from the server at some unspecified time in the future, even if Parse is currently inaccessible. Use this when you may not have a solid network connection, and don't need to know when the delete completes. If there is some problem with the object such that it can't be deleted, the request will be silently discarded. Delete requests made with this method will be stored locally in an on-disk cache until they can be transmitted to Parse. They will be sent immediately if possible. Otherwise, they will be sent the next time a network connection is available. Delete instructions saved this way will persist even after the app is closed, in which case they will be sent the next time the app is opened. If more than 10MB of commands are waiting to be sent, subsequent calls to deleteEventually or saveEventually will cause old instructions to be silently discarded until the connection can be re-established, and the queued objects can be saved.
-	result = [ParseObject registerInstanceMethod:@"deleteEventually"
+	[ParseObject registerInstanceMethod:@"deleteEventually"
 										selector:@selector(deleteEventually)
 									 returnValue:nil
 									   arguments:nil];
@@ -242,7 +241,7 @@
 	//*- Java: public final void deleteEventually(DeleteCallback callback)
 	//*- ObjC: -(void)deleteEventuallyWithCallback:(DeleteCallback*)callback;
 	//Deletes this object from the server at some unspecified time in the future, even if Parse is currently inaccessible. Use this when you may not have a solid network connection, and don't need to know when the delete completes. If there is some problem with the object such that it can't be deleted, the request will be silently discarded. Delete requests made with this method will be stored locally in an on-disk cache until they can be transmitted to Parse. They will be sent immediately if possible. Otherwise, they will be sent the next time a network connection is available. Delete instructions saved this way will persist even after the app is closed, in which case they will be sent the next time the app is opened. If more than 10MB of commands are waiting to be sent, subsequent calls to deleteEventually or saveEventually will cause old instructions to be silently discarded until the connection can be re-established, and the queued objects can be saved.
-	result = [ParseObject registerInstanceMethod:@"deleteEventually"
+	[ParseObject registerInstanceMethod:@"deleteEventually"
 										selector:@selector(deleteEventuallyWithCallback:)
 									 returnValue:nil
 									   arguments:[DeleteCallback className],nil];
@@ -251,7 +250,7 @@
 
 	//*- Java: public final void refresh()
 	//*- ObjC: -(void)refresh;
-	result = [ParseObject registerInstanceMethod:@"refresh"
+	[ParseObject registerInstanceMethod:@"refresh"
 										selector:@selector(refresh)
 									 returnValue:nil
 									   arguments:nil];
@@ -260,7 +259,7 @@
 	//*- Java: public final void refreshInBackground(RefreshCallback callback)
 	//*- ObjC: -(void)refreshInBackground:(RefreshCallback*)callback;
 	//Refreshes this object with the data from the server in a background thread. This is preferable to using refresh(), unless your code is already running from a background thread.
-	result = [ParseObject registerInstanceMethod:@"refreshInBackground"
+	[ParseObject registerInstanceMethod:@"refreshInBackground"
 										selector:@selector(refreshInBackground:)
 									 returnValue:nil
 									   arguments:[RefreshCallback className],nil];
@@ -269,7 +268,7 @@
 	//*- Java: public <T extends ParseObject> T fetch()
 	//*- ObjC: -(ParseObject*)fetch;
 	//Fetches this object with the data from the server. Call this whenever you want the state of the object to reflect exactly what is on the server.
-	result = [ParseObject registerInstanceMethod:@"fetch"
+	[ParseObject registerInstanceMethod:@"fetch"
 										selector:@selector(fetch)
 									 returnValue:[ParseObject className]
 									   arguments:nil];
@@ -277,7 +276,7 @@
 	//*- Java: public final <T extends ParseObject> void fetchInBackground(GetCallback<T> callback)
 	//*- ObjC: -(void)fetchInBackground:(GetCallback*)callback;
 	//Fetches this object with the data from the server in a background thread. This is preferable to using fetch(), unless your code is already running from a background thread.
-	result = [ParseObject registerInstanceMethod:@"fetchInBackground"
+	[ParseObject registerInstanceMethod:@"fetchInBackground"
 										selector:@selector(fetchInBackground:)
 									 returnValue:nil
 									   arguments:[GetCallback className],nil];
@@ -286,7 +285,7 @@
 
 	//*- Java: public ParseObject fetchIfNeeded()
 	//*- ObjC: -(ParseObject*)fetchIfNeeded;
-	result = [ParseObject registerInstanceMethod:@"fetchIfNeeded"
+	[ParseObject registerInstanceMethod:@"fetchIfNeeded"
 										selector:@selector(fetchIfNeeded)
 									 returnValue:[ParseObject className]
 									   arguments:nil];
@@ -296,14 +295,14 @@
 	//*- Java: public final void fetchIfNeededInBackground(GetCallback<ParseObject> callback)
 	//*- ObjC: -(void)fetchIfNeededInBackground:(GetCallBack*)callback;
 	//If this ParseObject has not been fetched (i.e. ParseObject.isDataAvailable() returns false), fetches this object with the data from the server in a background thread. This is preferable to using ParseObject.fetchIfNeeded(), unless your code is already running from a background thread.
-	result = [ParseObject registerInstanceMethod:@"fetchIfNeededInBackground"
+	[ParseObject registerInstanceMethod:@"fetchIfNeededInBackground"
 										selector:@selector(fetchIfNeededInBackground:)
 									 returnValue:nil
 									   arguments:[GetCallback className],nil];
  
 	//*- Java: public final void delete()
 	//*- ObjC: -(void)delete;
-	result = [ParseObject registerInstanceMethod:@"delete"
+	[ParseObject registerInstanceMethod:@"delete"
 										selector:@selector(delete)
 									 returnValue:nil
 									   arguments:nil];
@@ -312,7 +311,7 @@
 	//*- Java: public final void deleteInBackground(DeleteCallback callback)
 	//*- ObjC: -(void)deleteInBackgroundWithCallback:(DeleteCallback*)callback;
 	//Deletes this object on the server in a background thread. This is preferable to using delete(), unless your code is already running from a background thread.
-	result = [ParseObject registerInstanceMethod:@"deleteInBackground"
+	[ParseObject registerInstanceMethod:@"deleteInBackground"
 										selector:@selector(deleteInBackgroundWithCallback:)
 									 returnValue:nil
 									   arguments:[DeleteCallback className],nil];
@@ -320,7 +319,7 @@
 	//*- Java: public final void deleteInBackground()
 	//*- ObjC: -(void)deleteInBackground;
 	//Deletes this object on the server in a background thread. Does nothing in particular when the save completes. Use this when you don't care if the delete works.
-	result = [ParseObject registerInstanceMethod:@"deleteInBackground"
+	[ParseObject registerInstanceMethod:@"deleteInBackground"
 										selector:@selector(deleteInBackground)
 									 returnValue:nil
 									   arguments:nil];
@@ -329,7 +328,7 @@
 	//*- Java: public static void deleteAll(List<ParseObject> objects)
 	//*- ObjC: -(void)deleteAll:(JavaList*)objects;
 	//Deletes each object in the provided list. This is faster than deleting each object individually because it batches the requests.
-	result = [ParseObject registerStaticMethod:@"deleteAll"
+	[ParseObject registerStaticMethod:@"deleteAll"
 										selector:@selector(deleteAll:)
 									 returnValue:nil
 									   arguments:[JavaList className],nil];
@@ -338,7 +337,7 @@
 	//*- Java: public static void deleteAllInBackground(List<ParseObject> objects,DeleteCallback callback)
 	//*- ObjC: +(void)deleteAllInBackground:(JavaList*)objects callback:(DeleteCallback*)callback
 	//Deletes each object in the provided list. This is faster than deleting each object individually because it batches the requests.
-	result = [ParseObject registerStaticMethod:@"deleteAllInBackground"
+	[ParseObject registerStaticMethod:@"deleteAllInBackground"
 									  selector:@selector(deleteAllInBackground:callback:)
 								   returnValue:nil
 									 arguments:[JavaList className],[DeleteCallback className],nil];
@@ -348,7 +347,7 @@
 	//*- Java: public static void saveAll(List<ParseObject> objects)
 	//*- ObjC: +(void)saveAll:(JavaList*)objects;
 	//Saves each object in the provided list. This is faster than saving each object individually because it batches the requests.
-	result = [ParseObject registerStaticMethod:@"saveAll"
+	[ParseObject registerStaticMethod:@"saveAll"
 									  selector:@selector(saveAll:)
 								   returnValue:nil
 									 arguments:[JavaList className],nil];
@@ -356,7 +355,7 @@
 
 	//*- Java:  public static <T extends ParseObject> List<T> fetchAllIfNeeded(List<T> objects)
 	//*- ObjC: +(JavaList*)fetchAllIfNeeded:(JavaList*)objects;
-	result = [ParseObject registerStaticMethod:@"fetchAllIfNeeded"
+	[ParseObject registerStaticMethod:@"fetchAllIfNeeded"
 									  selector:@selector(fetchAllIfNeeded:)
 								   returnValue:[JavaList className]
 									 arguments:[JavaList className],nil];
@@ -365,7 +364,7 @@
 	//*- Java: public static <T extends ParseObject> void fetchAllIfNeededInBackground(List<T> objects,FindCallback<T> callback)
 	//*- ObjC: +(void)fetchAllIfNeededInBackground:(JavaList*)objects callback:(FindCallback*)callback
 	//Fetches all the objects that don't have data in the provided list in the background
-	result = [ParseObject registerStaticMethod:@"fetchAllIfNeededInBackground"
+	[ParseObject registerStaticMethod:@"fetchAllIfNeededInBackground"
 									  selector:@selector(fetchAllIfNeededInBackground:callback:)
 								   returnValue:nil
 									 arguments:[JavaList className],[FindCallback className],nil];
@@ -374,7 +373,7 @@
 
 	//*- Java: public static List<ParseObject> fetchAll(List<ParseObject> objects)
 	//*- ObjC: +(JavaList*)fetchAll:(JavaList*)objects;
-	result = [ParseObject registerStaticMethod:@"fetchAll"
+	[ParseObject registerStaticMethod:@"fetchAll"
 									  selector:@selector(fetchAll:)
 								   returnValue:[JavaList className]
 									 arguments:[JavaList className],nil];
@@ -383,7 +382,7 @@
 	//*- Java: public static <T extends ParseObject> void fetchAllInBackground(List<T> objects,FindCallback<T> callback)
 	//*- ObjC: +(void)fetchAllInBackground:(JavaList*)objects callback:(FindCallback*)callback;
 	//Fetches all the objects in the provided list in the background
-	result = [ParseObject registerStaticMethod:@"fetchAllInBackground"
+	[ParseObject registerStaticMethod:@"fetchAllInBackground"
 									  selector:@selector(fetchAllInBackground:callback:)
 								   returnValue:nil
 									 arguments:[JavaList className],[FindCallback className],nil];
@@ -391,7 +390,7 @@
 	//*- Java: public static void saveAllInBackground(List<ParseObject> objects,SaveCallback callback)
 	//*- ObjC: -(void)saveAllInBackgroundWithCallback:(JavaList*)objects callback:(SaveCallback*)callback;
 	//Saves each object in the provided list to the server in a background thread. This is preferable to using saveAll, unless your code is already running from a background thread.
-	result = [ParseObject registerStaticMethod:@"saveAllInBackground"
+	[ParseObject registerStaticMethod:@"saveAllInBackground"
 									  selector:@selector(saveAllInBackgroundWithCallback:callback:)
 								   returnValue:nil
 									 arguments:[JavaList className],[SaveCallback className],nil];
@@ -400,7 +399,7 @@
 	//*- Java: public static void saveAllInBackground(List<ParseObject> objects)
 	//*- ObjC: -(void)saveAllInBackground:(JavaList*)objects;
 	//Saves each object to the server in a background thread. Does nothing in particular when the save completes. Use this when you don't care if the save works.
-	result = [ParseObject registerStaticMethod:@"saveAllInBackground"
+	[ParseObject registerStaticMethod:@"saveAllInBackground"
 									  selector:@selector(saveAllInBackground:)
 								   returnValue:nil
 									 arguments:[JavaList className], nil];
@@ -409,7 +408,7 @@
 	//*- Java: public void remove(String key)
 	//*- ObjC: -(void)remove:(NSString*)key;
 	//Removes a key from this object's data if it exists.
-	result = [ParseObject registerInstanceMethod:@"remove"
+	[ParseObject registerInstanceMethod:@"remove"
 										selector:@selector(remove:)
 									 returnValue:nil
 									   arguments:[NSString className],nil];
@@ -417,7 +416,7 @@
 	//*- Java: public boolean has(String key)
 	//*- ObjC: -(bool)has:(NSString*)key;
 	//Whether this object has a particular key. Same as containsKey.
-	result = [ParseObject registerInstanceMethod:@"has"
+	[ParseObject registerInstanceMethod:@"has"
 										selector:@selector(has:)
 									 returnValue:[JavaClass boolPrimitive]
 									   arguments:[NSString className],nil];
@@ -426,7 +425,7 @@
 	//*- Java: public void increment(String key)
 	//*- ObjC: -(void)increment:(NSString*)key;
 	//Atomically increments the given key by 1.
-	result = [ParseObject registerInstanceMethod:@"increment"
+	[ParseObject registerInstanceMethod:@"increment"
 										selector:@selector(increment:)
 									 returnValue:nil
 									   arguments:[NSString className],nil];
@@ -434,7 +433,7 @@
 	//*- Java: public void increment(String key,Number amount)
 	//*- ObjC: -(void)incrementWithKeyandAmount:(NSString*)key amount:(NSNumber*)amount;
 	//Atomically increments the given key by the given number.
-	result = [ParseObject registerInstanceMethod:@"increment"
+	[ParseObject registerInstanceMethod:@"increment"
 										selector:@selector(increment:byAmount:)
 									 returnValue:nil
 									   arguments:[NSString className], [JavaNumber className], nil];
@@ -442,7 +441,7 @@
 	
 	//*- Java:  public void add(String key,Object value)
 	//*- ObjC: -(void)add:(NSString*)key value:(JavaObject*)value;
-	result = [ParseObject registerInstanceMethod:@"add"
+	[ParseObject registerInstanceMethod:@"add"
 										selector:@selector(add:value:)
 									 returnValue:nil
 									   arguments:[NSString className], [JavaObject className], nil];
@@ -450,7 +449,7 @@
 	
 	//*- Java: public void addAll(String key,Collection<?> values)
 	//*- ObjC: -(void)addAll:(NSString*)key values:(JavaObject*)values;
-	result = [ParseObject registerInstanceMethod:@"addAll"
+	[ParseObject registerInstanceMethod:@"addAll"
 										selector:@selector(addAll:values:)
 									 returnValue:nil
 									   arguments:[NSString className],[JavaCollection className], nil];
@@ -459,7 +458,7 @@
 	//*- Java: public void addUnique(String key,Object value)
 	//*- ObjC: -(void)addUnique:(NSString*)key value:(JavaObject*)value;
 	//Atomically adds an object to the array associated with a given key, only if it is not already present in the array. The position of the insert is not guaranteed.
-	result = [ParseObject registerInstanceMethod:@"addUnique"
+	[ParseObject registerInstanceMethod:@"addUnique"
 										selector:@selector(addUnique:value:)
 									 returnValue:nil
 									   arguments:[NSString className],[JavaObject className], nil];
@@ -468,7 +467,7 @@
 	//*- Java: public void addAllUnique(String key,Collection<?> values)
 	//*- ObjC: -(void)addAllUnique:(NSString*)key values:(JavaObject*)values;
 	//Atomically adds the objects contained in a Collection to the array associated with a given key, only adding elements which are not already present in the array. The position of the insert is not guaranteed.
-	result = [ParseObject registerInstanceMethod:@"addAllUnique"
+	[ParseObject registerInstanceMethod:@"addAllUnique"
 										selector:@selector(addAllUnique:values:)
 									 returnValue:nil
 									   arguments:[NSString className],[JavaCollection className], nil];
@@ -477,7 +476,7 @@
 	//*- Java: public void removeAll(String key,Collection<?> values)
 	//*- ObjC: -(void)removeAll:(NSString*)key values:(JavaObject*)values;
 	//Atomically removes all instances of the objects contained in a Collection from the array associated with a given key. To maintain consistency with the Java Collection API, there is no method removing all instances of a single object. Instead, you can call parseObject.removeAll(key, Arrays.asList(value)).
-	result = [ParseObject registerInstanceMethod:@"removeAll"
+	[ParseObject registerInstanceMethod:@"removeAll"
 										selector:@selector(removeAll:values:)
 									 returnValue:nil
 									   arguments:[NSString className],[JavaCollection className], nil];
@@ -485,7 +484,7 @@
 	//*- Java: public boolean containsKey(String key)
 	//*- ObjC: -(bool)containsKey:(NSString*)key;
 	//Whether this object has a particular key. Same as 'has'.
-	result = [ParseObject registerInstanceMethod:@"containsKey"
+	[ParseObject registerInstanceMethod:@"containsKey"
 										selector:@selector(containsKey:)
 									 returnValue:[JavaClass boolPrimitive]
 									   arguments:[NSString className],nil];
@@ -493,7 +492,7 @@
 
 	//*- Java:  public String getString(String key)
 	//*- ObjC: -(NSString*)getString:(NSString*)key;
-	result = [ParseObject registerInstanceMethod:@"getString"
+	[ParseObject registerInstanceMethod:@"getString"
 										selector:@selector(getString:)
 									 returnValue:[NSString className]
 									   arguments:[NSString className],nil];
@@ -511,7 +510,7 @@
  
 	//*- Java: public <T> List<T> getList(String key)
 	//*- ObjC: -(JavaList*)getList:(NSString*)key;
-	result = [ParseObject registerInstanceMethod:@"getList"
+	[ParseObject registerInstanceMethod:@"getList"
 										selector:@selector(getString:)
 									 returnValue:[JavaList className]
 									   arguments:[NSString className],nil];
@@ -524,28 +523,28 @@
 
 	//*- Java: public int getInt(String key)
 	//*- ObjC: -(int)getInt:(NSString*)key;
-	result = [ParseObject registerInstanceMethod:@"getInt"
+	[ParseObject registerInstanceMethod:@"getInt"
 										selector:@selector(getInt:)
 									 returnValue:[JavaClass intPrimitive]
 									   arguments:[NSString className],nil];
 	
 	//*- Java: public double getDouble(String key)
 	//*- ObjC: -(double)getDouble:(NSString*)key;
-	result = [ParseObject registerInstanceMethod:@"getDouble"
+	[ParseObject registerInstanceMethod:@"getDouble"
 										selector:@selector(getDouble:)
 									 returnValue:[JavaClass doublePrimitive]
 									   arguments:[NSString className],nil];
 
 	//*- Java: public long getLong(String key)
 	//*- ObjC: -(long)getLong:(NSString*)key;
-	result = [ParseObject registerInstanceMethod:@"getLong"
+	[ParseObject registerInstanceMethod:@"getLong"
 										selector:@selector(getLong:)
 									 returnValue:[JavaClass longPrimitive]
 									   arguments:[NSString className],nil];
 	
 	//*- Java: public boolean getBoolean(String key)
 	//*- ObjC: -(bool)getBoolean:(NSString*)key;
-	result = [ParseObject registerInstanceMethod:@"getBoolean"
+	[ParseObject registerInstanceMethod:@"getBoolean"
 										selector:@selector(getBoolean:)
 									 returnValue:[JavaClass boolPrimitive]
 									   arguments:[NSString className],nil];
@@ -556,7 +555,7 @@
 	//*- Java: public ParseObject getParseObject(String key)
 	//*- ObjC: -(ParseObject*)getParseObject:(NSString*)key;
 	//Access a ParseObject value. This function will not perform a network request. Unless the ParseObject has been downloaded (e.g. by a ParseQuery.include(String) or by calling ParseObject.fetchIfNeeded() or ParseObject.refresh()), ParseObject.isDataAvailable() will return false.
-	result = [ParseObject registerInstanceMethod:@"getParseObject"
+	[ParseObject registerInstanceMethod:@"getParseObject"
 										selector:@selector(getParseObject:)
 									 returnValue:[ParseObject className]
 									   arguments:[NSString className],nil];
@@ -565,7 +564,7 @@
 	//*- Java: public ParseUser getParseUser(String key)
 	//*- ObjC: -(ParseUser*)getParseUser:(NSString*)key;
 	//Access a ParseUser value. This function will not perform a network request. Unless the ParseObject has been downloaded (e.g. by a ParseQuery.include(String) or by calling ParseObject.fetchIfNeeded() or ParseObject.refresh()), ParseObject.isDataAvailable() will return false.
-	result = [ParseObject registerInstanceMethod:@"getParseUser"
+	[ParseObject registerInstanceMethod:@"getParseUser"
 										selector:@selector(getParseUser:)
 									 returnValue:[ParseUser className]
 									   arguments:[NSString className],nil];
@@ -574,14 +573,14 @@
 	//*- Java: public ParseFile getParseFile(String key)
 	//*- ObjC: -(ParseFile*)getParseFile:(NSString*)key;
 	//Access a ParseFile value. This function will not perform a network request. Unless the ParseFile has been downloaded (e.g. by calling ParseFile.getData()), ParseFile.isDataAvailable() will return false.
-	result = [ParseObject registerInstanceMethod:@"getParseFile"
+	[ParseObject registerInstanceMethod:@"getParseFile"
 										selector:@selector(getParseFile:)
 									 returnValue:[ParseFile className]
 									   arguments:[NSString className],nil];
  
 	//*- Java: public ParseGeoPoint getParseGeoPoint(String key)
 	//*- ObjC: -(ParseGeoPoint*)getParseGeoPoint:(NSString*)key;
-	result = [ParseObject registerInstanceMethod:@"getParseGeoPoint"
+	[ParseObject registerInstanceMethod:@"getParseGeoPoint"
 										selector:@selector(getParseGeoPoint:)
 									 returnValue:[ParseGeoPoint className]
 									   arguments:[NSString className],nil];
@@ -589,14 +588,14 @@
 
 	//*- Java: public ParseACL getACL()
 	//*- ObjC: -(ParseACL*)getACL;
-	result = [ParseObject registerInstanceMethod:@"getACL"
+	[ParseObject registerInstanceMethod:@"getACL"
 										selector:@selector(getACL)
 									 returnValue:[ParseACL className]
 									   arguments:nil];
  
 	//*- Java: public void setACL(ParseACL acl)
 	//*- ObjC: -(void)setACL:(ParseACL*)acl;
-	result = [ParseObject registerInstanceMethod:@"setACL"
+	[ParseObject registerInstanceMethod:@"setACL"
 										selector:@selector(setACL:)
 									 returnValue:nil
 									   arguments:[ParseACL className],nil];
@@ -604,21 +603,21 @@
 	//*- Java: public boolean isDataAvailable()
 	//*- ObjC: -(bool)isDataAvailable;
 	//Gets whether the ParseObject has been fetched.
-	result = [ParseObject registerInstanceMethod:@"isDataAvailable"
+	[ParseObject registerInstanceMethod:@"isDataAvailable"
 										selector:@selector(isDataAvailable)
 									 returnValue:[JavaClass boolPrimitive]
 									   arguments:nil];
  
 	//*- Java: public <T extends ParseObject> ParseRelation<T> getRelation(String key)
 	//*- ObjC: -(ParseRelation*)getRelation:(NSString*)key;
-	result = [ParseObject registerInstanceMethod:@"getRelation"
+	[ParseObject registerInstanceMethod:@"getRelation"
 										selector:@selector(getRelation:)
 									 returnValue:[ParseRelation className]
 									   arguments:[NSString className],nil];
 
 	//*- Java: public Object get(String key)
 	//*- ObjC: -(JavaObject*)get:(NSString*)key;
-	result = [ParseObject registerInstanceMethod:@"get"
+	[ParseObject registerInstanceMethod:@"get"
 										selector:@selector(get:)
 									 returnValue:[JavaObject className]
 									   arguments:[NSString className],nil];
@@ -626,7 +625,7 @@
 
 	//*- Java: public boolean hasSameId(ParseObject other)
 	//*- ObjC: -(bool)hasSameId:(ParseObject*)other;
-	result = [ParseObject registerInstanceMethod:@"hasSameId"
+	[ParseObject registerInstanceMethod:@"hasSameId"
 										selector:@selector(hasSameId:)
 									 returnValue:[JavaClass boolPrimitive]
 									   arguments:[ParseObject className],nil];

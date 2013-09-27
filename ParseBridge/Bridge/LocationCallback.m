@@ -37,12 +37,12 @@
     [super initializeJava];
 	BOOL results;
 	//*- Java:  public SaveCallback()
-	results = [LocationCallback registerConstructor];
+	[LocationCallback registerConstructor];
 	
 	//*- Java:  public abstract void done(ParseGeoPoint geoPoint,ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
 	//Override this function with the code you want to run after the save is complete.
-	// results = [LocationCallback registerCallback:@"done"
+	// [LocationCallback registerCallback:@"done"
 	// 						 selector:@selector(done:error:)
 	// 					  returnValue:nil
 	// 						arguments:[ParseGeoPoint className],[ParseException className], nil];

@@ -34,8 +34,7 @@
 	
 	//Constructor
 	//*- Java:  ParsePush()
-	BOOL results;
-	results = [ParsePush registerConstructorWithSelector:@selector(init)
+	[ParsePush registerConstructorWithSelector:@selector(init)
 												arguments:nil];
 	/*
 	Creates a new push notification. The default channel is the empty string, also known as the global broadcast channel, but this value can be overridden using ParsePush.setChannel(String), ParsePush.setChannels(Collection) or ParsePush.setQuery(ParseQuery). Before sending the push notification you must call either ParsePush.setMessage(String) or ParsePush.setData(JSONObject).

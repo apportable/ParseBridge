@@ -50,12 +50,12 @@
     [super initializeJava];
 	BOOL results;
 	//*- Java:  public SaveCallback()
-	results = [ParseBridgeSaveCallback registerConstructor];
+	[ParseBridgeSaveCallback registerConstructor];
 
 	//*- Java:  public abstract void done(ParseException e)
 	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
 	//Override this function with the code you want to run after the save is complete.
-	results = [ParseBridgeSaveCallback registerCallback:@"done"
+	[ParseBridgeSaveCallback registerCallback:@"done"
 						   selector:@selector(done:)
 						returnValue:nil
 						  arguments:[ParseException className], nil];

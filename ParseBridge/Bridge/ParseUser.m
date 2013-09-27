@@ -39,43 +39,43 @@
     [super initializeJava];
 	
 	BOOL result;
-	result = [ParseUser registerConstructorWithSelector:@selector(initUser)
+	[ParseUser registerConstructorWithSelector:@selector(initUser)
                                        arguments:nil];
 	
 	//*- ObjC: + currentUser
-    result = [ParseUser registerStaticMethod:@"getCurrentUser"
+    [ParseUser registerStaticMethod:@"getCurrentUser"
 						selector:@selector(currentUser)
 					 returnValue:[ParseUser className]
 					   arguments:nil];
 
-	result = [ParseUser registerStaticMethod:@"logOut"
+	[ParseUser registerStaticMethod:@"logOut"
 								 selector:@selector(logOut)
 								 returnValue:nil
 					   arguments:nil];
 					   
     //*- Java: public void put(String key, Object value)
     //*- ObjC: - setObject:(id) forKey:(NSString*)
-    result = [ParseUser registerInstanceMethod:@"put"
+    [ParseUser registerInstanceMethod:@"put"
                                selector:@selector(forKey:setObject:)
                             returnValue:nil
                               arguments:[NSString className],[JavaObject className],nil];
 
     //*- Java: public boolean isAuthenticated()
     //*- ObjC: - (BOOL)isAuthenticated
-	result = [ParseUser registerInstanceMethod:@"isAuthenticated"
+	[ParseUser registerInstanceMethod:@"isAuthenticated"
                                selector:@selector(isAuthenticated)
                             returnValue:[JavaClass boolPrimitive]
                               arguments:nil];
 
     //*- Java: public final void saveInBackground()
     //*- ObjC: - saveInBackground
-    result = [ParseUser registerInstanceMethod:@"saveInBackground"
+    [ParseUser registerInstanceMethod:@"saveInBackground"
                                selector:@selector(saveInBackground)
                             returnValue:nil];
 
     //*- Java: public static void enableAutomaticUser()
     //*- ObjC: + enableAutomaticUser
-    result = [ParseUser registerStaticMethod:@"enableAutomaticUser"
+    [ParseUser registerStaticMethod:@"enableAutomaticUser"
                            selector:@selector(enableAutomaticUser)
                         returnValue:nil
                           arguments:nil];
@@ -85,7 +85,7 @@
 	//*- Java: public void remove(String key)
 	//*-  ObjC: -(void)remove:(NSString*) key;
 	//Description copied from class: ParseObject
-    result = [ParseUser registerInstanceMethod:@"remove"
+    [ParseUser registerInstanceMethod:@"remove"
 							 selector:@selector(remove:)
 						  returnValue:nil
 							arguments:[NSString className],nil];
@@ -94,7 +94,7 @@
 	//*- Java: public void setUsername(String username)
 	//*-  ObjC: -(void)setUsername:(NSString*)username;
 	//Sets the username. Usernames cannot be null or blank.
-    result = [ParseUser registerInstanceMethod:@"setUsername"
+    [ParseUser registerInstanceMethod:@"setUsername"
 							 selector:@selector(setUsername:)
 						  returnValue:nil
 							arguments:[NSString className],nil];
@@ -103,7 +103,7 @@
 	//*- Java: public String getUsername()
 	//*- ObjC: -(NSString*)getUsername;
 	//Retrieves the username.
-    result = [ParseUser registerInstanceMethod:@"getUsername"
+    [ParseUser registerInstanceMethod:@"getUsername"
 							 selector:@selector(username)
 						  returnValue:[NSString className]
 							arguments:nil];
@@ -112,7 +112,7 @@
 	//*- Java: public void setPassword(String password)
 	//*-  ObjC: -(void)setPassword:(NSString*)password;
 	//Sets the password.
-    result = [ParseUser registerInstanceMethod:@"setPassword"
+    [ParseUser registerInstanceMethod:@"setPassword"
 							 selector:@selector(setPassword:)
 						  returnValue:nil
 							arguments:[NSString className],nil];
@@ -120,7 +120,7 @@
 	//*- Java: public void setEmail(String email)
 	//*- ObjC: -(void)setEmail:(NSString*)email;
 	//Sets the email address.
-    result = [ParseUser registerInstanceMethod:@"setEmail"
+    [ParseUser registerInstanceMethod:@"setEmail"
 							 selector:@selector(setEmail:)
 						  returnValue:nil
 							arguments:[NSString className],nil];
@@ -128,7 +128,7 @@
 	//*- Java: public String getEmail()
 	//*- ObjC: -(NSString*)getEmail;
 	//Retrieves the email address.
-    result = [ParseUser registerInstanceMethod:@"getEmail"
+    [ParseUser registerInstanceMethod:@"getEmail"
 							 selector:@selector(email)
 						  returnValue:[NSString className]
 							arguments:nil];
@@ -137,7 +137,7 @@
 	//public String getSessionToken()
 	//*-  ObjC: -(NSString*)getSessionToken;
 	//Retrieves the session token for a user, if they are logged in.
-    result = [ParseUser registerInstanceMethod:@"getSessionToken"
+    [ParseUser registerInstanceMethod:@"getSessionToken"
 							 selector:@selector(sessionToken)
 						  returnValue:[NSString className]
 							arguments:nil];
@@ -145,7 +145,7 @@
 	//*- Java: public ParseUser fetch()
 	//*- ObjC: -(ParseUser*)fetch;
 	//Description copied from class: ParseObject
-    result = [ParseUser registerInstanceMethod:@"fetch"
+    [ParseUser registerInstanceMethod:@"fetch"
 							 selector:@selector(fetch)
 						  returnValue:[ParseUser className]
 							arguments:nil];
@@ -153,7 +153,7 @@
 
 	//*- Java: public void signUp()
 	//*- ObjC: -(void)signUp;
-    result = [ParseUser registerInstanceMethod:@"signUp"
+    [ParseUser registerInstanceMethod:@"signUp"
 							 selector:@selector(signUp)
 						  returnValue:nil
 							arguments:nil];
@@ -162,7 +162,7 @@
 
 	//*- Java: public void signUpInBackground(SignUpCallback callback)
 	//*- ObjC: -(void)signUpInBackground:(SignUpCallback*)callback;
-    result = [ParseUser registerInstanceMethod:@"signUpInBackground"
+    [ParseUser registerInstanceMethod:@"signUpInBackground"
 							 selector:@selector(signUpInBackground:)
 						  returnValue:nil
 							arguments:[SignUpCallback className],nil];
@@ -171,7 +171,7 @@
 
 	//*- Java: public static ParseUser logIn(String username,String password)
 	//*-  ObjC: +(ParseUser*)logIn:(NSString*)username password:(NSString*)password;
-    result = [ParseUser registerStaticMethod:@"logIn"
+    [ParseUser registerStaticMethod:@"logIn"
                            selector:@selector(logIn:password:)
                         returnValue:[ParseUser className]
                           arguments:[NSString className],[NSString className],nil];
@@ -180,7 +180,7 @@
 
 	//*- Java: public static void logInInBackground(String username,String password,LogInCallback callback)
 	//*- ObjC: +(void)logInInBackground:(NSString*)username password:(NSString*)password callback:(LogInCallback*)callback;
-	result = [ParseUser registerStaticMethod:@"logInInBackground"
+	[ParseUser registerStaticMethod:@"logInInBackground"
                            selector:@selector(logInInBackground:password:callback:)
                         returnValue:nil
                           arguments:[NSString className],[NSString className],[LogInCallback className], nil];
@@ -190,7 +190,7 @@
 	//*- Java: public static void requestPasswordReset(String email)
 	//*- ObjC: +(void)requestPasswordReset:(NSString*)email;
 	//Requests a password reset email to be sent to the specified email address associated with the user account. This email allows the user to securely reset their password on the Parse site. Typically, you should use ParseUser.requestPasswordResetInBackground(java.lang.String, com.parse.RequestPasswordResetCallback) instead of this, unless you are managing your own threading.
-	result = [ParseUser registerStaticMethod:@"requestPasswordReset"
+	[ParseUser registerStaticMethod:@"requestPasswordReset"
                            selector:@selector(requestPasswordReset:)
                         returnValue:nil
                           arguments:[NSString className], nil];
@@ -198,14 +198,14 @@
 	//*- Java:  public static void requestPasswordResetInBackground(String email,RequestPasswordResetCallback callback)
 	//*- ObjC: +(void)requestPasswordResetInBackground:(NSString*)email callback:(RequestPasswordResetCallback*)callback;
 	//Requests a password reset email to be sent in a background thread to the specified email address associated with the user account. This email allows the user to securely reset their password on the Parse site. This is preferable to using requestPasswordReset(), unless your code is already running from a background thread.
-	result = [ParseUser registerStaticMethod:@"requestPasswordResetInBackground"
+	[ParseUser registerStaticMethod:@"requestPasswordResetInBackground"
                            selector:@selector(requestPasswordResetInBackground:callback:)
                         returnValue:nil
                           arguments:[NSString className], [RequestPasswordResetCallback className], nil];
 
 	//*- Java: public ParseUser fetchIfNeeded()
 	//*- ObjC: -(void)fetchIfNeeded;
-    result = [ParseUser registerInstanceMethod:@"fetchIfNeeded"
+    [ParseUser registerInstanceMethod:@"fetchIfNeeded"
 							 selector:@selector(fetchIfNeeded)
 						  returnValue:[ParseUser className]
 							arguments:nil];
@@ -213,7 +213,7 @@
 	//*- Java: public boolean isNew()
 	//*- ObjC: -(void)isNew;
 	//Indicates whether this ParseUser was created during this session through a call to ParseUser.signUp() or by logging in with a linked service such as Facebook.
-    result = [ParseUser registerInstanceMethod:@"isNew"
+    [ParseUser registerInstanceMethod:@"isNew"
 							 selector:@selector(isNew)
 						  returnValue:[JavaClass boolPrimitive]
 							arguments:nil];
@@ -221,7 +221,7 @@
 	//*- Java: public static ParseQuery<ParseUser> getQuery()
 	//*-  ObjC: -(ParseQuery*)getQuery;
 	//Constructs a query for ParseUsers.
-    result = [ParseUser registerStaticMethod:@"getQuery"
+    [ParseUser registerStaticMethod:@"getQuery"
 							 selector:@selector(getQuery)
 						  returnValue:[ParseQuery className]
 							arguments:nil];

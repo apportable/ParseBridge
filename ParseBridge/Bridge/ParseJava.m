@@ -35,23 +35,21 @@
 	
     //*- Java: public static void initialize(Context context, String applicationId, String clientKey)
     //*- Objective-C: +(void)init:(AndroidContext*)context applicationId:(NSString *)applicationId clientKey:(NSString *)clientKey;
-	BOOL result = FALSE;
-	
-	result = [ParseJava registerStaticMethod:@"initialize"
+	[ParseJava registerStaticMethod:@"initialize"
 					   selector:@selector(init:applicationId:clientKey:)
 					returnValue:nil
 					  arguments:[AndroidContext className],[NSString className],[NSString className], nil];
  
 	//*- Java: public static void setLogLevel(int logLevel)
 	//*- Objective-C:+(void)setLogLevel:(int)logLevel;
-	result = [ParseJava registerStaticMethod:@"setLogLevel"
+	[ParseJava registerStaticMethod:@"setLogLevel"
 					   selector:@selector(setLogLevel:)
 					returnValue:nil
 					  arguments:[JavaClass intPrimitive], nil];
 	
 	//*- Java: public static int getLogLevel()
 	//*- Objective-C:+(int)getLogLevel;
-	result = [ParseJava registerStaticMethod:@"getLogLevel"
+	[ParseJava registerStaticMethod:@"getLogLevel"
 					   selector:@selector(getLogLevel)
 					returnValue:[JavaClass intPrimitive]
 					  arguments:nil];

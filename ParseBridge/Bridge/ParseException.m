@@ -39,14 +39,13 @@
 	//*- Java: ParseException(int theCode, String theMessage)
 	//*- Objective C: 	-(id)initParseExceptionWithCode:(int)errorcode message:(NSString*)message;
 	//Construct a new ParseException with a particular error code.
-	BOOL results = FALSE;
-	results = [ParseException registerConstructorWithSelector:@selector(initParseExceptionWithCode:message:)
+	[ParseException registerConstructorWithSelector:@selector(initParseExceptionWithCode:message:)
 													arguments:[JavaClass intPrimitive], [NSString className], nil];
 	
 	//*- Java:ParseException(String message, Throwable cause)
 	//*- Objective C:  -(id)initParseExceptionWithMessageandCause:(NSString*)message throwable:(JavaThrowable*)throwable;
 
-	results = [ParseException registerConstructorWithSelector:@selector(initParseExceptionWithMessageandCause:throwable:)
+	[ParseException registerConstructorWithSelector:@selector(initParseExceptionWithMessageandCause:throwable:)
 													arguments:[NSString className], [JavaThrowable className], nil];
 	//*- Objective C:
 
@@ -54,7 +53,7 @@
 	
 	//*- Java:ParseException(Throwable cause)
 	//*- Objective C:  -(id)initParseExceptionWithCause:(JavaThrowable*)throwable;
-	results = [ParseException registerConstructorWithSelector:@selector(initParseExceptionWithCause:)
+	[ParseException registerConstructorWithSelector:@selector(initParseExceptionWithCause:)
 													arguments:[JavaThrowable className], nil];
 	//Construct a new ParseException with an external cause.
 	
@@ -62,7 +61,7 @@
 	//*- Java:int getCode()
 	//*- Objective C:  -(int)getCode;
 	//Access the code for this error.
-	results = [ParseException registerInstanceMethod:@"getCode"
+	[ParseException registerInstanceMethod:@"getCode"
 							 selector:@selector(getCode)
 						  returnValue:[JavaClass intPrimitive]
 							arguments:nil];

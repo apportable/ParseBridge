@@ -41,11 +41,11 @@
 	/*
 		Client code should not construct a PushService directly.
 	 */
-	BOOL result = [PushService registerConstructor];
+	[PushService registerConstructor];
 
 	//*- Java:   public static void startServiceIfRequired(Context context)
 	//*- iOS Bridge Method:  +(void)startServiceIfRequired:(AndroidContext*)context;
-	result = [PushService registerStaticMethod:@"startServiceIfRequired"
+	[PushService registerStaticMethod:@"startServiceIfRequired"
 					   selector:@selector(startServiceIfRequired:)
 					returnValue:nil
 					  arguments:[AndroidContext className], nil];
@@ -53,7 +53,7 @@
 	
 	//*- Java:   public static void subscribe(Context context,String channel,Class<? extends Activity> cls)
 	//*- iOS Bridge Method:  +(void)subscribe:(AndroidContext*)context channel:(NSString*)channel activitySubClass:(AndroidActivity*)activitySubClass;
-	result = [PushService registerStaticMethod:@"subscribe"
+	[PushService registerStaticMethod:@"subscribe"
 							 selector:@selector(subscribe:channel:activitySubClass:)
 						  returnValue:nil
 							arguments:[AndroidContext className], [NSString className], [JavaClass className], nil];
@@ -61,7 +61,7 @@
 
 	//*- Java:   public static void subscribe(Context context,String channel,Class<? extends Activity> cls,int icon)
 	//*- iOS Bridge Method:  +(void)subscribeWithIcon:(AndroidContext*)context channel:(NSString*)channel activitySubClass:(AndroidActivity*)activitySubClass icon:(int)icon;
-	result = [PushService registerStaticMethod:@"subscribe"
+	[PushService registerStaticMethod:@"subscribe"
 							 selector:@selector(subscribeWithIcon:channel:activitySubClass:icon:)
 						  returnValue:nil
 							arguments:[AndroidContext className], [NSString className], [JavaClass className], [JavaClass intPrimitive], nil];
@@ -77,7 +77,7 @@
 
 	//*- Java:   public static void unsubscribe(Context context,String channel)
 	//*- iOS Bridge Method:  +(void)unsubscribe:(AndroidContext*)context channel:(NSString*)channel;
-	result = [PushService registerStaticMethod:@"unsubscribe"
+	[PushService registerStaticMethod:@"unsubscribe"
 							 selector:@selector(unsubscribe:channel:)
 						  returnValue:nil
 							arguments:[AndroidContext className], [NSString className], nil];
@@ -86,7 +86,7 @@
 
 	//*- Java:   public static void setDefaultPushCallback(Context context,Class<? extends Activity> cls)
 	//*- iOS Bridge Method:  +(void)setDefaultPushCallback:(AndroidContext*)context activitySubClass:(AndroidActivity*)activitySubClass;
-	result = [PushService registerStaticMethod:@"setDefaultPushCallback"
+	[PushService registerStaticMethod:@"setDefaultPushCallback"
 							 selector:@selector(setDefaultPushCallback:activitySubClass:)
 						  returnValue:nil
 							arguments:[AndroidContext className], [JavaClass className], nil];
@@ -98,7 +98,7 @@
 
 	//*- Java:  public static void setDefaultPushCallback(Context context,Class<? extends Activity> cls,int icon)
 	//*- iOS Bridge Method:  +(void)setDefaultPushCallbackWithIcon:(AndroidContext*)context activitySubClass:(AndroidActivity*)activitySubClass icon:(int)icon;
-	result = [PushService registerStaticMethod:@"setDefaultPushCallback"
+	[PushService registerStaticMethod:@"setDefaultPushCallback"
 							 selector:@selector(setDefaultPushCallbackWithIcon:activitySubClass:icon:)
 						  returnValue:nil
 							arguments:[AndroidContext className], [JavaClass className], [JavaClass intPrimitive], nil];
@@ -112,7 +112,7 @@
 
 	//*- Java:   public static Set<String> getSubscriptions(Context context)
 	//*- iOS Bridge Method: +(NSArray*)getSubscriptions:(AndroidContext*)context;
-	result = [PushService registerStaticMethod:@"getSubscriptions"
+	[PushService registerStaticMethod:@"getSubscriptions"
 							 selector:@selector(_getSubscriptions:)
 						  returnValue:[JavaSet className]
 							arguments:[AndroidContext className], nil];

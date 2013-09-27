@@ -20,21 +20,21 @@
 	
 	//*- Java:  public void add(T object)
 	//*- ObjC:  -(void)add:(ParseObject*)object;
-	BOOL result = [ParseRelation registerInstanceMethod:@"add"
+	[ParseRelation registerInstanceMethod:@"add"
 													selector:@selector(addObject:)
 												 returnValue:nil
 												   arguments:[ParseObject className],nil];
 		
 	//*- Java:  public void remove(T object)
 	//*- ObjC:  -(void)remove:(ParseObject*)object;
-	result = [ParseRelation registerInstanceMethod:@"remove"
+	[ParseRelation registerInstanceMethod:@"remove"
 											   selector:@selector(removeObject:)
 											returnValue:nil
 											  arguments:[ParseObject className],nil];
 		
 	//*- Java:  public ParseQuery<T> getQuery()
 	//*- ObjC:  -(ParseQuery*)getQuery;
-	result = [ParseRelation registerInstanceMethod:@"getQuery"
+	[ParseRelation registerInstanceMethod:@"getQuery"
 										  selector:@selector(query)
 									   returnValue:[ParseQuery className]
 										 arguments:nil];

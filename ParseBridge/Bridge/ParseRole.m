@@ -17,35 +17,33 @@
 {
     [super initializeJava];
 	
-	BOOL result = FALSE;	
-
-	result = [ParseRole registerConstructorWithSelector:@selector(initWithName:)
+	[ParseRole registerConstructorWithSelector:@selector(initWithName:)
 													arguments:[NSString className], nil];
 			
-	result = [ParseRole registerConstructorWithSelector:@selector(initWithNameandACL:acl:)
+	[ParseRole registerConstructorWithSelector:@selector(initWithNameandACL:acl:)
 									arguments:[NSString className],[ParseACL className], nil];
 			
-    result = [ParseRole registerStaticMethod:@"getQuery"
+    [ParseRole registerStaticMethod:@"getQuery"
                             		selector:@selector(query)
                         			returnValue:[ParseQuery className]
                            			arguments:nil];
 
-	result = [ParseRole registerInstanceMethod:@"getName"
+	[ParseRole registerInstanceMethod:@"getName"
 									selector:@selector(name)
 									returnValue:[NSString className]
 									arguments:nil];
 	
-	result = [ParseRole registerInstanceMethod:@"setName"
+	[ParseRole registerInstanceMethod:@"setName"
 									selector:@selector(setName:)
 									returnValue:nil
 									arguments:[NSString className],nil];
 
-	result = [ParseRole registerInstanceMethod:@"getUsers"
+	[ParseRole registerInstanceMethod:@"getUsers"
 									selector:@selector(users)
 									returnValue:[ParseRelation className]
 									arguments:nil];
 
-	result = [ParseRole registerInstanceMethod:@"getRoles"
+	[ParseRole registerInstanceMethod:@"getRoles"
 									selector:@selector(roles)
 									returnValue:[ParseRelation className]
 									arguments:nil];							 

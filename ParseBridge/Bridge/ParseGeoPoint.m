@@ -35,7 +35,7 @@
 	 
 	BOOL results;
 	//*- Java: public SendCallback()
-	results = [ParseGeoPoint registerConstructor];
+	[ParseGeoPoint registerConstructor];
 	
 	//Constructors
 	//*- Java: ParseGeoPoint()

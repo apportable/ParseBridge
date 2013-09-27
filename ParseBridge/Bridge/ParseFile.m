@@ -36,14 +36,14 @@
 	//Constructors
 	//*- Java: public ParseFile(byte[] data)
 	//*- ObjC:  -(id)initWithData:(NSData*)owner;
-	BOOL result = [ParseFile registerConstructorWithSelector:@selector(initWithData:)
+	[ParseFile registerConstructorWithSelector:@selector(initWithData:)
 												arguments:[NSData className], nil];
 
 	
 	//*- Java: public ParseFile(String name,byte[] data)
 	//*- ObjC: -(id)initWithNameandData:(NSString*)fileName data:(NSData*)data;
 	//Creates a new file from a byte array and a name. Giving a name with a proper file extension (e.g. ".png") is ideal because it allows Parse to deduce the content type of the file and set appropriate HTTP headers when it is fetched.
-	result = [ParseFile registerConstructorWithSelector:@selector(initWithNameandData:data:)
+	[ParseFile registerConstructorWithSelector:@selector(initWithNameandData:data:)
 											  arguments:[NSString className],[NSData className], nil];
 	
 	//Methods

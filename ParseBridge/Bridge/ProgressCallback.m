@@ -34,14 +34,14 @@
 + (void)initializeJava
 {
     [super initializeJava];
-	BOOL results;
+
 	//*- Java:  public ProgressCallback()
-	results = [ProgressCallback registerConstructor];
+	[ProgressCallback registerConstructor];
 	
 	//*- Java:  public abstract void done(Integer percentDone)
 	//*- iOS Bridge Method:  public abstract void done(Integer percentDone)
 	//Override this function with the code you want to run after the save is complete.
-	results = [ProgressCallback registerCallback:@"done"
+	[ProgressCallback registerCallback:@"done"
 						   selector:@selector(done:)
 						returnValue:nil
 						  arguments:[JavaInteger className], nil];

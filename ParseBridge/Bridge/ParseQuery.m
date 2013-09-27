@@ -41,29 +41,27 @@
 {
     [super initializeJava];
 
-	BOOL results = FALSE;
-	
 	//*- Java:  public ParseQuery(Class<T> subclass)
 	//*- iOS Bridge Method:  -(ParseQuery*)initWithParseObject:(ParseObject*)object;
-	results = [ParseQuery registerConstructorWithSelector:@selector(initWithParseObject:)
+	[ParseQuery registerConstructorWithSelector:@selector(initWithParseObject:)
                                       arguments:[JavaClass className], nil];
 				
 	//*- Java:  public ParseQuery(String theClassName)
 	//*- iOS Bridge Method:  -(ParseQuery*)initWithClassName:(NSString*)theClassName;
-    results = [ParseQuery registerConstructorWithSelector:@selector(initWithClassName:)
+    [ParseQuery registerConstructorWithSelector:@selector(initWithClassName:)
                                       arguments:[NSString className], nil];
 	
 	
 	//*- Java:  public static <T extends ParseObject> ParseQuery<T> getQuery(String className)
 	//*- iOS Bridge Method: -(ParseQuery*)queryWithClassName:(NSString*)theClassName;
-     results = [ParseQuery registerStaticMethod:@"getQuery"
+    [ParseQuery registerStaticMethod:@"getQuery"
                             selector:@selector(queryWithClassName:)
                          returnValue:[ParseQuery className]
                            arguments:[NSString className], nil];
 				
 	//*- Java:  public static <T extends ParseObject> ParseQuery<T> getQuery(Class<T> subclass)
 	//*- iOS Bridge Method: -(ParseQuery*)queryWithObject:(ParseObject*)object;
-     results = [ParseQuery registerStaticMethod:@"getQuery"
+    [ParseQuery registerStaticMethod:@"getQuery"
                             selector:@selector(queryWithObject:)
                          returnValue:[ParseQuery className]
                            arguments:[JavaClass className], nil];
@@ -71,7 +69,7 @@
 	//*- Java:  public T get(String theObjectId)
 	//*- iOS Bridge Method: -(ParseObject*)get:(NSString*)objectID;
 	//Constructs a ParseObject whose id is already known by fetching data from the server.
-	results = [ParseQuery registerInstanceMethod:@"get"
+	[ParseQuery registerInstanceMethod:@"get"
 							selector:@selector(get:)
 						 returnValue:[ParseObject className]
 						   arguments:[NSString className], nil];
@@ -80,7 +78,7 @@
 	
 	//*- Java: public void getInBackground(String objectId,GetCallback<T> callback)
 	//*- iOS Bridge Method: -(void)getInBackground:(NSString*)objectID callback:(GetCallback*)callback;
-	results = [ParseQuery registerInstanceMethod:@"getInBackground"
+	[ParseQuery registerInstanceMethod:@"getInBackground"
 										selector:@selector(getInBackground:callback:)
 									 returnValue:nil
 									   arguments:[NSString className], [GetCallback className], nil];
@@ -88,14 +86,14 @@
 
 	//*- Java:  public static <T extends ParseObject> ParseQuery<T> or(List<ParseQuery<T>> queries)
 	//*- ObjC:  +(ParseQuery*)orQuery:(JavaList*)queries
-	results = [ParseQuery registerStaticMethod:@"or"
+	[ParseQuery registerStaticMethod:@"or"
 									  selector:@selector(orQuery:)
 								   returnValue:[ParseQuery className]
 									 arguments:[JavaList className], nil];
 	
 	//*- Java: public void cancel()
 	//*- ObjC: -(void)cancel;
-	results = [ParseQuery registerInstanceMethod:@"cancel"
+	[ParseQuery registerInstanceMethod:@"cancel"
 										selector:@selector(cancel)
 									 returnValue:nil
 									   arguments:nil];
@@ -103,7 +101,7 @@
 
 	//*- Java: public List<T> find()
 	//*- ObjC: -(NSArray*)find;
-	results = [ParseQuery registerInstanceMethod:@"find"
+	[ParseQuery registerInstanceMethod:@"find"
 										selector:@selector(find)
 									 returnValue:[JavaList className]
 									   arguments:nil];
@@ -111,7 +109,7 @@
 
 	//*- Java: public T getFirst()
 	//*- ObjC: -(ParseObject*)getFirst;
-	results = [ParseQuery registerInstanceMethod:@"getFirst"
+	[ParseQuery registerInstanceMethod:@"getFirst"
 										selector:@selector(getFirst)
 									 returnValue:[ParseObject className]
 									   arguments:nil];
@@ -136,7 +134,7 @@
 
 	//*- Java: public void findInBackground(FindCallback<T> callback)
 	//*- ObjC: -(void)findInBackground:(FindCallback*)callback;
-	results = [ParseQuery registerInstanceMethod:@"findInBackground"
+	[ParseQuery registerInstanceMethod:@"findInBackground"
 										selector:@selector(findInBackground:)
 									 returnValue:nil  
 									   arguments:[FindCallback className], nil];
@@ -145,7 +143,7 @@
 
 	//*- Java: public void getFirstInBackground(GetCallback<T> callback)
 	//*- ObjC: -(void)getFirstInBackground:(GetCallback*)callback;
-	results = [ParseQuery registerInstanceMethod:@"getFirstInBackground"
+	[ParseQuery registerInstanceMethod:@"getFirstInBackground"
 										selector:@selector(getFirstInBackground:)
 									 returnValue:nil
 									   arguments:[GetCallback className], nil];
@@ -155,7 +153,7 @@
 	//*- Java: public int count()throws ParseException
 	//*- ObjC: -(int)count;
 	//Counts the number of objects that match this query. This does not use caching.
-	results = [ParseQuery registerInstanceMethod:@"count"
+	[ParseQuery registerInstanceMethod:@"count"
 										selector:@selector(count)
 									 returnValue:[JavaClass intPrimitive]
 									   arguments:nil];
@@ -163,7 +161,7 @@
 	//*- Java: public void countInBackground(CountCallback callback)
 	//*- ObjC: -(void)countInBackground:(CountCallback*)callback;
 	//Counts the number of objects that match this query in a background thread. This does not use caching.
-	results = [ParseQuery registerInstanceMethod:@"countInBackground"
+	[ParseQuery registerInstanceMethod:@"countInBackground"
 										selector:@selector(countInBackground:)
 									 returnValue:nil
 									   arguments:[CountCallback className],nil];
@@ -173,7 +171,7 @@
 
 	//*- Java: public boolean hasCachedResult()
 	//*- ObjC: -(bool)hasCachedResult;
-	results = [ParseQuery registerInstanceMethod:@"hasCachedResult"
+	[ParseQuery registerInstanceMethod:@"hasCachedResult"
 										selector:@selector(hasCachedResult)
 									 returnValue:[JavaClass boolPrimitive]
 									   arguments:nil];
@@ -182,7 +180,7 @@
 
 	//*- Java: public void clearCachedResult()
 	//*- ObjC: -(void)clearCachedResult;
-	results = [ParseQuery registerInstanceMethod:@"clearCachedResult"
+	[ParseQuery registerInstanceMethod:@"clearCachedResult"
 										selector:@selector(clearCachedResult)
 									 returnValue:nil
 									   arguments:nil];
@@ -191,7 +189,7 @@
 
 	//*- Java: public static void clearAllCachedResults()
 	//*- ObjC: -(void)clearAllCachedResults;
-	results = [ParseQuery registerStaticMethod:@"clearAllCachedResults"
+	[ParseQuery registerStaticMethod:@"clearAllCachedResults"
 										selector:@selector(clearAllCachedResults)
 									 returnValue:nil
 									   arguments:nil];
@@ -201,7 +199,7 @@
 	//*- Java: public ParseQuery<T> whereEqualTo(String key,Object value)
 	//*- ObjC: -(ParseQuery*)whereEqualTo:(NSString*)key value:(JavaObject*)value;
 	//Add a constraint to the query that requires a particular key's value to be equal to the provided value.
-	results = [ParseQuery registerInstanceMethod:@"whereEqualTo"
+	[ParseQuery registerInstanceMethod:@"whereEqualTo"
 										selector:@selector(whereEqualTo:value:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[JavaObject className], nil];
@@ -211,7 +209,7 @@
 	//*- Java: public ParseQuery<T> whereLessThan(String key,Object value)
 	//*- ObjC: -(ParseQuery*)whereLessThan:(NSString*)key value:(JavaObject*)value;
 	//Add a constraint to the query that requires a particular key's value to be less than the provided value.
-	results = [ParseQuery registerInstanceMethod:@"whereLessThan"
+	[ParseQuery registerInstanceMethod:@"whereLessThan"
 										selector:@selector(whereLessThan:value:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[JavaObject className], nil];
@@ -220,7 +218,7 @@
 	//*- Java: public ParseQuery<T> whereNotEqualTo(String key,Object value)
 	//*- ObjC: -(ParseQuery*)whereNotEqualTo:(NSString*)key value:(JavaObject*)value;
 	//Add a constraint to the query that requires a particular key's value to be not equal to the provided value.
-	results = [ParseQuery registerInstanceMethod:@"whereNotEqualTo"
+	[ParseQuery registerInstanceMethod:@"whereNotEqualTo"
 										selector:@selector(whereNotEqualTo:value:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[JavaObject className], nil];
@@ -228,7 +226,7 @@
 	//*- Java: public ParseQuery<T> whereGreaterThan(String key,Object value)
 	//*- ObjC: -(ParseQuery*)whereGreaterThan:(NSString*)key value:(JavaObject*)value;
 	//Add a constraint to the query that requires a particular key's value to be greater than the provided value.
-	results = [ParseQuery registerInstanceMethod:@"whereGreaterThan"
+	[ParseQuery registerInstanceMethod:@"whereGreaterThan"
 										selector:@selector(whereGreaterThan:value:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[JavaObject className], nil];
@@ -237,7 +235,7 @@
 	//*- Java: public ParseQuery<T> whereLessThanOrEqualTo(String key,Object value)
 	//*- ObjC: -(ParseQuery*)whereLessThanOrEqualTo:(NSString*)key value:(JavaObject*)value;
 	//Add a constraint to the query that requires a particular key's value to be less than or equal to the provided value.
-	results = [ParseQuery registerInstanceMethod:@"whereLessThanOrEqualTo"
+	[ParseQuery registerInstanceMethod:@"whereLessThanOrEqualTo"
 										selector:@selector(whereLessThanOrEqualTo:value:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[JavaObject className], nil];
@@ -246,7 +244,7 @@
 	//*- Java: public ParseQuery<T> whereGreaterThanOrEqualTo(String key,Object value)
 	//*- ObjC: -(ParseQuery*)whereGreaterThanOrEqualTo:(NSString*)key value:(JavaObject*)value;
 	//Add a constraint to the query that requires a particular key's value to be greater than or equal to the provided value.
-	results = [ParseQuery registerInstanceMethod:@"whereGreaterThanOrEqualTo"
+	[ParseQuery registerInstanceMethod:@"whereGreaterThanOrEqualTo"
 										selector:@selector(whereGreaterThanOrEqualTo:value:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[JavaObject className], nil];
@@ -255,7 +253,7 @@
 	//*- Java: public ParseQuery<T> whereContainedIn(String key,Collection<? extends Object> values)
 	//*- ObjC: -(ParseQuery*)whereContainedIn:(NSString*)key values:(JavaArrayList*)values;
 	//Add a constraint to the query that requires a particular key's value to be contained in the provided list of values.
-	results = [ParseQuery registerInstanceMethod:@"whereContainedIn"
+	[ParseQuery registerInstanceMethod:@"whereContainedIn"
 										selector:@selector(whereContainedIn:values:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[JavaCollection className], nil];
@@ -264,7 +262,7 @@
 	//*- Java: public ParseQuery<T> whereContainsAll(String key,Collection<?> values)
 	//*- ObjC: -(ParseQuery*)whereContainsAll:(NSString*)key values:(JavaArrayList*)values;
 	//Add a constraint to the query that requires a particular key's value match another ParseQuery. This only works on keys whose values are ParseObjects or lists of ParseObjects. Add a constraint to the query that requires a particular key's value to contain every one of the provided list of values.
-	results = [ParseQuery registerInstanceMethod:@"whereContainsAll"
+	[ParseQuery registerInstanceMethod:@"whereContainsAll"
 										selector:@selector(whereContainsAll:values:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[JavaCollection className], nil];
@@ -272,7 +270,7 @@
 	//*- Java: public ParseQuery<T> whereMatchesQuery(String key,ParseQuery<?> query)
 	//*- ObjC: -(ParseQuery*)whereMatchesQuery:(NSString*)key query:(ParseQuery*)query;
 	//Add a constraint to the query that requires a particular key's value match another ParseQuery. This only works on keys whose values are ParseObjects or lists of ParseObjects.
-	results = [ParseQuery registerInstanceMethod:@"whereMatchesQuery"
+	[ParseQuery registerInstanceMethod:@"whereMatchesQuery"
 										selector:@selector(whereMatchesQuery:query:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[ParseQuery className], nil];
@@ -281,7 +279,7 @@
 	//*- Java: public ParseQuery<T> whereDoesNotMatchQuery(String key,ParseQuery<?> query)
 	//*- ObjC: -(ParseQuery*)whereDoesNotMatchQuery:(NSString*)key query:(ParseQuery*)query;
 	//Add a constraint to the query that requires a particular key's value does not match another ParseQuery. This only works on keys whose values are ParseObjects or lists of ParseObjects.
-	results = [ParseQuery registerInstanceMethod:@"whereDoesNotMatchQuery"
+	[ParseQuery registerInstanceMethod:@"whereDoesNotMatchQuery"
 										selector:@selector(whereDoesNotMatchQuery:query:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[ParseQuery className], nil];
@@ -290,7 +288,7 @@
 	//*- Java: public ParseQuery<T> whereMatchesKeyInQuery(String key,String keyInQuery,ParseQuery<?> query)
 	//*- ObjC: -(ParseQuery*)whereMatchesKeyInQuery:(NSString*)key keyInQuery:(NSString*)keyInQuery  query:(ParseQuery*)query;
 	//Add a constraint to the query that requires a particular key's value matches a value for a key in the results of another ParseQuery
-	results = [ParseQuery registerInstanceMethod:@"whereMatchesKeyInQuery"
+	[ParseQuery registerInstanceMethod:@"whereMatchesKeyInQuery"
 										selector:@selector(whereMatchesKeyInQuery:keyInQuery:query:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[NSString className],[ParseQuery className], nil];
@@ -299,7 +297,7 @@
 	//*- Java: public ParseQuery<T> whereDoesNotMatchKeyInQuery(String key,String keyInQuery,ParseQuery<?> query)
 	//*- ObjC: -(ParseQuery*)whereDoesNotMatchKeyInQuery:(NSString*)key keyInQuery:(NSString*)keyInQuery  query:(ParseQuery*)query;
 	//Add a constraint to the query that requires a particular key's value does not match any value for a key in the results of another ParseQuery.
-	results = [ParseQuery registerInstanceMethod:@"whereDoesNotMatchKeyInQuery"
+	[ParseQuery registerInstanceMethod:@"whereDoesNotMatchKeyInQuery"
 										selector:@selector(whereDoesNotMatchKeyInQuery:keyInQuery:query:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[NSString className],[ParseQuery className], nil];
@@ -308,7 +306,7 @@
 	//*- Java: public ParseQuery<T> whereNotContainedIn(String key,Collection<? extends Object> values)
 	//*- ObjC: -(ParseQuery*)whereNotContainedIn:(NSString*)key values:(JavaArrayList*)values;
 	//Add a constraint to the query that requires a particular key's value not be contained in the provided list of values.
-	//results = [ParseQuery registerInstanceMethod:@"whereNotContainedIn"
+	//[ParseQuery registerInstanceMethod:@"whereNotContainedIn"
 	//									selector:@selector(whereNotContainedIn:values:)
 	//								 returnValue:[ParseQuery className]
 	//								   arguments:[NSString className],[JavaArrayList className], nil];
@@ -317,7 +315,7 @@
 	//*- Java: public ParseQuery<T> whereNear(String key,ParseGeoPoint point)
 	//*- ObjC: -(ParseQuery*)whereNear:(NSString*)key point:(ParseGeoPoint*)point;
 	//dd a proximity based constraint for finding objects with key point values near the point given.
-	results = [ParseQuery registerInstanceMethod:@"whereNear"
+	[ParseQuery registerInstanceMethod:@"whereNear"
 										selector:@selector(whereNear:point:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[ParseGeoPoint className], nil];
@@ -325,7 +323,7 @@
 	//*- Java: public ParseQuery<T> whereWithinMiles(String key,ParseGeoPoint point,double maxDistance)
 	//*- ObjC: -(ParseQuery*)whereWithinMiles:(NSString*)key point:(ParseGeoPoint*)point maxDistance:(double)maxDistance;
 	//Add a proximity based constraint for finding objects with key point values near the point given and within the maximum distance given. Radius of earth used is 3958.8 miles.
-	results = [ParseQuery registerInstanceMethod:@"whereWithinMiles"
+	[ParseQuery registerInstanceMethod:@"whereWithinMiles"
 										selector:@selector(whereWithinMiles:point:maxDistance:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[ParseGeoPoint className], [JavaClass doublePrimitive], nil];
@@ -333,7 +331,7 @@
 	//*- Java: public ParseQuery<T> whereWithinKilometers(String key,ParseGeoPoint point,double maxDistance)
 	//*- ObjC: -(ParseQuery*)whereWithinKilometers:(NSString*)key point:(ParseGeoPoint*)point maxDistance:(double)maxDistance;
 	//Add a proximity based constraint for finding objects with key point values near the point given and within the maximum distance given. Radius of earth used is 6371.0 kilometers.
-	results = [ParseQuery registerInstanceMethod:@"whereWithinKilometers"
+	[ParseQuery registerInstanceMethod:@"whereWithinKilometers"
 										selector:@selector(whereWithinKilometers:point:maxDistance:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[ParseGeoPoint className], [JavaClass doublePrimitive], nil];
@@ -342,7 +340,7 @@
 	//*- Java: public ParseQuery<T> whereWithinRadians(String key,ParseGeoPoint point,double maxDistance)
 	//*- ObjC: -(ParseQuery*)whereWithinRadians:(NSString*)key point:(ParseGeoPoint*)point maxDistance:(double)maxDistance;
 	//Add a proximity based constraint for finding objects with key point values near the point given and within the maximum distance given.
-	results = [ParseQuery registerInstanceMethod:@"whereWithinRadians"
+	[ParseQuery registerInstanceMethod:@"whereWithinRadians"
 										selector:@selector(whereWithinRadians:point:maxDistance:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[ParseGeoPoint className], [JavaClass doublePrimitive], nil];
@@ -351,7 +349,7 @@
 	//*- Java: public ParseQuery<T> whereWithinGeoBox(String key,ParseGeoPoint southwest,ParseGeoPoint northeast)
 	//*- ObjC: -(ParseQuery*)whereWithinGeoBox:(NSString*)key southwest:(ParseGeoPoint*)southwest northeast:(ParseGeoPoint*)northeast;
 	//Add a constraint to the query that requires a particular key's coordinates be contained within a given rectangular geographic bounding box.
-	results = [ParseQuery registerInstanceMethod:@"whereWithinGeoBox"
+	[ParseQuery registerInstanceMethod:@"whereWithinGeoBox"
 										selector:@selector(whereWithinGeoBox:southwest:northeast:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[ParseGeoPoint className], [ParseGeoPoint className], nil];
@@ -359,7 +357,7 @@
 	//*- Java: public ParseQuery<T> whereMatches(String key,String regex)
 	//*- ObjC: -(ParseQuery*)whereMatches:(NSString*)key regex:(NSString*)regex;
 	//Add a regular expression constraint for finding string values that match the provided regular expression. This may be slow for large datasets.
-	results = [ParseQuery registerInstanceMethod:@"whereMatches"
+	[ParseQuery registerInstanceMethod:@"whereMatches"
 										selector:@selector(whereMatches:regex:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[NSString className], nil];
@@ -367,7 +365,7 @@
 	//*- Java: public ParseQuery<T> whereMatches(String key,String regex,String modifiers)
 	//*- ObjC: -(ParseQuery*)whereMatches:(NSString*)key regex:(NSString*)regex modifiers:(NSString*)modifiers;
 	//Add a regular expression constraint for finding string values that match the provided regular expression. This may be slow for large datasets.
-	results = [ParseQuery registerInstanceMethod:@"whereMatches"
+	[ParseQuery registerInstanceMethod:@"whereMatches"
 										selector:@selector(whereMatches:regex:modifiers:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[NSString className],[NSString className], nil];
@@ -375,7 +373,7 @@
 	//*- Java: public ParseQuery<T> whereContains(String key,String substring)
 	//*- ObjC: -(ParseQuery*)whereContains:(NSString*)key substring:(NSString*)substring;
 	//Add a constraint for finding string values that contain a provided string. This will be slow for large datasets.
-	results = [ParseQuery registerInstanceMethod:@"whereContains"
+	[ParseQuery registerInstanceMethod:@"whereContains"
 										selector:@selector(whereContains:substring:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[NSString className], nil];
@@ -385,7 +383,7 @@
 	//*- ObjC: -(ParseQuery*)whereStartsWith:(NSString*)key prefix:(NSString*)prefix;
 	//Add a constraint for finding string values that contain a provided string. This will be slow for large datasets.
 	//Add a constraint for finding string values that start with a provided string. This query will use the backend index, so it will be fast even for large datasets.
-	results = [ParseQuery registerInstanceMethod:@"whereStartsWith"
+	[ParseQuery registerInstanceMethod:@"whereStartsWith"
 										selector:@selector(whereStartsWith:prefix:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[NSString className], nil];
@@ -393,7 +391,7 @@
 	//*- Java: public ParseQuery<T> whereEndsWith(String key,String suffix)
 	//*- ObjC: -(ParseQuery*)whereEndsWith:(NSString*)key suffix:(NSString*)suffix;
 	//Add a constraint for finding string values that end with a provided string. This will be slow for large datasets.
-	results = [ParseQuery registerInstanceMethod:@"whereEndsWith"
+	[ParseQuery registerInstanceMethod:@"whereEndsWith"
 										selector:@selector(whereEndsWith:prefix:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className],[NSString className], nil];
@@ -402,7 +400,7 @@
 	//*- Java: public void include(String key)
 	//*- ObjC: -(void)include:(NSString*)key;
 	//Include nested ParseObjects for the provided key. You can use dot notation to specify which fields in the included object that are also fetched.
-	results = [ParseQuery registerInstanceMethod:@"include"
+	[ParseQuery registerInstanceMethod:@"include"
 										selector:@selector(include:)
 									 returnValue:nil
 									   arguments:[NSString className], nil];
@@ -410,7 +408,7 @@
 	//*- Java: public void selectKeys(Collection<String> keys)
 	//*- ObjC: -(void)selectKeys:(JavaList*)keys;
 	//Restrict the fields of returned ParseObjects to only include the provided keys. If this is called multiple times, then all of the keys specified in each of the calls will be included.
-	results = [ParseQuery registerInstanceMethod:@"selectKeys"
+	[ParseQuery registerInstanceMethod:@"selectKeys"
 										selector:@selector(selectKeys:)
 									 returnValue:nil
 									   arguments:[JavaCollection className], nil];
@@ -418,7 +416,7 @@
 	//*- Java: public ParseQuery<T> whereExists(String key)
 	//*- ObjC: -(ParseQuery*)whereExists:(NSString*)key;
 	//Add a constraint for finding objects that contain the given key.
-	results = [ParseQuery registerInstanceMethod:@"whereExists"
+	[ParseQuery registerInstanceMethod:@"whereExists"
 										selector:@selector(whereExists:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className], nil];
@@ -426,7 +424,7 @@
 	//*- Java: public ParseQuery<T> whereDoesNotExist(String key)
 	//*- ObjC: -(ParseQuery*)whereDoesNotExist:(NSString*)key
 	//Add a constraint for finding objects that do not contain a given key.
-	results = [ParseQuery registerInstanceMethod:@"whereDoesNotExist"
+	[ParseQuery registerInstanceMethod:@"whereDoesNotExist"
 										selector:@selector(whereDoesNotExist:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className], nil];
@@ -434,7 +432,7 @@
 	//*- Java: public ParseQuery<T> orderByAscending(String key)
 	//*- ObjC: -(ParseQuery*)orderByAscending:(NSString*)key
 	//Sorts the results in ascending order by the given key.
-	results = [ParseQuery registerInstanceMethod:@"orderByAscending"
+	[ParseQuery registerInstanceMethod:@"orderByAscending"
 										selector:@selector(orderByAscending:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className], nil];
@@ -443,7 +441,7 @@
 	//*- Java: public ParseQuery<T> addAscendingOrder(String key)
 	//*- ObjC: -(ParseQuery*)addAscendingOrder:(NSString*)key
 	//Also sorts the results in ascending order by the given key. The previous sort keys have precedence over this key.
-	results = [ParseQuery registerInstanceMethod:@"addAscendingOrder"
+	[ParseQuery registerInstanceMethod:@"addAscendingOrder"
 										selector:@selector(addAscendingOrder:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className], nil];
@@ -452,7 +450,7 @@
 	//*- Java: public ParseQuery<T> orderByDescending(String key)
 	//*- ObjC: -(ParseQuery*)orderByDescending:(NSString*)key;
 	//Sorts the results in descending order by the given key.
-	results = [ParseQuery registerInstanceMethod:@"orderByDescending"
+	[ParseQuery registerInstanceMethod:@"orderByDescending"
 										selector:@selector(orderByDescending:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className], nil];
@@ -461,7 +459,7 @@
 	//*- Java: public ParseQuery<T> addDescendingOrder(String key)
 	//*- ObjC: -(ParseQuery*)addDescendingOrder:(NSString*)key;
 	//Also sorts the results in descending order by the given key. The previous sort keys have precedence over this key.
-	results = [ParseQuery registerInstanceMethod:@"addDescendingOrder"
+	[ParseQuery registerInstanceMethod:@"addDescendingOrder"
 										selector:@selector(addDescendingOrder:)
 									 returnValue:[ParseQuery className]
 									   arguments:[NSString className], nil];
@@ -469,7 +467,7 @@
 	//*- Java: public void setLimit(int newLimit)
 	//*- ObjC: -(void)setLimit:(int)newLimit;
 	//Controls the maximum number of results that are returned. Setting a negative limit denotes retrieval without a limit. The default limit is 100, with a maximum of 1000 results being returned at a time.
-	results = [ParseQuery registerInstanceMethod:@"setLimit"
+	[ParseQuery registerInstanceMethod:@"setLimit"
 										selector:@selector(setLimit:)
 									 returnValue:nil
 									   arguments:[JavaClass intPrimitive], nil];
@@ -478,7 +476,7 @@
 	//*- Java: public void setTrace(boolean shouldTrace)
 	//*- ObjC: -(void)setTrace:(bool)shouldTrace;
 	//Turn on performance tracing of finds. If performance tracing is already turned on this does nothing. In general you don't need to call trace.
-	//results = [ParseQuery registerInstanceMethod:@"shouldTrace"
+	//[ParseQuery registerInstanceMethod:@"shouldTrace"
 	//									selector:@selector(shouldTrace:)
 	//								 returnValue:nil
 	//								   arguments:[JavaClass boolPrimitive], nil];
@@ -487,7 +485,7 @@
 	//*- Java: public int getLimit()
 	//*- ObjC: -(int)getLimit;
 	//Accessor for the limit.
-	results = [ParseQuery registerInstanceMethod:@"getLimit"
+	[ParseQuery registerInstanceMethod:@"getLimit"
 										selector:@selector(getLimit)
 									 returnValue:[JavaClass intPrimitive]
 									   arguments:nil];
@@ -496,7 +494,7 @@
 	//*- Java: public void setSkip(int newSkip)
 	//*- ObjC: -(void)setSkip:(int)newSkip;
 	//Controls the number of results to skip before returning any results. This is useful for pagination. Default is to skip zero results.
-	results = [ParseQuery registerInstanceMethod:@"setSkip"
+	[ParseQuery registerInstanceMethod:@"setSkip"
 										selector:@selector(setSkip:)
 									 returnValue:nil
 									   arguments:[JavaClass intPrimitive],nil];
@@ -505,7 +503,7 @@
 	//*- Java: public int getSkip()
 	//*- ObjC: -(int)getSkip;
 	//Accessor for the skip value.
-	results = [ParseQuery registerInstanceMethod:@"getSkip"
+	[ParseQuery registerInstanceMethod:@"getSkip"
 										selector:@selector(getSkip)
 									 returnValue:[JavaClass intPrimitive]
 									   arguments:nil];
@@ -514,7 +512,7 @@
 	//*- Java: public String getClassName()
 	//*- ObjC: -(NSString*)getClassName;
 	//Accessor for the class name.
-	results = [ParseQuery registerInstanceMethod:@"getClassName"
+	[ParseQuery registerInstanceMethod:@"getClassName"
 										selector:@selector(getClassName)
 									 returnValue:[NSString className]
 									   arguments:nil];
