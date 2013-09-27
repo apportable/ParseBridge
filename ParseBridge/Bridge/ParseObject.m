@@ -37,6 +37,7 @@
 #import "RefreshCallback.h"
 #import <BridgeKit/JavaList.h>
 #import <BridgeKit/JavaClass.h>
+#import <BridgeKit/JavaDate.h>
 #import <BridgeKit/JavaSet.h>
 #import <BridgeKit/JavaNumbers.h>
 
@@ -157,18 +158,18 @@
 	//*- Java: public Date getUpdatedAt()
 	//*- ObjC: -(JavaObject*)getUpdatedAt;
 	//This reports time as the server sees it, so that if you make changes to a ParseObject, then wait a while, and then call save(), the updated time will be the time of the save() call rather than the time the object was changed locally.
-	//result = [ParseObject registerInstanceMethod:@"getUpdatedAt"
-	//									selector:@selector(getUpdatedAt)
-	//								 returnValue:[JavaClass className]
-	//								   arguments:nil];
+	result = [ParseObject registerInstanceMethod:@"getUpdatedAt"
+										selector:@selector(updatedAt)
+									 returnValue:[JavaDate className]
+									   arguments:nil];
 
 	//*- Java: public Date getCreatedAt()
 	//*- ObjC: -(JavaObject*)getCreatedAt;
 	//This reports time as the server sees it, so that if you create a ParseObject, then wait a while, and then call save(), the creation time will be the time of the first save() call rather than the time the object was created locally.
-	//result = [ParseObject registerInstanceMethod:@"getCreatedAt"
-	//									selector:@selector(getCreatedAt)
-	//								 returnValue:[JavaClass className]
-	//								   arguments:nil];
+	result = [ParseObject registerInstanceMethod:@"getCreatedAt"
+										selector:@selector(createdAt)
+									 returnValue:[JavaDate className]
+									   arguments:nil];
  
 
 	//*- Java: public String getObjectId()

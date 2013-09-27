@@ -28,6 +28,7 @@
 
 
 @class JavaClass;
+@class JavaDate;
 @class JavaList;
 @class JavaSet;
 @class ParseRelation;
@@ -66,9 +67,9 @@
 
 -(NSArray*)keySet;
 
-//-(NSDate*)getUpdatedAt;
+-(JavaDate*)updatedAt;
 
-//-(NSDate*)getCreatedAt;
+-(JavaDate*)createdAt;
 
 -(NSString*)getObjectId;
 
