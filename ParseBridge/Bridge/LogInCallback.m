@@ -27,6 +27,7 @@
 #import "ParseUser.h"
 #import "ParseException.h"
 #import "PFUser.h"
+#import "PFUser+ParseUser.h"
 
 @implementation LogInCallback
 

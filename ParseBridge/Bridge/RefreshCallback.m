@@ -28,6 +28,7 @@
 #import "ParseException.h"
 #import "ParseObject.h"
 #import "PFObject.h"
+#import "PFObject+ParseObject.h"
 
 @implementation RefreshCallback
 

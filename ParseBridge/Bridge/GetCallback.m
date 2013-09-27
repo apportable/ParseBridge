@@ -27,6 +27,7 @@
 #import "GetCallback.h"
 #import "ParseException.h"
 #import "PFObject.h"
+#import "PFObject+ParseObject.h"
 #import "ParseObject.h"
 
 @implementation GetCallback
