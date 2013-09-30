@@ -25,44 +25,78 @@
  */
 
 #import "FunctionCallback.h"
-#import <BridgeKit/JavaObject.h>
+#import "PFObject.h"
+#import "PFObject+ParseObject.h"
+#import "ParseObject.h"
 #import "ParseException.h"
 
 @implementation FunctionCallback
 
-
 + (void)initializeJava
 {
     [super initializeJava];
-	BOOL results;
-	//*- Java:  public SaveCallback()
-	results = [FunctionCallback registerConstructor];
-	//*- Java:  public abstract void done(T object,ParseException e)
-	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
-	//Override this function with the code you want to run after the save is complete.
-	// results = [FunctionCallback registerCallback:@"done"
-	// 					  selector:@selector(done:error:)
-	// 				   returnValue:nil
-	// 					 arguments:[JavaObject className],[ParseException className], nil];
-	
 }
-
-
--(void)done:(JavaObject*)obj error:(ParseException*)error{
-	//[self _done:error];
-	if(!error && obj != nil){
-		//No error
-		NSLog(@"Cloud Function Successful");
-	}
-	else{
-		// NSLog(@"Cloud Function failed", [error getCode]);
-	}
-}
-
 
 + (NSString *)className
 {
     return @"com.parse.FunctionCallback";
+}
+
+@end
+
+@implementation ParseBridgeFunctionCallback
+
+@synthesize handler = _handler;
+
++ (void)initializeJava
+{
+    [super initializeJava];
+
+	[ParseBridgeFunctionCallback registerConstructor];
+
+	[ParseBridgeFunctionCallback registerCallback:@"done"
+							  selector:@selector(done:error:)
+						   returnValue:nil
+							 arguments:[ParseObject className],[ParseException className], nil];
+}
+
++ (NSString *)className
+{
+    return @"com.parsebridge.ParseBridgeFunctionCallback";
+}
+
++ (ParseBridgeFunctionCallback *)callbackWithHandler:(PFIdResultBlock)handler
+{
+    ParseBridgeFunctionCallback *callback = [ParseBridgeFunctionCallback new];
+    if (handler == nil)
+    {
+        callback.handler = ^(id obj, NSError *error){};
+    }
+    else
+    {
+        callback.handler = handler;
+    }
+    return callback; // NOTE: this is not autorelease but acts as if it is (because it is retained per the duration until the actual callback happens)
+}
+
+- (void)done:(JavaObject *)javaObject error:(ParseException *)exception
+{
+	NSLog(@"JJC done: %@", javaObject);
+    NSError *error = nil;
+    if (exception) {
+        error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _handler(javaObject, error);
+        [self autorelease]; // To balance the retain cycle created from the callbackWithHandler: method
+    });
+}
+
+- (void)dealloc
+{
+    Block_release(_handler);
+    _handler = nil;
+    [super dealloc];
 }
 
 @end

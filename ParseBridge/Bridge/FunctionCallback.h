@@ -25,13 +25,20 @@
  */
 
 #import <BridgeKit/JavaObject.h>
+#import "PFConstants.h"
+
 @class ParseException;
-@class JavaObject;
 
 @interface FunctionCallback : JavaObject
+@end
+
+@interface ParseBridgeFunctionCallback : FunctionCallback
+
+@property (nonatomic, copy) PFIdResultBlock handler;
+
++(ParseBridgeFunctionCallback *)callbackWithHandler:(PFIdResultBlock)handler;
 
 -(id)init;
--(void)done:(JavaObject*)list error:(ParseException*)error;
-
+-(void)done:(JavaObject*)object error:(ParseException*)error;
 
 @end
