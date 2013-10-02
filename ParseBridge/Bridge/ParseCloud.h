@@ -8,12 +8,12 @@
 
 #import <BridgeKit/JavaObject.h>
 
-@class ParseObject;
+@class JavaMap;
 @class FunctionCallback;
 
 @interface ParseCloud : JavaObject
 
-+ (JavaObject*)callFunction:(NSString*)name withParameters:(NSDictionary*)params;
-+ (void)callFunctionInBackground:(NSString*)name withParameters:(NSDictionary*)params callback:(FunctionCallback*)callback;;
++ (JavaObject*)callFunction:(NSString*)name withParameters:(JavaMap*)params;
++ (void)callFunctionInBackground:(NSString*)name withParameters:(JavaMap*)params callback:(FunctionCallback*)callback;;
 
 @end

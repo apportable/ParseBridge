@@ -27,6 +27,7 @@
 #import "FunctionCallback.h"
 #import "PFObject.h"
 #import "PFObject+ParseObject.h"
+#import "Parse.h"
 #import "ParseObject.h"
 #import "ParseException.h"
 
@@ -57,7 +58,7 @@
 	[ParseBridgeFunctionCallback registerCallback:@"done"
 							  selector:@selector(done:error:)
 						   returnValue:nil
-							 arguments:[ParseObject className],[ParseException className], nil];
+							 arguments:[JavaObject className],[ParseException className], nil];
 }
 
 + (NSString *)className
@@ -81,13 +82,12 @@
 
 - (void)done:(JavaObject *)javaObject error:(ParseException *)exception
 {
-	NSLog(@"JJC done: %@", javaObject);
     NSError *error = nil;
     if (exception) {
         error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        _handler(javaObject, error);
+        _handler([Parse NSObjectFromJavaObject:javaObject], error);
         [self autorelease]; // To balance the retain cycle created from the callbackWithHandler: method
     });
 }
