@@ -65,7 +65,7 @@
 
 + (NSString *)className
 {
-    return @"com.parsebridge.ParseBridgRefreshCallback";
+    return @"com.parsebridge.ParseBridgeRefreshCallback";
 }
 
 + (ParseBridgeRefreshCallback *)callbackWithHandler:(PFObjectResultBlock)handler

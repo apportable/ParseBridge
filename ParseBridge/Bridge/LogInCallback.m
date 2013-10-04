@@ -51,6 +51,8 @@
 + (void)initializeJava
 {
     [super initializeJava];
+
+    [ParseBridgeLogInCallback registerConstructor];
     [ParseBridgeLogInCallback registerCallback:@"done" selector:@selector(done:error:) returnValue:nil arguments:[ParseUser className], [ParseException className], nil];
 }
 
@@ -75,12 +77,13 @@
 
 - (void)done:(ParseUser *)parseUser error:(ParseException *)exception
 {
+
     NSError *error = nil;
     if (exception) {
         error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        PFUser *pfUser = [[PFUser alloc] initWithParseUser:parseUser];
+        PFUser *pfUser =  [[PFUser alloc] initWithParseUser:parseUser];   
         _handler(pfUser, error);
         [pfUser release];
         [self autorelease]; // To balance the retain cycle created from the callbackWithHandler: method

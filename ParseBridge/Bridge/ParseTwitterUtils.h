@@ -26,6 +26,56 @@
 
 #import <BridgeKit/JavaObject.h>
 
+@class ParseTwitter;
+@class ParseUser;
+@class LogInCallback;
+@class AndroidContext;
+
 @interface ParseTwitterUtils : JavaObject
+
++ (ParseTwitter *)twitter;
++ (void)initializeWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret;
++ (BOOL)isLinkedWithUser:(ParseUser *)user;
+
++ (void)logInInBackgroundWithCallback:(LogInCallback*)callback;
+
+// + (void)logInWithBlock:(PFUserResultBlock)block;
+// + (void)logInWithTarget:(id)target selector:(SEL)selector;
+// + (void)logInWithTwitterId:(NSString *)twitterId
+//                 screenName:(NSString *)screenName
+//                  authToken:(NSString *)authToken
+//            authTokenSecret:(NSString *)authTokenSecret
+//                      block:(PFUserResultBlock)block;
+// + (void)logInWithTwitterId:(NSString *)twitterId
+//                 screenName:(NSString *)screenName
+//                  authToken:(NSString *)authToken
+//            authTokenSecret:(NSString *)authTokenSecret
+//                     target:(id)target
+//                   selector:(SEL)selector;
+// + (void)linkUser:(PFUser *)user;
+// + (void)linkUser:(PFUser *)user block:(PFBooleanResultBlock)block;
+// + (void)linkUser:(PFUser *)user
+//           target:(id)target
+//         selector:(SEL)selector;
+// + (void)linkUser:(PFUser *)user
+//        twitterId:(NSString *)twitterId
+//       screenName:(NSString *)screenName
+//        authToken:(NSString *)authToken
+//  authTokenSecret:(NSString *)authTokenSecret
+//            block:(PFBooleanResultBlock)block;
+// + (void)linkUser:(PFUser *)user
+//        twitterId:(NSString *)twitterId
+//       screenName:(NSString *)screenName
+//        authToken:(NSString *)authToken
+//  authTokenSecret:(NSString *)authTokenSecret
+//           target:(id)target
+//         selector:(SEL)selector;
+// + (BOOL)unlinkUser:(PFUser *)user;
+// + (BOOL)unlinkUser:(PFUser *)user error:(NSError **)error;
+// + (void)unlinkUserInBackground:(PFUser *)user;
+// + (void)unlinkUserInBackground:(PFUser *)user
+//                          block:(PFBooleanResultBlock)block;
+// + (void)unlinkUserInBackground:(PFUser *)user
+//                         target:(id)target selector:(SEL)selector;
 
 @end
