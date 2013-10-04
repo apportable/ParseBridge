@@ -15,7 +15,6 @@
             selector:@selector(logInInBackgroundWithContext:callback:)
             returnValue:nil
             arguments:[AndroidContext className], [LogInCallback className], nil];
-	
 }
 
 +(NSString *)className

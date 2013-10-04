@@ -17,18 +17,18 @@
 {
     [super initializeJava];
 
-	[ParseCloud registerConstructor];
+    [ParseCloud registerConstructor];
 
-	[ParseCloud registerStaticMethod:@"callFunction"
-									  selector:@selector(callFunction:withParameters:)
-								   returnValue:[JavaObject className]
-									 arguments:[NSString className], [JavaMap className],nil];	
-	
-	[ParseCloud registerStaticMethod:@"callFunctionInBackground"
-									  selector:@selector(callFunctionInBackground:withParameters:callback:)
-								   returnValue:nil
-									 arguments:[NSString className], [JavaMap className],[FunctionCallback className],nil];	
-	
+    [ParseCloud registerStaticMethod:@"callFunction"
+                                      selector:@selector(callFunction:withParameters:)
+                                   returnValue:[JavaObject className]
+                                     arguments:[NSString className], [JavaMap className],nil];  
+    
+    [ParseCloud registerStaticMethod:@"callFunctionInBackground"
+                                      selector:@selector(callFunctionInBackground:withParameters:callback:)
+                                   returnValue:nil
+                                     arguments:[NSString className], [JavaMap className],[FunctionCallback className],nil]; 
+    
 }
 
 + (NSString *)className
