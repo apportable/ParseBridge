@@ -28,6 +28,7 @@
 
 #import "Parse.h"
 #import "ParseTwitter.h"
+#import "ParseUser.h"
 #import "LogInCallback.h"
 #import "ParseTwitterUtilsShim.h"
 #import <BridgeKit/AndroidActivity.h>
@@ -48,6 +49,15 @@
             returnValue:nil
             arguments:[NSString className], [NSString className], nil];
 
+    [ParseTwitterUtils registerStaticMethod:@"isLinked"
+            selector:@selector(isLinkedWithUser:)
+            returnValue:[JavaClass boolPrimitive]
+            arguments:[ParseUser className], nil];
+
+    [ParseTwitterUtils registerStaticMethod:@"unlink"
+            selector:@selector(unlinkUser:)
+            returnValue:nil
+            arguments:[ParseUser className], nil];
 }
 
 +(NSString *)className

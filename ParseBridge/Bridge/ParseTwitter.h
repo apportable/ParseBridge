@@ -1,6 +1,8 @@
 
 #import <BridgeKit/JavaObject.h>
 
+@class NSMutableURLRequest;
+
 @interface ParseTwitter : JavaObject
 
 - (NSString*)consumerKey;
@@ -15,5 +17,7 @@
 - (void)setUserId:(NSString*)userId;
 - (NSString*)screenName;
 - (void)setScreenName:(NSString*)name;
+
+- (void)signRequest:(NSMutableURLRequest*)request;
 
 @end
