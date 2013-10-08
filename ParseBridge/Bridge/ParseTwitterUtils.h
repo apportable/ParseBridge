@@ -30,6 +30,7 @@
 @class ParseUser;
 @class LogInCallback;
 @class AndroidContext;
+@class ParseBridgeSaveCallback;
 
 @interface ParseTwitterUtils : JavaObject
 
@@ -38,6 +39,11 @@
 + (BOOL)isLinkedWithUser:(ParseUser *)user;
 
 + (void)logInInBackgroundWithCallback:(LogInCallback*)callback;
+
+
++ (void)unlinkUser:(ParseUser *)user;
++ (void)unlinkUserInBackground:(ParseUser *)user;
++ (void)unlinkUserInBackground:(ParseUser *)user callback:(ParseBridgeSaveCallback*)callback;
 
 // + (void)logInWithBlock:(PFUserResultBlock)block;
 // + (void)logInWithTarget:(id)target selector:(SEL)selector;
@@ -70,12 +76,5 @@
 //  authTokenSecret:(NSString *)authTokenSecret
 //           target:(id)target
 //         selector:(SEL)selector;
-// + (BOOL)unlinkUser:(PFUser *)user;
-// + (BOOL)unlinkUser:(PFUser *)user error:(NSError **)error;
-// + (void)unlinkUserInBackground:(PFUser *)user;
-// + (void)unlinkUserInBackground:(PFUser *)user
-//                          block:(PFBooleanResultBlock)block;
-// + (void)unlinkUserInBackground:(PFUser *)user
-//                         target:(id)target selector:(SEL)selector;
 
 @end
