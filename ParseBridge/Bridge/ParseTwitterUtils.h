@@ -30,7 +30,8 @@
 @class ParseUser;
 @class LogInCallback;
 @class AndroidContext;
-@class ParseBridgeSaveCallback;
+@class LogInCallback;
+@class SaveCallback;
 
 @interface ParseTwitterUtils : JavaObject
 
@@ -38,43 +39,23 @@
 + (void)initializeWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret;
 + (BOOL)isLinkedWithUser:(ParseUser *)user;
 
-+ (void)logInInBackgroundWithCallback:(LogInCallback*)callback;
++ (void)logInWithCallback:(LogInCallback *)callback;
++ (void)linkUser:(ParseUser*)user callback:(SaveCallback *)callback;
 
++ (void)logInWithTwitterId:(NSString *)twitterId
+        screenName:(NSString *)screenName
+         authToken:(NSString *)authToken
+   authTokenSecret:(NSString *)authTokenSecret
+          callback:(LogInCallback *)callback;
+
++ (void)linkUser:(ParseUser*)user
+    withTwitterId:(NSString *)twitterId
+       screenName:(NSString *)screenName
+        authToken:(NSString *)authToken
+  authTokenSecret:(NSString *)authTokenSecret
+         callback:(SaveCallback *)callback;
 
 + (void)unlinkUser:(ParseUser *)user;
-+ (void)unlinkUserInBackground:(ParseUser *)user;
-+ (void)unlinkUserInBackground:(ParseUser *)user callback:(ParseBridgeSaveCallback*)callback;
-
-// + (void)logInWithBlock:(PFUserResultBlock)block;
-// + (void)logInWithTarget:(id)target selector:(SEL)selector;
-// + (void)logInWithTwitterId:(NSString *)twitterId
-//                 screenName:(NSString *)screenName
-//                  authToken:(NSString *)authToken
-//            authTokenSecret:(NSString *)authTokenSecret
-//                      block:(PFUserResultBlock)block;
-// + (void)logInWithTwitterId:(NSString *)twitterId
-//                 screenName:(NSString *)screenName
-//                  authToken:(NSString *)authToken
-//            authTokenSecret:(NSString *)authTokenSecret
-//                     target:(id)target
-//                   selector:(SEL)selector;
-// + (void)linkUser:(PFUser *)user;
-// + (void)linkUser:(PFUser *)user block:(PFBooleanResultBlock)block;
-// + (void)linkUser:(PFUser *)user
-//           target:(id)target
-//         selector:(SEL)selector;
-// + (void)linkUser:(PFUser *)user
-//        twitterId:(NSString *)twitterId
-//       screenName:(NSString *)screenName
-//        authToken:(NSString *)authToken
-//  authTokenSecret:(NSString *)authTokenSecret
-//            block:(PFBooleanResultBlock)block;
-// + (void)linkUser:(PFUser *)user
-//        twitterId:(NSString *)twitterId
-//       screenName:(NSString *)screenName
-//        authToken:(NSString *)authToken
-//  authTokenSecret:(NSString *)authTokenSecret
-//           target:(id)target
-//         selector:(SEL)selector;
++ (void)unlinkUserInBackground:(ParseUser *)user callback:(SaveCallback*)callback;
 
 @end

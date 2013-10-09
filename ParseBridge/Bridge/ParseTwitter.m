@@ -88,15 +88,11 @@
 
 - (void)signRequest:(NSMutableURLRequest*)request
 {
-    NSDictionary *oldHeaders = [request allHTTPHeaderFields];
-    NSLog(@"old headers: %@", oldHeaders);
-
     AndroidHttpRequest *androidRequest = [[AndroidHttpRequest alloc] initWithRequest:request];
 
     [self signAndroidRequest:androidRequest];
-    NSDictionary *signedHeaders = [androidRequest allHeaders] ;
-    NSLog(@"signed headers: %@", signedHeaders);
 
+    NSDictionary *signedHeaders = [androidRequest allHeaders] ;
     [request setAllHTTPHeaderFields:signedHeaders];
 
     [androidRequest release];

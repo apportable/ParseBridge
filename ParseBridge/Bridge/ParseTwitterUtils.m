@@ -55,13 +55,18 @@
             returnValue:[JavaClass boolPrimitive]
             arguments:[ParseUser className], nil];
 
+    [ParseTwitterUtils registerStaticMethod:@"logIn"
+            selector:@selector(logInWithTwitterId:screenName:authToken:authTokenSecret:callback:)
+            returnValue:nil
+            arguments:[NSString className], [NSString className], [NSString className], [NSString className], [LogInCallback className], nil];
+
+    [ParseTwitterUtils registerStaticMethod:@"link"
+            selector:@selector(linkUser:withTwitterId:screenName:authToken:authTokenSecret:callback:)
+            returnValue:nil
+            arguments:[ParseUser className], [NSString className], [NSString className], [NSString className], [NSString className], [SaveCallback className], nil];
+
     [ParseTwitterUtils registerStaticMethod:@"unlink"
             selector:@selector(unlinkUser:)
-            returnValue:nil
-            arguments:[ParseUser className], nil];
-
-    [ParseTwitterUtils registerStaticMethod:@"unlinkInBackground"
-            selector:@selector(unlinkUserInBackground:)
             returnValue:nil
             arguments:[ParseUser className], nil];
 
@@ -76,30 +81,14 @@
     return @"com.parse.ParseTwitterUtils";
 }
  
- 
-+ (void)logInInBackgroundWithCallback:(LogInCallback*)callback
++ (void)logInWithCallback:(LogInCallback*)callback
 {
-    [ParseTwitterUtilsShim logInInBackgroundWithContext:[AndroidActivity currentActivity] callback:callback];
+    [ParseTwitterUtilsShim logInWithContext:[AndroidActivity currentActivity] callback:callback];
 }
 
-  //*- Java: public static void link(ParseUser user,Context context)
-  
-  //*- Java:public static void link(ParseUser user,Context context,SaveCallback callback)
-  //Links a ParseUser to a Twitter account, allowing you to use Twitter for authentication, and providing access to Twitter data for the user. A dialog will be shown to the user for Twitter authentication.
- 
-  //*- Java:public static void link(ParseUser user,String twitterId,String screenName,String authToken,String authTokenSecret)
-  
-  //*- Java:public static void link(ParseUser user,String twitterId, String screenName,String authToken,String authTokenSecret, SaveCallback callback)
-  //Links a ParseUser to a Twitter account, allowing you to use Twitter for authentication, and providing access to Twitter data for the user. This method allows you to handle getting the auth tokens for your users, rather than delegating to the provided dialog log-in.
- 
- 
-  //*- Java: public static void logIn(String twitterId,String screenName,String authToken, String authTokenSecret,LogInCallback callback)
-  //Logs in a ParseUser using Twitter for authentication. If a user for the given Twitter credentials does not already exist, a new user will be created. This method allows you to handle getting the auth tokens for your users, rather than delegating to the provided dialog log-in.
- 
-  //*- Java: public static void logIn(Context context,LogInCallback callback)
-  //Logs in a ParseUser using Twitter for authentication. If a user for the given Twitter credentials does not already exist, a new user will be created. A dialog will be shown to the user for Twitter authentication.
-  
-   //*- Java: public static void unlinkInBackground(ParseUser user,SaveCallback callback)
-  //Unlinks a user from a Twitter account in the background. Unlinking a user will save the user's data.
++ (void)linkUser:(ParseUser*)user callback:(SaveCallback *)callback
+{
+    [ParseTwitterUtilsShim linkUser:(ParseUser*)user withContext:[AndroidActivity currentActivity] callback:callback];
+}
 
 @end
