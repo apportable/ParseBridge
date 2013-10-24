@@ -25,62 +25,82 @@
  */
 
 #import "ParseFile.h"
- 
+#import "GetDataCallback.h"
+#import "ProgressCallback.h"
+#import "SaveCallback.h"
 
 @implementation ParseFile
 
 + (void)initializeJava
 {
     [super initializeJava];
-	
-	//Constructors
-	//*- Java: public ParseFile(byte[] data)
-	//*- ObjC:  -(id)initWithData:(NSData*)owner;
-	[ParseFile registerConstructorWithSelector:@selector(initWithData:)
-												arguments:[NSData className], nil];
+    
+    [ParseFile registerConstructorWithSelector:@selector(initWithData:)
+                                                arguments:[NSData className], nil];
 
-	
-	//*- Java: public ParseFile(String name,byte[] data)
-	//*- ObjC: -(id)initWithNameandData:(NSString*)fileName data:(NSData*)data;
-	//Creates a new file from a byte array and a name. Giving a name with a proper file extension (e.g. ".png") is ideal because it allows Parse to deduce the content type of the file and set appropriate HTTP headers when it is fetched.
-	[ParseFile registerConstructorWithSelector:@selector(initWithNameandData:data:)
-											  arguments:[NSString className],[NSData className], nil];
-	
-	//Methods
-	//*- Java: public String getName()
-	//The filename. Before save is called, this is just the filename given by the user (if any). After save is called, that name gets prefixed with a unique identifier.
-	
-	//*- Java: public boolean isDirty()
-	//Whether the file still needs to be saved.
-	
-	
-	//*- Java: public boolean isDataAvailable()
-	
-	//*- Java: public String getUrl()
-	
-	//*- Java: public void save()
-	
-	//*- Java: public void saveInBackground(SaveCallback saveCallback,ProgressCallback progressCallback)
-	//Saves the file to the Parse cloud in a background thread. progressCallback is guaranteed to be called with 100 before saveCallback is called.
-	
-	
-	//*- Java: public void saveInBackground(SaveCallback callback)
-	//Saves the file to the Parse cloud in a background thread.
-	
-	//*- Java: public void saveInBackground()
-	//Saves the file to the Parse cloud in a background thread.
-	
-	//*- Java: public byte[] getData()
-	//Synchronously gets the data for this object. You probably want to use ParseFile.getDataInBackground(com.parse.GetDataCallback, com.parse.ProgressCallback) instead unless you're already in a background thread.
-	
-	//*- Java: public void getDataInBackground(GetDataCallback dataCallback,ProgressCallback progressCallback)
-	//Gets the data for this object in a background thread. progressCallback is guaranteed to be called with 100 before dataCallback is called.
-	
-	//*- Java: public void getDataInBackground(GetDataCallback dataCallback)
-	
-	//*- Java: public void cancel()
-	//Cancels the current network request and callbacks whether it's uploading or fetching data from the server.
-	
+    [ParseFile registerConstructorWithSelector:@selector(initWithName:data:)
+                                              arguments:[NSString className],[NSData className], nil];
+    
+
+    [ParseFile registerInstanceMethod:@"getName"
+                             selector:@selector(name)
+                          returnValue:[NSString className]
+                            arguments:nil];
+
+    [ParseFile registerInstanceMethod:@"getUrl"
+                             selector:@selector(url)
+                          returnValue:[NSString className]
+                            arguments:nil];
+
+    [ParseFile registerInstanceMethod:@"isDirty"
+                             selector:@selector(isDirty)
+                          returnValue:[JavaClass boolPrimitive]
+                            arguments:nil];
+
+    [ParseFile registerInstanceMethod:@"isDataAvailable"
+                             selector:@selector(isDataAvailable)
+                          returnValue:[JavaClass boolPrimitive]
+                            arguments:nil];
+
+    [ParseFile registerInstanceMethod:@"getData"
+                             selector:@selector(getData)
+                          returnValue:[NSData className]
+                            arguments:nil];
+
+    [ParseFile registerInstanceMethod:@"getDataInBackground"
+                             selector:@selector(getDataInBackground:)
+                          returnValue:nil
+                            arguments:[GetDataCallback className], nil];
+
+    [ParseFile registerInstanceMethod:@"getDataInBackground"
+                             selector:@selector(getDataInBackground:progress:)
+                          returnValue:nil
+                            arguments:[GetDataCallback className], [ProgressCallback className], nil];
+
+    [ParseFile registerInstanceMethod:@"save"
+                             selector:@selector(save)
+                          returnValue:nil
+                            arguments:nil];
+
+    [ParseFile registerInstanceMethod:@"saveInBackground"
+                             selector:@selector(saveInBackground:)
+                          returnValue:nil
+                            arguments:[SaveCallback className], nil];
+
+    [ParseFile registerInstanceMethod:@"saveInBackground"
+                             selector:@selector(saveInBackground)
+                          returnValue:nil
+                            arguments:nil];
+
+    [ParseFile registerInstanceMethod:@"saveInBackground"
+                             selector:@selector(saveInBackground:progress:)
+                          returnValue:nil
+                            arguments:[SaveCallback className], [ProgressCallback className], nil];
+
+    [ParseFile registerInstanceMethod:@"cancel"
+                             selector:@selector(cancel)
+                          returnValue:nil
+                            arguments:nil];
 }
  
 
@@ -88,8 +108,5 @@
 {
     return @"com.parse.ParseFile";
 }
-
-
-
 
 @end

@@ -25,11 +25,21 @@
  */
 
 #import <BridgeKit/JavaObject.h>
-#import "ParseObject.h"
+#import "PFConstants.h"
+
 @class ParseException;
+@class JavaInteger;
 
-@interface ProgressCallback : ParseObject
+@interface ProgressCallback : JavaObject
+@end
 
--(void)done:(int)percentDone;
+@interface ParseBridgeProgressCallback : ProgressCallback
+
+@property (nonatomic, copy) PFProgressBlock handler;
+
++(ParseBridgeProgressCallback *)callbackWithHandler:(PFProgressBlock)handler;
+
+-(id)init;
+-(void)done:(JavaInteger*)percentDone;
 
 @end

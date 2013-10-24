@@ -29,38 +29,72 @@
 
 @implementation GetDataCallback
 
-
 + (void)initializeJava
 {
     [super initializeJava];
-	//*- Java:  public SaveCallback()
-	[GetDataCallback registerConstructor];
-	
-	//*- Java:  public abstract void done(byte[] data,ParseException e)
-	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
-	//Override this function with the code you want to run after the save is complete.
-	// [GetDataCallback registerCallback:@"done"
-	// 					 selector:@selector(done:error:)
-	// 				  returnValue:nil
-	// 					arguments:[NSData className],[ParseException className], nil];
-	
 }
-
--(void)done:(NSData*)data error:(ParseException*)error{
-	//[self _done:error];
-	if(!error && data != nil){
-		//No error
-		NSLog(@"Object Retrieved Successfully");
-	}
-	else{
-		// NSLog(@"Object retrieval failed", [error getCode]);
-	}
-}
-
 
 + (NSString *)className
 {
     return @"com.parse.GetDataCallback";
 }
+
+@end
+
+@implementation ParseBridgeGetDataCallback
+
+@synthesize handler = _handler;
+
++ (void)initializeJava
+{
+    [super initializeJava];
+
+	[ParseBridgeGetDataCallback registerConstructor];
+	
+	[ParseBridgeGetDataCallback registerCallback:@"done"
+						 selector:@selector(done:error:)
+					  returnValue:nil
+						arguments:[NSData className],[ParseException className], nil];
+	
+}
+
++ (NSString *)className
+{
+    return @"com.parsebridge.ParseBridgeGetDataCallback";
+}
+
++ (ParseBridgeGetDataCallback *)callbackWithHandler:(PFDataResultBlock)handler
+{
+    ParseBridgeGetDataCallback *callback = [ParseBridgeGetDataCallback new];
+    if (handler == nil)
+    {
+        callback.handler = ^(NSData *data, NSError *error){};
+    }
+    else
+    {
+        callback.handler = handler;
+    }
+    return callback; // NOTE: this is not autorelease but acts as if it is (because it is retained per the duration until the actual callback happens)
+}
+
+- (void)done:(NSData *)data error:(ParseException *)exception
+{
+    NSError *error = nil;
+    if (exception) {
+        error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _handler(data, error);
+        [self autorelease]; // To balance the retain cycle created from the callbackWithHandler: method
+    });
+}
+
+- (void)dealloc
+{
+    Block_release(_handler);
+    _handler = nil;
+    [super dealloc];
+}
+
 
 @end

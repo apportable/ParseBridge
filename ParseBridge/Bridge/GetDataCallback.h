@@ -24,11 +24,20 @@
  *
  */
 
+
 #import <BridgeKit/JavaObject.h>
+#import "PFConstants.h"
+
 @class ParseException;
 
-
 @interface GetDataCallback : JavaObject
+@end
+
+@interface ParseBridgeGetDataCallback : GetDataCallback
+
+@property (nonatomic, copy) PFDataResultBlock handler;
+
++(ParseBridgeGetDataCallback *)callbackWithHandler:(PFDataResultBlock)handler;
 
 -(id)init;
 -(void)done:(NSData*)data error:(ParseException*)error;

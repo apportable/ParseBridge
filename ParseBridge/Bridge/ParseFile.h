@@ -26,9 +26,36 @@
 
 #import <BridgeKit/JavaObject.h>
 
+@class GetDataCallback;
+@class ProgressCallback;
+@class SaveCallback;
+
 @interface ParseFile : JavaObject
 
--(id)initWithData:(NSData*)owner;
--(id)initWithNameandData:(NSString*)fileName data:(NSData*)data;
+-(id)initWithData:(NSData*)data;
+-(id)initWithName:(NSString*)fileName data:(NSData*)data;
+
+- (NSString*)name;
+- (NSString*)url;
+- (BOOL)isDirty;
+- (BOOL)isDataAvailable;
+
+- (NSData*)getData;
+- (void)getDataInBackground:(GetDataCallback*)getDataCallback;
+- (void)getDataInBackground:(GetDataCallback*)getDataCallback progress:(ProgressCallback*)progressCallback;
+
+- (void)save;
+- (void)saveInBackground;
+- (void)saveInBackground:(SaveCallback*)getDataCallback;
+- (void)saveInBackground:(SaveCallback*)getDataCallback progress:(ProgressCallback*)progressCallback;
+
+- (void)cancel;
+
+ // void   save() 
+ // void   saveInBackground() 
+ // void   saveInBackground(SaveCallback callback) 
+ // void   saveInBackground(SaveCallback saveCallback, ProgressCallback progressCallback) 
+
+
 
 @end

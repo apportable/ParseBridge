@@ -34,30 +34,75 @@
 + (void)initializeJava
 {
     [super initializeJava];
-
-	//*- Java:  public ProgressCallback()
-	[ProgressCallback registerConstructor];
-	
-	//*- Java:  public abstract void done(Integer percentDone)
-	//*- iOS Bridge Method:  public abstract void done(Integer percentDone)
-	//Override this function with the code you want to run after the save is complete.
-	[ProgressCallback registerCallback:@"done"
-						   selector:@selector(done:)
-						returnValue:nil
-						  arguments:[JavaInteger className], nil];
-	
-	
 }
-
--(void)done:(int)percentDone{
-	 		NSLog(@"%i",percentDone);
-}
-
 
 + (NSString *)className
 {
     return @"com.parse.ProgressCallback";
 }
+@end
 
+@implementation ParseBridgeProgressCallback
+
+@synthesize handler = _handler;
+
++ (void)initializeJava
+{
+    [super initializeJava];
+
+    //*- Java:  public ProgressCallback()
+    [ParseBridgeProgressCallback registerConstructor];
+    
+    //*- Java:  public abstract void done(Integer percentDone)
+    //*- iOS Bridge Method:  public abstract void done(Integer percentDone)
+    //Override this function with the code you want to run after the save is complete.
+    [ParseBridgeProgressCallback registerCallback:@"done"
+                           selector:@selector(done:)
+                        returnValue:nil
+                          arguments:[JavaInteger className], nil];
+    
+    
+}
+
++ (NSString *)className
+{
+    return @"com.parsebridge.ParseBridgeProgressCallback";
+}
+
++ (ParseBridgeProgressCallback *)callbackWithHandler:(PFProgressBlock)handler
+{
+    ParseBridgeProgressCallback *callback = [ParseBridgeProgressCallback new];
+    if (handler == nil)
+    {
+        callback.handler = ^(int progress){};
+    }
+    else
+    {
+        callback.handler = handler;
+    }
+
+    return callback; // NOTE: this is not autorelease but acts as if it is (because it is retained per the duration until the actual callback happens)
+}
+
+- (void)done:(JavaInteger*)percentDoneInteger
+{
+    int percentDone = [percentDoneInteger intValue];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _handler(percentDone);
+    });
+
+    if (percentDone == 100) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self autorelease]; // To balance the retain cycle created from the callbackWithHandler: method
+        });
+    }
+}
+
+- (void)dealloc
+{
+    Block_release(_handler);
+    _handler = nil;
+    [super dealloc];
+}
 
 @end
