@@ -39,7 +39,7 @@
 #import "ParsePush.h"
 #import "ParseQuery.h"
 #import "ParseACL.h"
-#import "CountCallback.h"
+#import "CountCallBack.h"
 #import "DeleteCallback.h"
 #import "FindCallback.h"
 #import "FunctionCallback.h"

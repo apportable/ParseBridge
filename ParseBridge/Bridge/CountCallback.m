@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Apportable. All rights reserved.
 //
 
-#import "CountCallback.h"
+#import "CountCallBack.h"
 #import "ParseException.h"
 
 @implementation CountCallback
