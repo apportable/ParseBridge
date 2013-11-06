@@ -27,45 +27,76 @@
 #import "LocationCallback.h"
 #import "ParseException.h"
 #import "ParseGeoPoint.h"
+#import "PFGeoPoint+ParseGeoPoint.h"
 
 @implementation LocationCallback
-
-
 
 + (void)initializeJava
 {
     [super initializeJava];
-	BOOL results;
-	//*- Java:  public SaveCallback()
-	[LocationCallback registerConstructor];
-	
-	//*- Java:  public abstract void done(ParseGeoPoint geoPoint,ParseException e)
-	//*- iOS Bridge Method:  -(void)done:(ParseUser*)user :(ParseException*)error;
-	//Override this function with the code you want to run after the save is complete.
-	// [LocationCallback registerCallback:@"done"
-	// 						 selector:@selector(done:error:)
-	// 					  returnValue:nil
-	// 						arguments:[ParseGeoPoint className],[ParseException className], nil];
-	
-	
 }
-
--(void)done:(ParseGeoPoint*)geoPoint error:(ParseException*)error{
-	//[self _done:error];
-	if(!error && geoPoint != nil){
-		//No error
-		NSLog(@"GeoPoint Retrieved Successfully");
-	}
-	else{
-		// NSLog(@"Object retrieval failed", [error getCode]);
-	}
-}
-
 
 + (NSString *)className
 {
     return @"com.parse.LocationCallback";
 }
 
+@end
+
+
+@implementation ParseBridgeLocationCallback
+
+@synthesize handler = _handler;
+
++ (void)initializeJava
+{
+    [super initializeJava];
+
+    [ParseBridgeLocationCallback registerConstructor];
+    [ParseBridgeLocationCallback registerCallback:@"done" 
+    	selector:@selector(done:error:) 
+    	returnValue:nil 
+    	arguments:[ParseGeoPoint className], [ParseException className], nil];
+}
+
++ (NSString *)className
+{
+    return @"com.parsebridge.ParseBridgeLocationCallback";
+}
+
++ (ParseBridgeLocationCallback *)callbackWithHandler:(ParseBridgeGeoPointResultBlock)handler
+{
+    ParseBridgeLocationCallback *callback = [ParseBridgeLocationCallback new];
+    if (handler == nil)
+    {
+        callback.handler = ^(PFGeoPoint *PFGeoPointeoPoint, NSError *error){};
+    }
+    else
+    {
+        callback.handler = handler;
+    }
+    return callback; // NOTE: this is not autorelease but acts as if it is (because it is retained per the duration until the actual callback happens)
+}
+
+- (void)done:(ParseGeoPoint *)parseGeoPoint error:(ParseException *)exception
+{
+    NSError *error = nil;
+    if (exception) {
+        error = [NSError errorWithDomain:[exception localizedMessage] code:[exception getCode] userInfo:nil];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        PFGeoPoint *pfGeoPoint =  [[PFGeoPoint alloc] initWithParseGeoPoint:parseGeoPoint];   
+        _handler(pfGeoPoint, error);
+        [pfGeoPoint release];
+        [self autorelease]; // To balance the retain cycle created from the callbackWithHandler: method
+    });
+}
+
+- (void)dealloc
+{
+    Block_release(_handler);
+    _handler = nil;
+    [super dealloc];
+}
 
 @end

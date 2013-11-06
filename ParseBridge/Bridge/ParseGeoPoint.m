@@ -26,6 +26,9 @@
 
 #import "ParseGeoPoint.h"
 
+#import "LocationCallback.h"
+#import <BridgeKit/AndroidCriteria.h>
+
 @implementation ParseGeoPoint
 
 
@@ -33,52 +36,60 @@
 {
     [super initializeJava];
 	 
-	BOOL results;
-	//*- Java: public SendCallback()
 	[ParseGeoPoint registerConstructor];
 	
-	//Constructors
-	//*- Java: ParseGeoPoint()
-	//Creates a new default point with latitude and longitude set to 0.0.
-	//*- Java: ParseGeoPoint(double latitude, double longitude)
-	//Creates a new point with the specified latitude and longitude.
-	
-	
-	//Methods
-	//*- Java: double	distanceInKilometersTo(ParseGeoPoint point)
-	//Get distance between this point and another geopoint in kilometers.
-	
-	//*- Java:double	distanceInMilesTo(ParseGeoPoint point)
-	//Get distance between this point and another geopoint in kilometers.
-	
-	//*- Java:double	distanceInRadiansTo(ParseGeoPoint point)
-	//Get distance in radians between this point and another GeoPoint.
-	
-	//*- Java:static void	getCurrentLocationInBackground(long timeout, Criteria criteria, LocationCallback callback)
-	//Fetches the user's current location and returns a new ParseGeoPoint via the provided LocationCallback.
-	
-	//*- Java:static void	getCurrentLocationInBackground(long timeout, LocationCallback callback)
-	//Fetches the user's current location and returns a new ParseGeoPoint via the provided LocationCallback.
-	
-	//*- Java: double	getLatitude()
-	//Get latitude.
-	
-	//*- Java: double	getLongitude()
-	//Get longitude.
-	
-	//*- Java:void	setLatitude(double latitude)
-	//Set latitude.
-	
-	//*- Java: void	setLongitude(double longitude)
-	//Set longitude.
-}
- 
+    [ParseGeoPoint registerConstructorWithSelector:@selector(initWithLatitude:longitude:)
+                                                arguments:[JavaClass doublePrimitive], [JavaClass doublePrimitive], nil];
 
+    [ParseGeoPoint registerInstanceMethod:@"getLatitude"
+                             selector:@selector(latitude)
+                          returnValue:[JavaClass doublePrimitive]
+                            arguments:nil];
+
+    [ParseGeoPoint registerInstanceMethod:@"setLatitude"
+                             selector:@selector(setLatitude:)
+                          returnValue:nil
+                            arguments:[JavaClass doublePrimitive], nil];
+
+    [ParseGeoPoint registerInstanceMethod:@"getLongitude"
+                             selector:@selector(longitude)
+                          returnValue:[JavaClass doublePrimitive]
+                            arguments:nil];
+
+    [ParseGeoPoint registerInstanceMethod:@"setLongitude"
+                             selector:@selector(setLongitude:)
+                          returnValue:nil
+                            arguments:[JavaClass doublePrimitive], nil];
+
+    [ParseGeoPoint registerInstanceMethod:@"distanceInKilometersTo"
+                             selector:@selector(distanceInKilometersTo:)
+                          returnValue:[JavaClass doublePrimitive]
+                            arguments:[ParseGeoPoint className], nil];
+
+    [ParseGeoPoint registerInstanceMethod:@"distanceInMilesTo"
+                             selector:@selector(distanceInMilesTo:)
+                          returnValue:[JavaClass doublePrimitive]
+                            arguments:[ParseGeoPoint className], nil];
+
+    [ParseGeoPoint registerInstanceMethod:@"distanceInRadiansTo"
+                             selector:@selector(distanceInRadiansTo:)
+                          returnValue:[JavaClass doublePrimitive]
+                            arguments:[ParseGeoPoint className], nil];
+	
+    [ParseGeoPoint registerStaticMethod:@"getCurrentLocationInBackground"
+                             selector:@selector(geoPointForCurrentLocationInBackgroundWithTimeout:callback:)
+                          returnValue:nil
+                            arguments:[JavaClass longPrimitive], [LocationCallback className], nil];
+
+    [ParseGeoPoint registerStaticMethod:@"getCurrentLocationInBackground"
+                             selector:@selector(geoPointForCurrentLocationInBackgroundWithTimeout:criteria:callback:)
+                          returnValue:nil
+                            arguments:[JavaClass longPrimitive], [AndroidCriteria className], [LocationCallback className], nil];
+}
 
 + (NSString *)className
 {
     return @"com.parse.ParseGeoPoint";
 }
-
 
 @end

@@ -26,6 +26,24 @@
 
 #import <BridgeKit/JavaObject.h>
 
+@class PFGeoPoint;
+@class LocationCallback;
+@class AndroidCriteria;
+
 @interface ParseGeoPoint : JavaObject
+
+- (id)initWithLatitude:(double)latitude longitude:(double)longitude;
+
+- (double)latitude;
+- (void)setLatitude:(double)latitude;
+- (double)longitude;
+- (void)setLongitude:(double)longitude;
+
+- (double)distanceInRadiansTo:(ParseGeoPoint*)point;
+- (double)distanceInMilesTo:(ParseGeoPoint*)point;
+- (double)distanceInKilometersTo:(ParseGeoPoint*)point;
+
++ (void)geoPointForCurrentLocationInBackgroundWithTimeout:(long)timeoutMillis callback:(LocationCallback*)callback;
++ (void)geoPointForCurrentLocationInBackgroundWithTimeout:(long)timeoutMillis criteria:(AndroidCriteria*)criteria callback:(LocationCallback*)callback;
 
 @end

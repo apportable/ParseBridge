@@ -25,12 +25,21 @@
  */
 
 #import <BridgeKit/JavaObject.h>
+
 @class ParseException;
 @class ParseGeoPoint;
+@class PFGeoPoint;
+
+typedef void (^ParseBridgeGeoPointResultBlock)(PFGeoPoint *geoPoint, NSError *error);
 
 @interface LocationCallback : JavaObject
+@end
 
--(id)init;
--(void)done:(ParseGeoPoint*)geoPoint error:(ParseException*)error;
+@interface ParseBridgeLocationCallback : LocationCallback
+
+@property(readwrite, copy) ParseBridgeGeoPointResultBlock handler;
+
++ (ParseBridgeLocationCallback *)callbackWithHandler:(ParseBridgeGeoPointResultBlock)handler;
+- (void)done:(ParseGeoPoint *)geoPoint error:(ParseException *)error;
 
 @end
